@@ -2620,12 +2620,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 5
   bulletSpeed: 7
+  maxBullet: 5
   mainCamera: {fileID: 519420031}
+  bulletSlider: {fileID: 687250255}
+  bulletCounter: {fileID: 1380154251}
   pauseScreen: {fileID: 1118295514}
   healthSlider: {fileID: 739478177}
   healthCounter: {fileID: 1354370450}
-  bulletSlider: {fileID: 687250255}
-  bulletCounter: {fileID: 1380154251}
 --- !u!4 &1398000331
 Transform:
   m_ObjectHideFlags: 0

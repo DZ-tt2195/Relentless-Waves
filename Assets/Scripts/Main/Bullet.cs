@@ -6,7 +6,7 @@ public class Bullet : MonoBehaviour
 {
     protected Vector3 direction;
     protected Entity owner;
-    protected float speed;
+    protected float bulletSpeed;
 
     float minX;
     float maxX;
@@ -34,7 +34,7 @@ public class Bullet : MonoBehaviour
 
     public void AssignInfo(float speed, Vector3 direction, Entity owner)
     {
-        this.speed = speed;
+        this.bulletSpeed = speed;
         this.direction = direction;
         this.owner = owner;
     }
@@ -49,7 +49,7 @@ public class Bullet : MonoBehaviour
 
     protected virtual void Movement()
     {
-        this.transform.Translate(direction * Time.deltaTime);
+        this.transform.Translate(direction * bulletSpeed * Time.deltaTime);
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)

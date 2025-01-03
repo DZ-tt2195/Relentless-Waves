@@ -9,21 +9,25 @@ public class Player : Entity
 {
     public static Player instance;
     public static bool paused = false;
+
+    [Foldout("Player info", true)]
+    int currentBullet;
+    [SerializeField] int maxBullet;
+
+    [Foldout("UI", true)]
     public Camera mainCamera;
-
-    [SerializeField] GameObject pauseScreen;
-
-    [SerializeField] Slider healthSlider;
-    [SerializeField] TMP_Text healthCounter;
-
-    int currentBullet = 5;
     [SerializeField] Slider bulletSlider;
     [SerializeField] TMP_Text bulletCounter;
+
+    [SerializeField] GameObject pauseScreen;
+    [SerializeField] Slider healthSlider;
+    [SerializeField] TMP_Text healthCounter;
 
     float minX;
     float maxX;
     float minY;
     float maxY;
+    int maxHealth;
 
     protected override void Awake()
     {
@@ -32,6 +36,8 @@ public class Player : Entity
         instance = this;
         this.Setup(2f, "Player");
 
+        currentBullet = maxBullet;
+        maxHealth = health;
         float cameraHeight = 2f * mainCamera.orthographicSize;
         float cameraWidth = cameraHeight * mainCamera.aspect;
 
@@ -56,10 +62,10 @@ public class Player : Entity
             Time.timeScale = (paused) ? 0f : 1f;
         }
 
-        healthSlider.value = health / 5f;
-        healthCounter.text = $"Health: {health} / 5";
-        bulletSlider.value = currentBullet / 5f;
-        bulletCounter.text = $"Bullets: {currentBullet} / 5";
+        healthSlider.value = health / (float)maxHealth;
+        healthCounter.text = $"Health: {health} / {maxHealth}";
+        bulletSlider.value = currentBullet / (float)maxBullet;
+        bulletCounter.text = $"Bullets: {currentBullet} / {maxBullet}";
     }
 
     void ShootBullet()
@@ -94,10 +100,10 @@ public class Player : Entity
         {
             this.TakeDamage();
         }
-        else if (collision.TryGetComponent(out Resupply resupply))
+        else if (collision.TryGetComponent(out Resupply resupply) && currentBullet < maxBullet)
         {
             WaveManager.instance.ReturnResupply(resupply);
-            currentBullet = Mathf.Min(currentBullet + 2, 5);
+            currentBullet = Mathf.Min(currentBullet + 2, maxBullet);
         }
     }
 }
