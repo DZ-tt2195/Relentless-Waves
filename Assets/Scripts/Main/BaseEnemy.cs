@@ -1,9 +1,13 @@
+using MyBox;
 using UnityEngine;
 
 public class BaseEnemy : Entity
 {
+    [Foldout("Enemy info", true)]
     GameObject crossedOut;
+    [SerializeField] protected float moveSpeed;
     [SerializeField] float attackRate;
+    protected Vector3 moveDirection;
 
     public void EnemySetup()
     {
@@ -22,8 +26,9 @@ public class BaseEnemy : Entity
 
     protected virtual void Update()
     {
-        Vector2 direction = AimAtPlayer();
-        spriteRenderer.transform.localEulerAngles = new(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90);
+        this.transform.Translate(moveSpeed * Time.deltaTime * moveDirection);
+        Vector2 aimDirection = AimAtPlayer();
+        spriteRenderer.transform.localEulerAngles = new(0, 0, Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg + 90);
     }
 
     protected Vector2 AimAtPlayer()

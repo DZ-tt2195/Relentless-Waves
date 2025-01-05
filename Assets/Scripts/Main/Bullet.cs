@@ -8,22 +8,6 @@ public class Bullet : MonoBehaviour
     protected Entity owner;
     protected float bulletSpeed;
 
-    float minX;
-    float maxX;
-    float minY;
-    float maxY;
-
-    private void Awake()
-    {
-        float cameraHeight = 2f * Player.instance.mainCamera.orthographicSize;
-        float cameraWidth = cameraHeight * Player.instance.mainCamera.aspect;
-
-        minX = Player.instance.mainCamera.transform.position.x - cameraWidth / 2f;
-        maxX = Player.instance.mainCamera.transform.position.x + cameraWidth / 2f;
-        minY = Player.instance.mainCamera.transform.position.y - cameraHeight / 2f;
-        maxY = Player.instance.mainCamera.transform.position.y + cameraHeight / 2f;
-    }
-
     void TryAndReturn()
     {
         if (owner == null)
@@ -42,14 +26,14 @@ public class Bullet : MonoBehaviour
     void Update()
     {
         Movement();
-        if (this.transform.position.x < minX || this.transform.position.x > maxX ||
-            this.transform.position.y < minY || this.transform.position.y > maxY)
+        if (this.transform.position.x < WaveManager.minX || this.transform.position.x > WaveManager.maxX ||
+            this.transform.position.y < WaveManager.minY || this.transform.position.y > WaveManager.maxY)
             TryAndReturn();
     }
 
     protected virtual void Movement()
     {
-        this.transform.Translate(direction * bulletSpeed * Time.deltaTime);
+        this.transform.Translate(bulletSpeed * Time.deltaTime * direction);
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)

@@ -38,7 +38,7 @@ public class Entity : MonoBehaviour
 
         Vector3 darkness = new(0.1f, 0.1f, 0.1f);
         Vector3 gray = new(0.25f, 0.25f, 0.25f);
-        Player.instance.mainCamera.backgroundColor = new(darkness.x, darkness.y, darkness.z);
+        WaveManager.instance.mainCamera.backgroundColor = new(darkness.x, darkness.y, darkness.z);
 
         while (elapsedTime < immuneTime)
         {
@@ -46,11 +46,11 @@ public class Entity : MonoBehaviour
             elapsedTime += Time.deltaTime;
             SetAlpha(flicker ? (elapsedTime / immuneTime) : 1f);
             Vector3 target = Vector3.Lerp(darkness, gray, elapsedTime / immuneTime);
-            Player.instance.mainCamera.backgroundColor = new(target.x, target.y, target.z);
+            WaveManager.instance.mainCamera.backgroundColor = new(target.x, target.y, target.z);
             yield return null;
         }
 
-        Player.instance.mainCamera.backgroundColor = new(gray.x, gray.y, gray.z);
+        WaveManager.instance.mainCamera.backgroundColor = new(gray.x, gray.y, gray.z);
         SetAlpha(1);
         immune = false;
     }

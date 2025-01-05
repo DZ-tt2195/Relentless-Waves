@@ -18,6 +18,7 @@ public class WaveManager : MonoBehaviour
     Queue<Resupply> resupplyQueue = new();
 
     [Foldout("UI", true)]
+    public Camera mainCamera;
     [SerializeField] Slider waveSlider;
     [SerializeField] TMP_Text waveCounter;
     int currentWave = -1;
@@ -25,9 +26,22 @@ public class WaveManager : MonoBehaviour
     [SerializeField] TMP_Text enemyCounter;
     [SerializeField] TMP_Text endingText;
 
+    public static float minX { get; private set; }
+    public static float maxX { get; private set; }
+    public static float minY { get; private set; }
+    public static float maxY { get; private set; }
+
     private void Awake()
     {
         instance = this;
+
+        float cameraHeight = 2f * mainCamera.orthographicSize;
+        float cameraWidth = cameraHeight * mainCamera.aspect;
+
+        minX = mainCamera.transform.position.x - cameraWidth / 2f;
+        maxX = mainCamera.transform.position.x + cameraWidth / 2f;
+        minY = mainCamera.transform.position.y - cameraHeight / 2f;
+        maxY = 3.5f;
 
         listOfWaves = Resources.LoadAll<Wave>("Waves");
         enemiesToSpawn = Resources.LoadAll<BaseEnemy>("Enemies");

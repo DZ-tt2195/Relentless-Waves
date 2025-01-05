@@ -15,7 +15,6 @@ public class Player : Entity
     [SerializeField] int maxBullet;
 
     [Foldout("UI", true)]
-    public Camera mainCamera;
     [SerializeField] Slider bulletSlider;
     [SerializeField] TMP_Text bulletCounter;
 
@@ -23,10 +22,6 @@ public class Player : Entity
     [SerializeField] Slider healthSlider;
     [SerializeField] TMP_Text healthCounter;
 
-    float minX;
-    float maxX;
-    float minY;
-    float maxY;
     int maxHealth;
 
     protected override void Awake()
@@ -38,13 +33,6 @@ public class Player : Entity
 
         currentBullet = maxBullet;
         maxHealth = health;
-        float cameraHeight = 2f * mainCamera.orthographicSize;
-        float cameraWidth = cameraHeight * mainCamera.aspect;
-
-        minX = mainCamera.transform.position.x - cameraWidth / 2f;
-        maxX = mainCamera.transform.position.x + cameraWidth / 2f;
-        minY = mainCamera.transform.position.y - cameraHeight / 2f;
-        maxY = 3.5f;
     }
 
     void Update()
@@ -80,10 +68,11 @@ public class Player : Entity
     void FollowMouse()
     {
         Vector3 mouseScreenPosition = Input.mousePosition;
-        Vector3 targetPosition = mainCamera.ScreenToWorldPoint(new(mouseScreenPosition.x, mouseScreenPosition.y, mainCamera.nearClipPlane));
+        Vector3 targetPosition = WaveManager.instance.mainCamera.ScreenToWorldPoint
+            (new(mouseScreenPosition.x, mouseScreenPosition.y, WaveManager.instance.mainCamera.nearClipPlane));
 
-        targetPosition.x = Mathf.Clamp(targetPosition.x, minX, maxX);
-        targetPosition.y = Mathf.Clamp(targetPosition.y, minY, maxY);
+        targetPosition.x = Mathf.Clamp(targetPosition.x, WaveManager.minX, WaveManager.maxX);
+        targetPosition.y = Mathf.Clamp(targetPosition.y, WaveManager.minY, WaveManager.maxY);
         transform.position = Vector3.Lerp(transform.position, targetPosition, 10f * Time.deltaTime);
     }
 
