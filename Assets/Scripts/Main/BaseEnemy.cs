@@ -14,7 +14,13 @@ public class BaseEnemy : Entity
         this.Setup(0f, "Enemy");
         crossedOut = transform.Find("X").gameObject;
         crossedOut.SetActive(false);
-        InvokeRepeating(nameof(ShootBullet), 1f, attackRate);
+        if (PlayerPrefs.GetInt("Hard Mode") == 1)
+        {
+            attackRate *= (3/4f);
+            bulletSpeed *= (4/3f);
+            moveSpeed *= (4/3f);
+        }
+        InvokeRepeating(nameof(ShootBullet), attackRate, attackRate);
     }
 
     protected virtual void ShootBullet()
@@ -41,5 +47,15 @@ public class BaseEnemy : Entity
         immune = true;
         crossedOut.SetActive(true);
         SetAlpha(0.5f);
+    }
+
+    public void OnDestroy()
+    {
+        while (bulletQueue.Count > 0)
+        {
+            Bullet nextBullet = bulletQueue.Dequeue();
+            if (nextBullet != null)
+                Destroy(nextBullet.gameObject);
+        }
     }
 }

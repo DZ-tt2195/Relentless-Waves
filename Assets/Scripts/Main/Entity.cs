@@ -15,7 +15,7 @@ public class Entity : MonoBehaviour
     [SerializeField] protected float bulletSpeed;
 
     protected Bullet prefab { get; private set; }
-    Queue<Bullet> bulletQueue = new();
+    protected Queue<Bullet> bulletQueue = new();
 
     protected virtual void Awake()
     {
