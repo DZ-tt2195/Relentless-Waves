@@ -89,6 +89,10 @@ public class Player : Entity
         {
             this.TakeDamage();
         }
+        else if (collision.CompareTag("Wall"))
+        {
+            this.TakeDamage();
+        }
         else if (collision.TryGetComponent(out Resupply resupply) && currentBullet < maxBullet)
         {
             WaveManager.instance.ReturnResupply(resupply);

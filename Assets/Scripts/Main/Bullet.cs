@@ -43,5 +43,9 @@ public class Bullet : MonoBehaviour
             target.TakeDamage();
             TryAndReturn();
         }
+        else if (collision.CompareTag("Wall") && !collision.transform.parent.CompareTag(this.tag))
+        {
+            TryAndReturn();
+        }
     }
 }
