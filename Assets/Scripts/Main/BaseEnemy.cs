@@ -7,6 +7,7 @@ public class BaseEnemy : Entity
     GameObject crossedOut;
     [SerializeField] protected float moveSpeed;
     [SerializeField] float attackRate;
+    [SerializeField] bool lookAtPlayer = true;
     protected Vector3 moveDirection;
 
     public void EnemySetup()
@@ -27,14 +28,17 @@ public class BaseEnemy : Entity
     {
         Vector2 target = AimAtPlayer();
         target.Normalize();
-        CreateBullet(prefab, bulletSpeed, this.transform.position, target);
+        CreateBullet(prefab, this.transform.position, bulletSpeed, target);
     }
 
     protected virtual void Update()
     {
         this.transform.Translate(moveSpeed * Time.deltaTime * moveDirection);
-        Vector2 aimDirection = AimAtPlayer();
-        spriteRenderer.transform.localEulerAngles = new(0, 0, Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg + 90);
+        if (lookAtPlayer)
+        {
+            Vector2 aimDirection = AimAtPlayer();
+            spriteRenderer.transform.localEulerAngles = new(0, 0, Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg + 90);
+        }
     }
 
     protected Vector2 AimAtPlayer()

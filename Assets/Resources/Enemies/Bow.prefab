@@ -400,7 +400,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1
   bulletSpeed: 6.5
+  moveSpeed: 0
   attackRate: 2
+  lookAtPlayer: 1
 --- !u!61 &7595905048437823666
 BoxCollider2D:
   m_ObjectHideFlags: 0

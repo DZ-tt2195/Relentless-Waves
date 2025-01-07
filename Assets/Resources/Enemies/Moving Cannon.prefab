@@ -473,5 +473,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 2
   bulletSpeed: 2.25
-  attackRate: 1.5
   moveSpeed: 2.5
+  attackRate: 1.5
+  lookAtPlayer: 1

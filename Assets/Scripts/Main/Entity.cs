@@ -78,7 +78,7 @@ public class Entity : MonoBehaviour
     {
     }
 
-    protected void CreateBullet(Bullet prefab, float bulletSpeed, Vector3 start, Vector3 direction)
+    protected void CreateBullet(Bullet prefab, Vector3 start, float bulletSpeed, Vector3 direction)
     {
         Bullet newBullet = (bulletQueue.Count > 0) ? bulletQueue.Dequeue() : Instantiate(prefab);
         newBullet.tag = this.tag;

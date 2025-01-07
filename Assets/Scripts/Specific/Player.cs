@@ -61,7 +61,7 @@ public class Player : Entity
         if (Input.GetKeyDown(KeyCode.Mouse0) && currentBullet >= 1)
         {
             currentBullet--;
-            CreateBullet(prefab, bulletSpeed, this.transform.position, Vector3.up);
+            CreateBullet(prefab, this.transform.position, bulletSpeed, Vector3.up);
         }
     }
 
