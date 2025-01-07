@@ -19,10 +19,7 @@ public class MoveUpDown : BaseEnemy
 
     protected override void ShootBullet()
     {
-        Vector2 target1 = new(-1, 0);
-        CreateBullet(prefab, this.transform.position, bulletSpeed, target1);
-
-        Vector2 target2 = new(1, 0);
-        CreateBullet(prefab, this.transform.position, bulletSpeed, target2);
+        CreateBullet(prefab, this.transform.position, bulletSpeed, new(-1, 0));
+        CreateBullet(prefab, this.transform.position, bulletSpeed, new(1, 0));
     }
 }

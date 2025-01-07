@@ -12,7 +12,7 @@ public class BaseEnemy : Entity
 
     public void EnemySetup()
     {
-        this.Setup(0f, "Enemy");
+        this.tag = "Enemy";
         crossedOut = transform.Find("X").gameObject;
         crossedOut.SetActive(false);
         if (PlayerPrefs.GetInt("Hard Mode") == 1)

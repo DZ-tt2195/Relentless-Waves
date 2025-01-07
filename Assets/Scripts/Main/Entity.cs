@@ -11,7 +11,6 @@ public class Entity : MonoBehaviour
     protected SpriteRenderer spriteRenderer;
 
     protected bool immune = false;
-    float immuneTime = 0f;
     [SerializeField] protected float bulletSpeed;
 
     protected Bullet prefab { get; private set; }
@@ -22,37 +21,6 @@ public class Entity : MonoBehaviour
         spriteRenderer = transform.Find("Sprite").GetComponent<SpriteRenderer>();
         prefab = this.transform.Find("Bullet").GetComponent<Bullet>();
         prefab.gameObject.SetActive(false);
-    }
-
-    public virtual void Setup(float immuneTime, string tag)
-    {
-        this.tag = tag;
-        this.immuneTime = immuneTime;
-    }
-
-    IEnumerator Immunity()
-    {
-        immune = true;
-        float elapsedTime = 0f;
-        bool flicker = true;
-
-        Vector3 darkness = new(0.1f, 0.1f, 0.1f);
-        Vector3 gray = new(0.25f, 0.25f, 0.25f);
-        WaveManager.instance.mainCamera.backgroundColor = new(darkness.x, darkness.y, darkness.z);
-
-        while (elapsedTime < immuneTime)
-        {
-            flicker = !flicker;
-            elapsedTime += Time.deltaTime;
-            SetAlpha(flicker ? (elapsedTime / immuneTime) : 1f);
-            Vector3 target = Vector3.Lerp(darkness, gray, elapsedTime / immuneTime);
-            WaveManager.instance.mainCamera.backgroundColor = new(target.x, target.y, target.z);
-            yield return null;
-        }
-
-        WaveManager.instance.mainCamera.backgroundColor = new(gray.x, gray.y, gray.z);
-        SetAlpha(1);
-        immune = false;
     }
 
     protected void SetAlpha(float alpha)
@@ -71,10 +39,14 @@ public class Entity : MonoBehaviour
         if (health == 0)
             DeathEffect();
         else
-            StartCoroutine(Immunity());
+            DamageEffect();
     }
 
     protected virtual void DeathEffect()
+    {
+    }
+
+    protected virtual void DamageEffect()
     {
     }
 

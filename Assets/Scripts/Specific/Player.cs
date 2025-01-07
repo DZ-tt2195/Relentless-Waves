@@ -4,6 +4,7 @@ using MyBox;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using System.Collections;
 
 public class Player : Entity
 {
@@ -13,6 +14,7 @@ public class Player : Entity
     [Foldout("Player info", true)]
     int currentBullet;
     [SerializeField] int maxBullet;
+    [SerializeField] float immuneTime;
 
     [Foldout("UI", true)]
     [SerializeField] Slider bulletSlider;
@@ -29,7 +31,7 @@ public class Player : Entity
         base.Awake();
         Application.targetFrameRate = 60;
         instance = this;
-        this.Setup(2f, "Player");
+        this.tag = "Player";
 
         currentBullet = maxBullet;
         maxHealth = health;
@@ -74,6 +76,36 @@ public class Player : Entity
         targetPosition.x = Mathf.Clamp(targetPosition.x, WaveManager.minX, WaveManager.maxX);
         targetPosition.y = Mathf.Clamp(targetPosition.y, WaveManager.minY, WaveManager.maxY);
         transform.position = Vector3.Lerp(transform.position, targetPosition, 10f * Time.deltaTime);
+    }
+
+    protected override void DamageEffect()
+    {
+        StartCoroutine(Immunity());
+    }
+
+    IEnumerator Immunity()
+    {
+        immune = true;
+        float elapsedTime = 0f;
+        bool flicker = true;
+
+        Vector3 darkness = new(0.1f, 0.1f, 0.1f);
+        Vector3 gray = new(0.25f, 0.25f, 0.25f);
+        WaveManager.instance.mainCamera.backgroundColor = new(darkness.x, darkness.y, darkness.z);
+
+        while (elapsedTime < immuneTime)
+        {
+            flicker = !flicker;
+            elapsedTime += Time.deltaTime;
+            SetAlpha(flicker ? (elapsedTime / immuneTime) : 1f);
+            Vector3 target = Vector3.Lerp(darkness, gray, elapsedTime / immuneTime);
+            WaveManager.instance.mainCamera.backgroundColor = new(target.x, target.y, target.z);
+            yield return null;
+        }
+
+        WaveManager.instance.mainCamera.backgroundColor = new(gray.x, gray.y, gray.z);
+        SetAlpha(1);
+        immune = false;
     }
 
     protected override void DeathEffect()

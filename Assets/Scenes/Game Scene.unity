@@ -2621,6 +2621,7 @@ MonoBehaviour:
   health: 5
   bulletSpeed: 7
   maxBullet: 5
+  immuneTime: 2
   bulletSlider: {fileID: 687250255}
   bulletCounter: {fileID: 1380154251}
   pauseScreen: {fileID: 1118295514}
@@ -3575,7 +3576,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resupplyPrefab: {fileID: 6745294394428086912, guid: 7b38fb4ee236042a5b17132716ecc10e, type: 3}
-  hardMode: 0
   mainCamera: {fileID: 519420031}
   waveSlider: {fileID: 651330698}
   waveCounter: {fileID: 1771467385}
