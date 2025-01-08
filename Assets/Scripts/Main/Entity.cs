@@ -15,6 +15,7 @@ public class Entity : MonoBehaviour
 
     protected Bullet prefab { get; private set; }
     protected Queue<Bullet> bulletQueue = new();
+    protected int landedBullets { get; private set; }
 
     protected virtual void Awake()
     {
@@ -59,9 +60,11 @@ public class Entity : MonoBehaviour
         newBullet.gameObject.SetActive(true);
     }
 
-    public void ReturnBullet(Bullet bullet)
+    public void ReturnBullet(Bullet bullet, bool landed)
     {
         bulletQueue.Enqueue(bullet);
         bullet.gameObject.SetActive(false);
+        if (landed)
+            landedBullets++;
     }
 }

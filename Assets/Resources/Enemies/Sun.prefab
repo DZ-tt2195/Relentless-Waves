@@ -398,10 +398,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 325a5d3d1bc7d47e5a669eedd7fe3446, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 2
+  health: 3
   bulletSpeed: 1.75
   moveSpeed: 0
-  attackRate: 0.75
+  attackRate: 0.5
   lookAtPlayer: 1
 --- !u!61 &7595905048437823666
 BoxCollider2D:

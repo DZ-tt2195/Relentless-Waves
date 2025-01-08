@@ -79,7 +79,7 @@ public class WaveManager : MonoBehaviour
             foreach (Bullet bullet in bullets)
                 Destroy(bullet.gameObject);
 
-            EndGame("You Won!");
+            EndGame("You Won!" + "\n\n" + Player.instance.PlayerStats());
         }
     }
 

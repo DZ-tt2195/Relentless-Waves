@@ -15,6 +15,7 @@ public class Player : Entity
     int currentBullet;
     [SerializeField] int maxBullet;
     [SerializeField] float immuneTime;
+    int firedBullets;
 
     [Foldout("UI", true)]
     [SerializeField] Slider bulletSlider;
@@ -63,6 +64,7 @@ public class Player : Entity
         if (Input.GetKeyDown(KeyCode.Mouse0) && currentBullet >= 1)
         {
             currentBullet--;
+            firedBullets++;
             CreateBullet(prefab, this.transform.position, bulletSpeed, Vector3.up);
         }
     }
@@ -112,7 +114,13 @@ public class Player : Entity
     {
         immune = true;
         SetAlpha(0.5f);
-        WaveManager.instance.EndGame("You Lost.");
+        WaveManager.instance.EndGame($"You Lost.");
+    }
+
+    public string PlayerStats()
+    {
+        string answer = $"Missed {firedBullets-landedBullets} bullets\nTook {maxHealth-health} damage";
+        return answer;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
