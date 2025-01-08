@@ -1,10 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 using MyBox;
-using System.Collections.Generic;
-using System.Linq;
 using TMPro;
 using System.Collections;
+using System.Diagnostics;
+using System;
 
 public class Player : Entity
 {
@@ -15,7 +15,9 @@ public class Player : Entity
     int currentBullet;
     [SerializeField] int maxBullet;
     [SerializeField] float immuneTime;
+    int maxHealth;
     int firedBullets;
+    Stopwatch gameTimer;
 
     [Foldout("UI", true)]
     [SerializeField] Slider bulletSlider;
@@ -25,17 +27,18 @@ public class Player : Entity
     [SerializeField] Slider healthSlider;
     [SerializeField] TMP_Text healthCounter;
 
-    int maxHealth;
-
     protected override void Awake()
     {
         base.Awake();
         Application.targetFrameRate = 60;
         instance = this;
-        this.tag = "Player";
 
+        this.tag = "Player";
         currentBullet = maxBullet;
         maxHealth = health;
+
+        gameTimer = new Stopwatch();
+        gameTimer.Start();
     }
 
     void Update()
@@ -119,8 +122,16 @@ public class Player : Entity
 
     public string PlayerStats()
     {
-        string answer = $"Missed {firedBullets-landedBullets} bullets\nTook {maxHealth-health} damage";
+        string answer = $"Time: {StopwatchTime(gameTimer)}\nMissed {firedBullets-landedBullets} bullets\nTook {maxHealth-health} damage";
         return answer;
+
+        string StopwatchTime(Stopwatch stopwatch)
+        {
+            stopwatch.Stop();
+            TimeSpan time = stopwatch.Elapsed;
+            string part = time.Seconds < 10 ? $"0{time.Seconds}" : $"{time.Seconds}";
+            return $"{time.Minutes}:{part}.{time.Milliseconds}";
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

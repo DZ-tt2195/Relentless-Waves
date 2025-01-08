@@ -57,7 +57,6 @@ public class Entity : MonoBehaviour
         newBullet.tag = this.tag;
         newBullet.transform.position = start;
         newBullet.AssignInfo(bulletSpeed, direction, this);
-        newBullet.gameObject.SetActive(true);
     }
 
     public void ReturnBullet(Bullet bullet, bool landed)

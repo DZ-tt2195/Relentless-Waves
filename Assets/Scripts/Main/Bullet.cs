@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour
     protected Entity owner;
     protected float bulletSpeed;
 
-    void TryAndReturn(bool landed)
+    protected void TryAndReturn(bool landed)
     {
         if (owner == null)
             Destroy(this.gameObject);
@@ -16,11 +16,12 @@ public class Bullet : MonoBehaviour
             owner.ReturnBullet(this, landed);
     }
 
-    public void AssignInfo(float speed, Vector3 direction, Entity owner)
+    public virtual void AssignInfo(float speed, Vector3 direction, Entity owner)
     {
         this.bulletSpeed = speed;
         this.direction = direction;
         this.owner = owner;
+        this.gameObject.SetActive(true);
     }
 
     void Update()

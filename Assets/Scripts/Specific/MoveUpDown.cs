@@ -21,5 +21,12 @@ public class MoveUpDown : BaseEnemy
     {
         CreateBullet(prefab, this.transform.position, bulletSpeed, new(-1, 0));
         CreateBullet(prefab, this.transform.position, bulletSpeed, new(1, 0));
+        CreateBullet(prefab, this.transform.position, bulletSpeed, new(0, 1));
+        CreateBullet(prefab, this.transform.position, bulletSpeed, new(0, -1));
+
+        CreateBullet(prefab, this.transform.position, bulletSpeed, new(-1, 1));
+        CreateBullet(prefab, this.transform.position, bulletSpeed, new(1, 1));
+        CreateBullet(prefab, this.transform.position, bulletSpeed, new(-1, -1));
+        CreateBullet(prefab, this.transform.position, bulletSpeed, new(1, -1));
     }
 }

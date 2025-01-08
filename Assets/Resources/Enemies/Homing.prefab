@@ -76,8 +76,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5849d5cb311144eae954336fff0096de, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: e5c58535800454eaebe3a589d4d9ffb9, type: 3}
+  m_Color: {r: 0.5570203, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -164,7 +164,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 87152df4cebb247a685491d3440229ec, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -185,8 +185,8 @@ GameObject:
   - component: {fileID: 5941903031631538330}
   - component: {fileID: 7307465337714780801}
   - component: {fileID: 8959051888700978848}
-  - component: {fileID: 2321679041628334356}
   - component: {fileID: 8554648864909730338}
+  - component: {fileID: 3932552596931266241}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -204,7 +204,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -1.12, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5602975972425853259}
@@ -254,7 +254,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 7fe21782592064554954250e857c8504, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.56078434, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -291,18 +291,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &2321679041628334356
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5051284903998295696}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 916b9b263332c4775a6b226bee3bb2bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &8554648864909730338
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -349,6 +337,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.3, y: 0.3}
   m_EdgeRadius: 0
+--- !u!114 &3932552596931266241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5051284903998295696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f065e203c36d47cf9d902e1d4129ea8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer: 3
 --- !u!1 &7461354543800533658
 GameObject:
   m_ObjectHideFlags: 0
@@ -358,11 +359,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5602975972425853259}
-  - component: {fileID: 6121679406452318740}
+  - component: {fileID: 4982336583283359399}
   - component: {fileID: 7595905048437823666}
   - component: {fileID: 3084981597421438330}
   m_Layer: 0
-  m_Name: Move Up Down
+  m_Name: Homing
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -386,7 +387,7 @@ Transform:
   - {fileID: 5941903031631538330}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6121679406452318740
+--- !u!114 &4982336583283359399
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -395,14 +396,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 7461354543800533658}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69826929d04e2406191720bb24c98d8f, type: 3}
+  m_Script: {fileID: 11500000, guid: 325a5d3d1bc7d47e5a669eedd7fe3446, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 3
-  bulletSpeed: 1.75
-  moveSpeed: 1
-  attackRate: 1.5
-  lookAtPlayer: 0
+  health: 2
+  bulletSpeed: 3.5
+  moveSpeed: 0
+  attackRate: 2.25
+  lookAtPlayer: 1
 --- !u!61 &7595905048437823666
 BoxCollider2D:
   m_ObjectHideFlags: 0
