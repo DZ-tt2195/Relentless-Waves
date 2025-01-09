@@ -53,7 +53,7 @@ public class WaveManager : MonoBehaviour
     void SpawnResupply()
     {
         Resupply resupply = (resupplyQueue.Count > 0) ? resupplyQueue.Dequeue() : Instantiate(resupplyPrefab);
-        resupply.transform.position = new Vector2(Random.Range(-7f, 7f), 4f);
+        resupply.transform.position = new Vector2(Random.Range(minX+0.5f, maxX-0.5f), maxY);
         resupply.gameObject.SetActive(true);
     }
 
@@ -79,7 +79,7 @@ public class WaveManager : MonoBehaviour
             foreach (Bullet bullet in bullets)
                 Destroy(bullet.gameObject);
 
-            EndGame("You Won!" + "\n\n" + Player.instance.PlayerStats());
+            EndGame($"You Won! {(PlayerPrefs.GetInt("Hard Mode") == 1 ? "(Hard Mode)" : "")}\n\n{Player.instance.PlayerStats()}");
         }
     }
 

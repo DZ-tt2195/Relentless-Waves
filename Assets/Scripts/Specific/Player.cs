@@ -31,6 +31,8 @@ public class Player : Entity
         base.Awake();
         Application.targetFrameRate = 60;
         instance = this;
+        paused = false;
+        Time.timeScale = 1f;
 
         this.tag = "Player";
         currentBullet = maxBullet;
@@ -84,31 +86,30 @@ public class Player : Entity
     protected override void DamageEffect()
     {
         StartCoroutine(Immunity());
-    }
-
-    IEnumerator Immunity()
-    {
-        immune = true;
-        float elapsedTime = 0f;
-        bool flicker = true;
-
-        Vector3 darkness = new(0.1f, 0.1f, 0.1f);
-        Vector3 gray = new(0.25f, 0.25f, 0.25f);
-        WaveManager.instance.mainCamera.backgroundColor = new(darkness.x, darkness.y, darkness.z);
-
-        while (elapsedTime < immuneTime)
+        IEnumerator Immunity()
         {
-            flicker = !flicker;
-            elapsedTime += Time.deltaTime;
-            SetAlpha(flicker ? (elapsedTime / immuneTime) : 1f);
-            Vector3 target = Vector3.Lerp(darkness, gray, elapsedTime / immuneTime);
-            WaveManager.instance.mainCamera.backgroundColor = new(target.x, target.y, target.z);
-            yield return null;
-        }
+            immune = true;
+            float elapsedTime = 0f;
+            bool flicker = true;
 
-        WaveManager.instance.mainCamera.backgroundColor = new(gray.x, gray.y, gray.z);
-        SetAlpha(1);
-        immune = false;
+            Vector3 darkness = new(0.1f, 0.1f, 0.1f);
+            Vector3 gray = new(0.25f, 0.25f, 0.25f);
+            WaveManager.instance.mainCamera.backgroundColor = new(darkness.x, darkness.y, darkness.z);
+
+            while (elapsedTime < immuneTime)
+            {
+                flicker = !flicker;
+                elapsedTime += Time.deltaTime;
+                SetAlpha(flicker ? (elapsedTime / immuneTime) : 1f);
+                Vector3 target = Vector3.Lerp(darkness, gray, elapsedTime / immuneTime);
+                WaveManager.instance.mainCamera.backgroundColor = new(target.x, target.y, target.z);
+                yield return null;
+            }
+
+            WaveManager.instance.mainCamera.backgroundColor = new(gray.x, gray.y, gray.z);
+            SetAlpha(1);
+            immune = false;
+        }
     }
 
     protected override void DeathEffect()

@@ -398,8 +398,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 325a5d3d1bc7d47e5a669eedd7fe3446, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1
-  bulletSpeed: 6.5
+  health: 2
+  bulletSpeed: 6.25
   moveSpeed: 0
   attackRate: 2
   lookAtPlayer: 1
