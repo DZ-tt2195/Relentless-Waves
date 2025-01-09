@@ -4,7 +4,7 @@ using UnityEngine;
 public class BaseEnemy : Entity
 {
     [Foldout("Enemy info", true)]
-    GameObject crossedOut;
+    protected GameObject crossedOut { get; private set; }
     [SerializeField] protected float moveSpeed;
     [SerializeField] float attackRate;
     [SerializeField] bool lookAtPlayer = true;

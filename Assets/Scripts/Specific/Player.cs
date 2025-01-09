@@ -15,7 +15,6 @@ public class Player : Entity
     int currentBullet;
     [SerializeField] int maxBullet;
     [SerializeField] float immuneTime;
-    int maxHealth;
     int firedBullets;
     Stopwatch gameTimer;
 
@@ -35,7 +34,6 @@ public class Player : Entity
 
         this.tag = "Player";
         currentBullet = maxBullet;
-        maxHealth = health;
 
         gameTimer = new Stopwatch();
         gameTimer.Start();

@@ -8,6 +8,7 @@ public class Entity : MonoBehaviour
 {
     [Foldout("Entity info", true)]
     public int health;
+    protected int maxHealth { get; private set; }
     protected SpriteRenderer spriteRenderer;
 
     protected bool immune = false;
@@ -22,6 +23,7 @@ public class Entity : MonoBehaviour
         spriteRenderer = transform.Find("Sprite").GetComponent<SpriteRenderer>();
         prefab = this.transform.Find("Bullet").GetComponent<Bullet>();
         prefab.gameObject.SetActive(false);
+        maxHealth = health;
     }
 
     protected void SetAlpha(float alpha)
