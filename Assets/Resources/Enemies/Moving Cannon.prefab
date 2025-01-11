@@ -399,9 +399,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 2
-  bulletSpeed: 2.25
-  moveSpeed: 2.5
-  attackRate: 1.5
+  bulletSpeed: 2
+  moveSpeed: 2
+  attackRate: 2
   lookAtPlayer: 1
 --- !u!61 &7595905048437823666
 BoxCollider2D:

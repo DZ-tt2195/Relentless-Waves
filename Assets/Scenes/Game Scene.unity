@@ -2755,9 +2755,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56bd0f9ffe37f4aa68d1d5251433133e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 5
+  health: 6
   bulletSpeed: 7
-  maxBullet: 5
+  maxBullet: 6
   immuneTime: 2
   bulletSlider: {fileID: 687250255}
   bulletCounter: {fileID: 1380154251}
