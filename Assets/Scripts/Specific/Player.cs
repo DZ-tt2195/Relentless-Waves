@@ -100,14 +100,14 @@ public class Player : Entity
             {
                 flicker = !flicker;
                 elapsedTime += Time.deltaTime;
-                SetAlpha(flicker ? (elapsedTime / immuneTime) : 1f);
+                SetAlpha(this.spriteRenderer, flicker ? (elapsedTime / immuneTime) : 1f);
                 Vector3 target = Vector3.Lerp(darkness, gray, elapsedTime / immuneTime);
                 WaveManager.instance.mainCamera.backgroundColor = new(target.x, target.y, target.z);
                 yield return null;
             }
 
             WaveManager.instance.mainCamera.backgroundColor = new(gray.x, gray.y, gray.z);
-            SetAlpha(1);
+            SetAlpha(this.spriteRenderer, 1);
             immune = false;
         }
     }
@@ -115,7 +115,7 @@ public class Player : Entity
     protected override void DeathEffect()
     {
         immune = true;
-        SetAlpha(0.5f);
+        SetAlpha(this.spriteRenderer, 0.5f);
         WaveManager.instance.EndGame($"You Lost.");
     }
 

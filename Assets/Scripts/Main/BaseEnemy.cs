@@ -21,7 +21,7 @@ public class BaseEnemy : Entity
             bulletSpeed *= (4/3f);
             moveSpeed *= (4/3f);
         }
-        InvokeRepeating(nameof(ShootBullet), attackRate, attackRate);
+        InvokeRepeating(nameof(ShootBullet), attackRate*(3/4f), attackRate);
     }
 
     protected virtual void ShootBullet()
@@ -50,7 +50,7 @@ public class BaseEnemy : Entity
     {
         immune = true;
         crossedOut.SetActive(true);
-        SetAlpha(0.5f);
+        SetAlpha(this.spriteRenderer, 0.5f);
     }
 
     public void OnDestroy()

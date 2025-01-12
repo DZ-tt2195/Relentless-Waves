@@ -21,16 +21,19 @@ public class Entity : MonoBehaviour
     protected virtual void Awake()
     {
         spriteRenderer = transform.Find("Sprite").GetComponent<SpriteRenderer>();
-        prefab = this.transform.Find("Bullet").GetComponent<Bullet>();
-        prefab.gameObject.SetActive(false);
+        try
+        {
+            prefab = this.transform.Find("Bullet").GetComponent<Bullet>();
+            prefab.gameObject.SetActive(false);
+        } catch { }
         maxHealth = health;
     }
 
-    protected void SetAlpha(float alpha)
+    protected void SetAlpha(SpriteRenderer target, float alpha)
     {
-        Color newColor = spriteRenderer.color;
+        Color newColor = target.color;
         newColor.a = alpha;
-        spriteRenderer.color = newColor;
+        target.color = newColor;
     }
 
     public void TakeDamage()

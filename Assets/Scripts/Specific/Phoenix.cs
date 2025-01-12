@@ -23,7 +23,7 @@ public class Phoenix : BaseEnemy
             health = maxHealth;
             immune = false;
             crossedOut.SetActive(false);
-            SetAlpha(1f);
+            SetAlpha(this.spriteRenderer, 1f);
         }
     }
 }
