@@ -39,7 +39,7 @@ public class Mortar : BaseEnemy
                 yield return null;
             }
 
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(next.transform.position, 1f);
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(next.transform.position, 0.9f);
             foreach (Collider2D nextCollider in colliders)
             {
                 if (nextCollider.gameObject == Player.instance.gameObject)

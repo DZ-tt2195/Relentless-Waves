@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour
     protected Entity owner;
     protected float bulletSpeed;
 
-    protected void TryAndReturn(bool landed)
+    protected virtual void TryAndReturn(bool landed)
     {
         if (owner == null)
             Destroy(this.gameObject);
