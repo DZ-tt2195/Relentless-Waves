@@ -6,7 +6,7 @@ public class BaseEnemy : Entity
     [Foldout("Enemy info", true)]
     protected GameObject crossedOut { get; private set; }
     [SerializeField] protected float moveSpeed;
-    [SerializeField] float attackRate;
+    [SerializeField] protected float attackRate;
     [SerializeField] bool lookAtPlayer = true;
     protected Vector3 moveDirection;
 
