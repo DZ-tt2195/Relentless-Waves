@@ -575,10 +575,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ecfb215c0e7b4c578d0fad5ee77e017, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 4
-  bulletSpeed: 3
+  health: 3
+  bulletSpeed: 2.75
   moveSpeed: 0
-  attackRate: 3
+  attackRate: 2.75
   lookAtPlayer: 1
   bulletOffset: 0.33
 --- !u!61 &7595905048437823666
