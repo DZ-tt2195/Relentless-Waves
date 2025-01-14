@@ -2,18 +2,30 @@ using UnityEngine;
 using UnityEngine.UI;
 using MyBox;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class TitleScreen : MonoBehaviour
 {
-    [SerializeField] Toggle hardModeToggle;
+    [SerializeField] Slider difficultySlider;
+    [SerializeField] TMP_Text sliderLabel;
 
     void Awake()
     {
-        hardModeToggle.isOn = PlayerPrefs.GetInt("Hard Mode") != 0;
+        if (!PlayerPrefs.HasKey("Difficulty"))
+            PlayerPrefs.SetFloat("Difficulty", 1f);
+
+        difficultySlider.onValueChanged.AddListener(UpdateText);
+        difficultySlider.value = PlayerPrefs.GetFloat("Difficulty");
+        UpdateText(PlayerPrefs.GetFloat("Difficulty"));
+    }
+
+    void UpdateText(float value)
+    {
+        sliderLabel.text = $"{value*100:F1}%";
     }
 
     private void OnDisable()
     {
-        PlayerPrefs.SetInt("Hard Mode", hardModeToggle.isOn ? 1 : 0);
+        PlayerPrefs.SetFloat("Difficulty", difficultySlider.value);
     }
 }

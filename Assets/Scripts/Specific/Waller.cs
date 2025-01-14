@@ -9,9 +9,8 @@ public class Waller : BaseEnemy
     {
         base.Awake();
         wall = transform.Find("Wall").gameObject;
-        if (PlayerPrefs.GetInt("Hard Mode") == 1)
-            wallTimer *= (4 / 3f);
-        InvokeRepeating(nameof(FlickerWall), wallTimer, wallTimer);
+        wallTimer *= PlayerPrefs.GetFloat("Difficulty");
+        InvokeRepeating(nameof(FlickerWall), wallTimer*0.5f, wallTimer);
     }
 
     void FlickerWall()

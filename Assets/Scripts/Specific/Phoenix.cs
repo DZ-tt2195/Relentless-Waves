@@ -8,8 +8,7 @@ public class Phoenix : BaseEnemy
     protected override void Awake()
     {
         base.Awake();
-        if (PlayerPrefs.GetInt("Hard Mode") == 1)
-            respawnTime *= (3 / 4f);
+        respawnTime *= 2 - PlayerPrefs.GetFloat("Difficulty");
     }
 
     protected override void DeathEffect()

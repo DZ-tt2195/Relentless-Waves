@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class UFO : BaseEnemy
 {
-    [SerializeField] float avoid = 0.5f;
+    [SerializeField] float avoid;
 
     protected override void DamageEffect()
     {

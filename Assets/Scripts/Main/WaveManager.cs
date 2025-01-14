@@ -79,7 +79,7 @@ public class WaveManager : MonoBehaviour
             foreach (Bullet bullet in bullets)
                 Destroy(bullet.gameObject);
 
-            EndGame($"You Won! {(PlayerPrefs.GetInt("Hard Mode") == 1 ? "(Hard Mode)" : "")}\n\n{Player.instance.PlayerStats()}");
+            EndGame($"You Won! {PlayerPrefs.GetFloat("Difficulty")*100:F1}%\n\n{Player.instance.PlayerStats()}");
         }
     }
 

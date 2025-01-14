@@ -5,6 +5,7 @@ public class CollectOrb : BaseEnemy
     GameObject wall;
     Orb orbPrefab;
     [SerializeField] float bulletOffset;
+    [SerializeField] int numBullets;
 
     protected override void Awake()
     {
@@ -20,7 +21,7 @@ public class CollectOrb : BaseEnemy
         Vector2 target = AimAtPlayer();
         target.Normalize();
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < numBullets; i++)
             CreateBullet(prefab, this.transform.position, bulletSpeed, new(target.x + RandomOffSet(), target.y + RandomOffSet()));
 
         if (health > 0 && !orbPrefab.gameObject.activeSelf)

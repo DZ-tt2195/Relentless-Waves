@@ -12,6 +12,7 @@ public class Mortar : BaseEnemy
     protected override void Awake()
     {
         base.Awake();
+        waitTime *= 2 - PlayerPrefs.GetFloat("Difficulty");
         foreach (SpriteRenderer next in listOfRadiuses)
             next.gameObject.SetActive(false);
     }

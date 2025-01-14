@@ -401,7 +401,7 @@ MonoBehaviour:
   health: 4
   bulletSpeed: 2.75
   moveSpeed: 0
-  attackRate: 1
+  attackRate: 1.25
   lookAtPlayer: 0
 --- !u!61 &7595905048437823666
 BoxCollider2D:

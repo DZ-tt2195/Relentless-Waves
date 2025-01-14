@@ -15,13 +15,12 @@ public class BaseEnemy : Entity
         this.tag = "Enemy";
         crossedOut = transform.Find("X").gameObject;
         crossedOut.SetActive(false);
-        if (PlayerPrefs.GetInt("Hard Mode") == 1)
-        {
-            attackRate *= (3/4f);
-            bulletSpeed *= (4/3f);
-            moveSpeed *= (4/3f);
-        }
-        InvokeRepeating(nameof(ShootBullet), attackRate*(3/4f), attackRate);
+
+        attackRate *= (2-PlayerPrefs.GetFloat("Difficulty"));
+        bulletSpeed *= PlayerPrefs.GetFloat("Difficulty");
+        moveSpeed *= PlayerPrefs.GetFloat("Difficulty");
+
+        InvokeRepeating(nameof(ShootBullet), attackRate*0.5f, attackRate);
     }
 
     protected virtual void ShootBullet()
