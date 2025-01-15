@@ -15,6 +15,7 @@ public class WaveManager : MonoBehaviour
 
     [Foldout("Prefabs", true)]
     [SerializeField] Resupply resupplyPrefab;
+    [SerializeField] HealthPack healthPack;
     Queue<Resupply> resupplyQueue = new();
 
     [Foldout("UI", true)]
@@ -53,7 +54,7 @@ public class WaveManager : MonoBehaviour
     void SpawnResupply()
     {
         Resupply resupply = (resupplyQueue.Count > 0) ? resupplyQueue.Dequeue() : Instantiate(resupplyPrefab);
-        resupply.transform.position = new Vector2(Random.Range(minX+0.5f, maxX-0.5f), maxY);
+        resupply.transform.position = new(Random.Range(minX + 0.5f, maxX - 0.5f), maxY);
         resupply.gameObject.SetActive(true);
     }
 
@@ -68,6 +69,11 @@ public class WaveManager : MonoBehaviour
         currentWave++;
         if (currentWave < listOfWaves.Count())
         {
+            if (currentWave > 1)
+            {
+                HealthPack pack = Instantiate(healthPack);
+                pack.transform.position = new(Random.Range(minX + 0.5f, maxX - 0.5f), maxY);
+            }
             foreach (Vector2 vector in listOfWaves[currentWave].enemySpawns)
                 CreateEnemy(vector, enemiesToSpawn[Random.Range(0, enemiesToSpawn.Length)]);
             waveSlider.value = (currentWave + 1) / (float)listOfWaves.Length;
@@ -79,7 +85,7 @@ public class WaveManager : MonoBehaviour
             foreach (Bullet bullet in bullets)
                 Destroy(bullet.gameObject);
 
-            EndGame($"You Won! {PlayerPrefs.GetFloat("Difficulty")*100:F1}%\n\n{Player.instance.PlayerStats()}");
+            EndGame($"You Won!\n\n{Player.instance.PlayerStats()}");
         }
     }
 

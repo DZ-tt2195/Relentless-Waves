@@ -399,7 +399,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 4
-  bulletSpeed: 2.75
+  bulletSpeed: 2.5
   moveSpeed: 0
   attackRate: 1.25
   lookAtPlayer: 0

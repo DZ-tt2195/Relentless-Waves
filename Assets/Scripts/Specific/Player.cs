@@ -19,6 +19,7 @@ public class Player : Entity
     Stopwatch gameTimer;
 
     [Foldout("UI", true)]
+    [SerializeField] TMP_Text timerText;
     [SerializeField] Slider bulletSlider;
     [SerializeField] TMP_Text bulletCounter;
 
@@ -49,17 +50,29 @@ public class Player : Entity
             ShootBullet();
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (health > 0 && Input.GetKeyDown(KeyCode.Space))
         {
             paused = !paused;
             pauseScreen.SetActive(paused);
             Time.timeScale = (paused) ? 0f : 1f;
+            if (paused)
+                gameTimer.Stop();
+            else
+                gameTimer.Start();
         }
 
         healthSlider.value = health / (float)maxHealth;
         healthCounter.text = $"Health: {health} / {maxHealth}";
         bulletSlider.value = currentBullet / (float)maxBullet;
         bulletCounter.text = $"Bullets: {currentBullet} / {maxBullet}";
+
+        timerText.text = $"{PlayerPrefs.GetFloat("Difficulty") * 100:F1}% Difficulty\n{StopwatchTime(gameTimer)}";
+        string StopwatchTime(Stopwatch stopwatch)
+        {
+            TimeSpan time = stopwatch.Elapsed;
+            string part = time.Seconds < 10 ? $"0{time.Seconds}" : $"{time.Seconds}";
+            return $"{time.Minutes}:{part}.{time.Milliseconds}";
+        }
     }
 
     void ShootBullet()
@@ -116,21 +129,14 @@ public class Player : Entity
     {
         immune = true;
         SetAlpha(this.spriteRenderer, 0.5f);
-        WaveManager.instance.EndGame($"You Lost.");
+        WaveManager.instance.EndGame($"You Lost.\n\n{PlayerStats()}");
     }
 
     public string PlayerStats()
     {
-        string answer = $"Time: {StopwatchTime(gameTimer)}\nMissed {firedBullets-landedBullets} bullets\nTook {maxHealth-health} damage";
+        gameTimer.Stop();
+        string answer = $"Missed {firedBullets-landedBullets} bullets\nTook {maxHealth-health} damage";
         return answer;
-
-        string StopwatchTime(Stopwatch stopwatch)
-        {
-            stopwatch.Stop();
-            TimeSpan time = stopwatch.Elapsed;
-            string part = time.Seconds < 10 ? $"0{time.Seconds}" : $"{time.Seconds}";
-            return $"{time.Minutes}:{part}.{time.Milliseconds}";
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -143,10 +149,15 @@ public class Player : Entity
         {
             this.TakeDamage();
         }
-        else if (collision.TryGetComponent(out Resupply resupply) && currentBullet < maxBullet)
+        else if (collision.CompareTag("Resupply") && currentBullet < maxBullet)
         {
-            WaveManager.instance.ReturnResupply(resupply);
+            WaveManager.instance.ReturnResupply(collision.GetComponent<Resupply>());
             currentBullet = Mathf.Min(currentBullet + 2, maxBullet);
+        }
+        else if (collision.CompareTag("HealthPack") && health < maxHealth)
+        {
+            Destroy(collision.gameObject);
+            health++;
         }
     }
 }

@@ -403,7 +403,7 @@ MonoBehaviour:
   moveSpeed: 0
   attackRate: 0.75
   lookAtPlayer: 1
-  respawnTime: 6
+  respawnTime: 6.25
 --- !u!61 &7595905048437823666
 BoxCollider2D:
   m_ObjectHideFlags: 0
