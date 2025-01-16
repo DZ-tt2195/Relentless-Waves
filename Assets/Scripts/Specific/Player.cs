@@ -129,14 +129,13 @@ public class Player : Entity
     {
         immune = true;
         SetAlpha(this.spriteRenderer, 0.5f);
-        WaveManager.instance.EndGame($"You Lost.\n\n{PlayerStats()}");
+        WaveManager.instance.EndGame($"You Lost.", PlayerStats());
     }
 
-    public string PlayerStats()
+    public (int, int) PlayerStats()
     {
         gameTimer.Stop();
-        string answer = $"Missed {firedBullets-landedBullets} bullets\nTook {maxHealth-health} damage";
-        return answer;
+        return (firedBullets - landedBullets, maxHealth - health);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

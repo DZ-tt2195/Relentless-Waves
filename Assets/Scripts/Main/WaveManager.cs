@@ -69,7 +69,7 @@ public class WaveManager : MonoBehaviour
         currentWave++;
         if (currentWave < listOfWaves.Count())
         {
-            if (currentWave > 1)
+            if (currentWave >= 1)
             {
                 HealthPack pack = Instantiate(healthPack);
                 pack.transform.position = new(Random.Range(minX + 0.5f, maxX - 0.5f), maxY);
@@ -85,7 +85,25 @@ public class WaveManager : MonoBehaviour
             foreach (Bullet bullet in bullets)
                 Destroy(bullet.gameObject);
 
-            EndGame($"You Won!\n\n{Player.instance.PlayerStats()}");
+            (int missedBullets, int tookDamage) = Player.instance.PlayerStats();
+            EndGame($"You Won!", new(missedBullets, tookDamage));
+
+            float currentDifficulty = PlayerPrefs.GetFloat("Difficulty");
+            float bestDifficulty = PlayerPrefs.HasKey("Best Difficulty") ? PlayerPrefs.GetFloat("Best Difficulty") : 0f;
+            int currentScore = missedBullets + tookDamage;
+            int bestScore = PlayerPrefs.GetInt("Best Bullet") + PlayerPrefs.GetInt("Best Damage");
+
+            if (currentDifficulty > bestDifficulty)
+            {
+                PlayerPrefs.SetFloat("Best Difficulty", currentDifficulty);
+                PlayerPrefs.SetInt("Best Bullet", missedBullets);
+                PlayerPrefs.SetInt("Best Damage", tookDamage);
+            }
+            else if (currentDifficulty == bestDifficulty && currentScore < bestScore)
+            {
+                PlayerPrefs.SetInt("Best Bullet", missedBullets);
+                PlayerPrefs.SetInt("Best Damage", tookDamage);
+            }
         }
     }
 
@@ -121,12 +139,12 @@ public class WaveManager : MonoBehaviour
         }
     }
 
-    public void EndGame(string text)
+    public void EndGame(string text, (int missedBullets, int tookDamage) stats)
     {
         if (!endingText.transform.parent.gameObject.activeSelf)
         {
             endingText.transform.parent.gameObject.SetActive(true);
-            endingText.text = text;
+            endingText.text = $"{text}\n\nMissed {stats.missedBullets} bullets\nTook {stats.tookDamage} damage";
         }
     }
 }
