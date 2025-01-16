@@ -3,18 +3,38 @@ using UnityEngine;
 public class Waller : BaseEnemy
 {
     GameObject wall;
-    [SerializeField] float wallTimer;
+    [SerializeField] float wallOff;
+    [SerializeField] float wallOn;
+    float timer;
 
     protected override void Awake()
     {
         base.Awake();
         wall = transform.Find("Wall").gameObject;
-        wallTimer *= PlayerPrefs.GetFloat("Difficulty");
-        InvokeRepeating(nameof(FlickerWall), wallTimer*0.5f, wallTimer);
+        wallOn *= PlayerPrefs.GetFloat("Difficulty");
+        wallOff *= 2 - PlayerPrefs.GetFloat("Difficulty");
+
+        wall.SetActive(true);
+        timer = wallOn;
     }
 
-    void FlickerWall()
+    protected override void Update()
     {
-        wall.SetActive(!wall.activeSelf);
+        base.Update();
+        timer -= Time.deltaTime;
+
+        if (timer < 0f)
+        {
+            if (wall.activeSelf)
+            {
+                timer = wallOff;
+                wall.SetActive(false);
+            }
+            else
+            {
+                timer = wallOn;
+                wall.SetActive(true);
+            }
+        }
     }
 }

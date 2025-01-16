@@ -404,7 +404,8 @@ MonoBehaviour:
   moveSpeed: 0
   attackRate: 2
   lookAtPlayer: 1
-  wallTimer: 1.5
+  wallOff: 5
+  wallOn: 2
 --- !u!61 &7595905048437823666
 BoxCollider2D:
   m_ObjectHideFlags: 0

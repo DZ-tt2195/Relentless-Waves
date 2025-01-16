@@ -2758,7 +2758,7 @@ MonoBehaviour:
   health: 6
   bulletSpeed: 7
   maxBullet: 6
-  immuneTime: 2
+  immuneTime: 2.5
   timerText: {fileID: 200080893}
   bulletSlider: {fileID: 687250255}
   bulletCounter: {fileID: 1380154251}

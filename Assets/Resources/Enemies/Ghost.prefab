@@ -400,8 +400,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 3
   bulletSpeed: 2
-  moveSpeed: 1.75
-  attackRate: 3
+  moveSpeed: 2
+  attackRate: 2.75
   lookAtPlayer: 1
 --- !u!61 &7595905048437823666
 BoxCollider2D:

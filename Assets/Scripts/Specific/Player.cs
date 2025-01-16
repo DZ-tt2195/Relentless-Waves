@@ -16,6 +16,7 @@ public class Player : Entity
     [SerializeField] int maxBullet;
     [SerializeField] float immuneTime;
     int firedBullets;
+    int tookDamage;
     Stopwatch gameTimer;
 
     [Foldout("UI", true)]
@@ -37,6 +38,7 @@ public class Player : Entity
 
         this.tag = "Player";
         currentBullet = maxBullet;
+        immuneTime *= 2 - PlayerPrefs.GetFloat("Difficulty");
 
         gameTimer = new Stopwatch();
         gameTimer.Start();
@@ -98,6 +100,7 @@ public class Player : Entity
 
     protected override void DamageEffect()
     {
+        tookDamage++;
         StartCoroutine(Immunity());
         IEnumerator Immunity()
         {
@@ -135,7 +138,7 @@ public class Player : Entity
     public (int, int) PlayerStats()
     {
         gameTimer.Stop();
-        return (firedBullets - landedBullets, maxHealth - health);
+        return (firedBullets - landedBullets, tookDamage);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

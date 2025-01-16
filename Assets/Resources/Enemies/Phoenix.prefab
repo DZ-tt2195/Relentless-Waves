@@ -401,7 +401,7 @@ MonoBehaviour:
   health: 2
   bulletSpeed: 1.25
   moveSpeed: 0
-  attackRate: 0.75
+  attackRate: 1
   lookAtPlayer: 1
   respawnTime: 6.25
 --- !u!61 &7595905048437823666
