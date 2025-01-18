@@ -14,9 +14,12 @@ public class Orb : Bullet
             this.owner.TakeDamage();
             TryAndReturn(true);
         }
-        else if (collision.CompareTag("Wall") && !collision.transform.parent.CompareTag(this.tag))
+        else if (collision.CompareTag("Wall"))
         {
-            TryAndReturn(false);
+            if (collision.TryGetComponent(out Bullet bullet) && !bullet.owner.CompareTag(this.owner.tag))
+                TryAndReturn(false);
+            else if (!collision.transform.parent.CompareTag(owner.tag))
+                TryAndReturn(false);
         }
     }
 }

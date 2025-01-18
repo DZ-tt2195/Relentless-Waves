@@ -5,7 +5,7 @@ using MyBox;
 public class Bullet : MonoBehaviour
 {
     protected Vector3 direction;
-    protected Entity owner;
+    public Entity owner { get; private set; }
     protected float bulletSpeed;
 
     protected virtual void TryAndReturn(bool landed)
@@ -18,6 +18,7 @@ public class Bullet : MonoBehaviour
 
     public virtual void AssignInfo(float speed, Vector3 direction, Entity owner)
     {
+        this.tag = owner.tag;
         this.bulletSpeed = speed;
         this.direction = direction;
         this.owner = owner;
@@ -27,26 +28,29 @@ public class Bullet : MonoBehaviour
     void Update()
     {
         Movement();
-        if (this.transform.position.x < WaveManager.minX || this.transform.position.x > WaveManager.maxX ||
-            this.transform.position.y < WaveManager.minY || this.transform.position.y > WaveManager.maxY)
+        if (this.transform.position.x < WaveManager.minX - 0.5f || this.transform.position.x > WaveManager.maxX + 0.5f ||
+            this.transform.position.y < WaveManager.minY - 0.5f || this.transform.position.y > WaveManager.maxY + 0.5f)
             TryAndReturn(false);
     }
 
     protected virtual void Movement()
     {
-        this.transform.Translate(bulletSpeed * Time.deltaTime * direction);
+        this.transform.Translate(bulletSpeed * Time.deltaTime * direction, Space.World);
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out Entity target) && target.health > 0 && !this.CompareTag(target.tag))
+        if (collision.TryGetComponent(out Entity target) && target.health > 0 && !owner.CompareTag(target.tag))
         {
             target.TakeDamage();
             TryAndReturn(true);
         }
-        else if (collision.CompareTag("Wall") && !collision.transform.parent.CompareTag(this.tag))
+        else if (collision.CompareTag("Wall"))
         {
-            TryAndReturn(false);
+            if (collision.TryGetComponent(out Bullet bullet) && !bullet.owner.CompareTag(this.owner.tag))
+                TryAndReturn(false);
+            else if (!collision.transform.parent.CompareTag(owner.tag))
+                TryAndReturn(false);
         }
     }
 }

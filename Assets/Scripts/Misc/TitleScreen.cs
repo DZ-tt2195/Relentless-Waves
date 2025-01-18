@@ -27,7 +27,7 @@ public class TitleScreen : MonoBehaviour
         }
         else
         {
-            bestRun.text = "";
+            bestRun.text = "No completed runs";
         }
     }
 
