@@ -131,6 +131,7 @@ public class Player : Entity
     protected override void DeathEffect()
     {
         immune = true;
+        tookDamage++;
         SetAlpha(this.spriteRenderer, 0.5f);
         WaveManager.instance.EndGame($"You Lost.", PlayerStats());
     }

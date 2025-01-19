@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour
 {
     protected Vector3 direction;
     public Entity owner { get; private set; }
+    string ownerTag;
     protected float bulletSpeed;
 
     protected virtual void TryAndReturn(bool landed)
@@ -22,6 +23,7 @@ public class Bullet : MonoBehaviour
         this.bulletSpeed = speed;
         this.direction = direction;
         this.owner = owner;
+        ownerTag = owner.tag;
         this.gameObject.SetActive(true);
     }
 
@@ -40,17 +42,14 @@ public class Bullet : MonoBehaviour
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out Entity target) && target.health > 0 && !owner.CompareTag(target.tag))
+        if (collision.TryGetComponent(out Entity target) && target.health > 0 && !target.CompareTag(ownerTag))
         {
             target.TakeDamage();
             TryAndReturn(true);
         }
-        else if (collision.CompareTag("Wall"))
+        else if (collision.CompareTag("Wall") && !collision.transform.parent.CompareTag(ownerTag))
         {
-            if (collision.TryGetComponent(out Bullet bullet) && !bullet.owner.CompareTag(this.owner.tag))
-                TryAndReturn(false);
-            else if (!collision.transform.parent.CompareTag(owner.tag))
-                TryAndReturn(false);
+            TryAndReturn(false);
         }
     }
 }
