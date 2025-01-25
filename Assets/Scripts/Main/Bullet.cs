@@ -1,6 +1,4 @@
 using UnityEngine;
-using System;
-using MyBox;
 
 public class Bullet : MonoBehaviour
 {
@@ -38,6 +36,7 @@ public class Bullet : MonoBehaviour
     protected virtual void Movement()
     {
         this.transform.Translate(bulletSpeed * Time.deltaTime * direction, Space.World);
+        this.transform.localEulerAngles = new(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90);
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
