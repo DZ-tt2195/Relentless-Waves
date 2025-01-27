@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MoveUpDown : BaseEnemy
+public class Sun : BaseEnemy
 {
     protected override void Awake()
     {

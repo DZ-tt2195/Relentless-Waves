@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Waller : BaseEnemy
+public class Angel : BaseEnemy
 {
     GameObject wall;
     [SerializeField] float wallOff;
