@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 96619c60c5e554ac68be1179db2e867c
+guid: 32554a972d9464310ad7b9e6e5d9deb7
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1805158079502305607
-    second: Flag_0
-  - first:
-      213: -477789389410734736
-    second: Flag_1
+      213: -3017979480325208809
+    second: Battery_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -142,13 +139,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Flag_0
+      name: Battery_0
       rect:
         serializedVersion: 2
-        x: 194
-        y: 88
-        width: 97
-        height: 957
+        x: 0
+        y: 0
+        width: 502
+        height: 856
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -157,30 +154,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 749492c85b53d0910800000000000000
-      internalID: 1805158079502305607
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Flag_1
-      rect:
-        serializedVersion: 2
-        x: 282
-        y: 412
-        width: 651
-        height: 539
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 07de8bee41d8e59f0800000000000000
-      internalID: -477789389410734736
+      spriteID: 7154ccf07abfd16d0800000000000000
+      internalID: -3017979480325208809
       vertices: []
       indices: 
       edges: []
@@ -197,8 +172,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Flag_0: 1805158079502305607
-      Flag_1: -477789389410734736
+      Battery_0: -3017979480325208809
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

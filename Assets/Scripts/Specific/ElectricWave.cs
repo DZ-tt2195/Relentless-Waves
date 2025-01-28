@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SpiderWeb : Bullet
+public class ElectricWave : Bullet
 {
     [SerializeField] float targetXpand;
     [SerializeField] float travelTime;

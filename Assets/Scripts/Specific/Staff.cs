@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class CollectOrb : BaseEnemy
+public class Staff : BaseEnemy
 {
     GameObject wall;
-    Orb orbPrefab;
+    Star starPrefab;
     [SerializeField] float bulletOffset;
     [SerializeField] int numBullets;
 
@@ -12,8 +12,8 @@ public class CollectOrb : BaseEnemy
         base.Awake();
         wall = transform.Find("Wall").gameObject;
 
-        orbPrefab = transform.Find("Orb").GetComponent<Orb>();
-        orbPrefab.gameObject.SetActive(false);
+        starPrefab = transform.Find("Star").GetComponent<Star>();
+        starPrefab.gameObject.SetActive(false);
     }
 
     protected override void ShootBullet()
@@ -24,11 +24,11 @@ public class CollectOrb : BaseEnemy
         for (int i = 0; i < numBullets; i++)
             CreateBullet(prefab, this.transform.position, bulletSpeed, new(target.x + RandomOffSet(), target.y + RandomOffSet()));
 
-        if (health > 0 && !orbPrefab.gameObject.activeSelf)
+        if (health > 0 && !starPrefab.gameObject.activeSelf)
         {
-            orbPrefab.transform.position = this.transform.position;
-            orbPrefab.tag = this.tag;
-            orbPrefab.AssignInfo(bulletSpeed, new(target.x + RandomOffSet(), target.y + RandomOffSet()), this);
+            starPrefab.transform.position = this.transform.position;
+            starPrefab.tag = this.tag;
+            starPrefab.AssignInfo(bulletSpeed, new(target.x + RandomOffSet(), target.y + RandomOffSet()), this);
         }
 
         float RandomOffSet()

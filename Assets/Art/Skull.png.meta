@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 119832004288f43929a41578885dd3da
+guid: 3ba87dbf70f2540c298d4a427d4b6a73
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5620155193319629329
-    second: Lock_0
+      213: -2739807658926110822
+    second: Skull_0
+  - first:
+      213: -8375587311600527847
+    second: Skull_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +54,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 600
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -139,13 +142,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Lock_0
+      name: Skull_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 307
-        height: 466
+        y: 64
+        width: 357
+        height: 363
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,8 +157,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: feddd97e0a23102b0800000000000000
-      internalID: -5620155193319629329
+      spriteID: a9780d8437f3af9d0800000000000000
+      internalID: -2739807658926110822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skull_1
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 0
+        width: 211
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 91618c247bfe3cb80800000000000000
+      internalID: -8375587311600527847
       vertices: []
       indices: 
       edges: []
@@ -172,7 +197,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Lock_0: -5620155193319629329
+      Skull_0: -2739807658926110822
+      Skull_1: -8375587311600527847
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

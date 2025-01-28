@@ -47,7 +47,7 @@ public class WaveManager : MonoBehaviour
         listOfWaves = Resources.LoadAll<Wave>("Waves");
         enemiesToSpawn = Resources.LoadAll<BaseEnemy>("Enemies");
 
-        InvokeRepeating(nameof(SpawnResupply), 1f, 2.5f);
+        InvokeRepeating(nameof(SpawnResupply), 1f, 2.25f);
         NewWave();
     }
 

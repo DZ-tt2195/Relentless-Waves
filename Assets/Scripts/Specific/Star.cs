@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Orb : Bullet
+public class Star : Bullet
 {
     protected override void TryAndReturn(bool landed)
     {
