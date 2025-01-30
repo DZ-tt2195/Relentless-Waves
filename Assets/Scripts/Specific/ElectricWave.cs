@@ -16,6 +16,7 @@ public class ElectricWave : Bullet
     void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        travelTime *= 2 - PlayerPrefs.GetFloat("Difficulty");
         vanishTime *= 2 - PlayerPrefs.GetFloat("Difficulty");
     }
 

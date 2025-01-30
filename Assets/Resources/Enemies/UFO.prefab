@@ -401,9 +401,9 @@ MonoBehaviour:
   health: 4
   bulletSpeed: 2
   moveSpeed: 0
-  attackRate: 3
+  attackRate: 2.75
   lookAtPlayer: 1
-  avoid: 1
+  avoid: 1.25
 --- !u!61 &7595905048437823666
 BoxCollider2D:
   m_ObjectHideFlags: 0

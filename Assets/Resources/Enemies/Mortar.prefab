@@ -579,7 +579,7 @@ MonoBehaviour:
   health: 3
   bulletSpeed: 0
   moveSpeed: 0
-  attackRate: 2.25
+  attackRate: 2.5
   lookAtPlayer: 1
   waitTime: 1.5
   randomize: 3
