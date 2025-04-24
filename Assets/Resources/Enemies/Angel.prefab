@@ -363,7 +363,7 @@ MonoBehaviour:
   moveSpeed: 0
   attackRate: 2
   lookAtPlayer: 1
-  wallOff: 5
+  wallOff: 5.25
   wallOn: 1.75
 --- !u!61 &7595905048437823666
 BoxCollider2D:

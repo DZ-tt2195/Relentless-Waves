@@ -27,7 +27,8 @@ public class Ghost : BaseEnemy
             moveDirection = Vector3.right;
         else if (transform.position.x > WaveManager.maxX)
             moveDirection = Vector3.left;
+
         if (health > 0)
-            this.SetAlpha(spriteRenderer, Mathf.Max(0, spriteRenderer.color.a - ((attackRate)*Time.deltaTime)));
+            this.SetAlpha(spriteRenderer, Mathf.Max(0, spriteRenderer.color.a - ((4.75f-attackRate) * Time.deltaTime)));
     }
 }

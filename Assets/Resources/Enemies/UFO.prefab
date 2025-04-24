@@ -183,10 +183,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5941903031631538330}
-  - component: {fileID: 2321679041628334356}
   - component: {fileID: 7307465337714780801}
   - component: {fileID: 8959051888700978848}
   - component: {fileID: 7087359425114115362}
+  - component: {fileID: 6252998285707896142}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -203,24 +203,12 @@ Transform:
   m_GameObject: {fileID: 5051284903998295696}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.12, z: 0}
-  m_LocalScale: {x: 0.3, y: 1.75, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 5, y: 5, z: 10}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5602975972425853259}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2321679041628334356
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5051284903998295696}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 916b9b263332c4775a6b226bee3bb2bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!212 &7307465337714780801
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -265,8 +253,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f43ea75921cca4fe18f481d1f6b3d098, type: 3}
-  m_Color: {r: 0.7162437, g: 0.972549, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 8b653f44c572147cb840e9dd6b3ccf00, type: 3}
+  m_Color: {r: 0, g: 0.4839829, b: 0.972549, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -341,7 +329,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.45266667, y: 0.45733333}
+    oldSize: {x: 0.6384, y: 0.6384}
     newSize: {x: 0.5, y: 0.5}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -349,6 +337,20 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.45266667, y: 0.45733333}
   m_EdgeRadius: 0
+--- !u!114 &6252998285707896142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5051284903998295696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00819f607a5474a6285237da47972ce9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetXpand: 15
+  travelTime: 4
 --- !u!1 &7461354543800533658
 GameObject:
   m_ObjectHideFlags: 0
@@ -399,11 +401,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 4
-  bulletSpeed: 2
+  bulletSpeed: 0
   moveSpeed: 0
   attackRate: 2.75
-  lookAtPlayer: 1
-  avoid: 1.25
+  lookAtPlayer: 0
+  avoid: 1.5
 --- !u!61 &7595905048437823666
 BoxCollider2D:
   m_ObjectHideFlags: 0

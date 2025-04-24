@@ -5,7 +5,6 @@ public class ElectricWave : Bullet
     [SerializeField] float targetXpand;
     [SerializeField] float travelTime;
     [SerializeField] float vanishTime;
-    SpriteRenderer spriteRenderer;
 
     float myTimer = 0;
     bool moving = true;
@@ -13,9 +12,9 @@ public class ElectricWave : Bullet
     float invertTime = 0.25f;
     bool inverted = true;
 
-    void Awake()
+    protected override void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        base.Awake();
         travelTime *= 2 - PlayerPrefs.GetFloat("Difficulty");
         vanishTime *= 2 - PlayerPrefs.GetFloat("Difficulty");
     }

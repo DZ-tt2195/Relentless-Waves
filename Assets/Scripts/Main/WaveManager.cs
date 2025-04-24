@@ -77,7 +77,7 @@ public class WaveManager : MonoBehaviour
             foreach (Vector2 vector in listOfWaves[currentWave].enemySpawns)
                 CreateEnemy(vector, enemiesToSpawn[Random.Range(0, enemiesToSpawn.Length)]);
             waveSlider.value = (currentWave + 1) / (float)listOfWaves.Length;
-            waveCounter.text = $"Wave {currentWave + 1} / {listOfWaves.Length}";
+            waveCounter.text = $"{Translator.inst.GetText("Wave")}: {currentWave + 1} / {listOfWaves.Length}";
         }
         else
         {
@@ -86,7 +86,7 @@ public class WaveManager : MonoBehaviour
                 Destroy(bullet.gameObject);
 
             (int missedBullets, int tookDamage) = Player.instance.PlayerStats();
-            EndGame($"You Won!", new(missedBullets, tookDamage));
+            EndGame(Translator.inst.GetText("Victory"), new(missedBullets, tookDamage));
 
             float currentDifficulty = PlayerPrefs.GetFloat("Difficulty");
             float bestDifficulty = PlayerPrefs.HasKey("Best Difficulty") ? PlayerPrefs.GetFloat("Best Difficulty") : 0f;
@@ -128,7 +128,7 @@ public class WaveManager : MonoBehaviour
             }
 
             enemySlider.value = (float)currentEnemies / allEnemies.Count;
-            enemyCounter.text = $"Enemies: {currentEnemies} / {allEnemies.Count}";
+            enemyCounter.text = $"{Translator.inst.GetText("Enemies")}: {currentEnemies} / {allEnemies.Count}";
 
             if (currentEnemies == 0)
             {
@@ -144,7 +144,8 @@ public class WaveManager : MonoBehaviour
         if (!endingText.transform.parent.gameObject.activeSelf)
         {
             endingText.transform.parent.gameObject.SetActive(true);
-            endingText.text = $"{text}\n\nMissed {stats.missedBullets} bullets\nTook {stats.tookDamage} damage";
+            endingText.text = $"{text}\n\n{Translator.inst.GetText("Bullets Missed")}: {stats.missedBullets}\n" +
+                $"{Translator.inst.GetText("Health Lost")}: {stats.tookDamage}";
         }
     }
 }

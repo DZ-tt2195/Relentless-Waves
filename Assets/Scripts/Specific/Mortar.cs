@@ -19,15 +19,17 @@ public class Mortar : BaseEnemy
 
     protected override void ShootBullet()
     {
+        Vector2 playerPosition = Player.instance.transform.position;
         foreach (SpriteRenderer next in listOfRadiuses)
         {
-            Vector2 randomPosition = new(
-                Random.Range(Player.instance.transform.position.x - randomize, Player.instance.transform.position.x + randomize),
-                Random.Range(Player.instance.transform.position.y - randomize, Player.instance.transform.position.y + randomize));
-
-            next.transform.position = randomPosition;
+            next.transform.position = new(playerPosition.x + RandomOffSet(), playerPosition.y + RandomOffSet());
             next.gameObject.SetActive(true);
             StartCoroutine(Activation(next));
+        }
+
+        float RandomOffSet()
+        {
+            return Random.Range(-randomize, randomize);
         }
 
         IEnumerator Activation(SpriteRenderer next)

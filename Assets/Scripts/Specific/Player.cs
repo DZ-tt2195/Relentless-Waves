@@ -5,9 +5,13 @@ using TMPro;
 using System.Collections;
 using System.Diagnostics;
 using System;
+using System.Linq;
 
 public class Player : Entity
 {
+
+#region Setup
+
     public static Player instance;
     public static bool paused = false;
 
@@ -44,6 +48,10 @@ public class Player : Entity
         gameTimer.Start();
     }
 
+    #endregion
+
+#region Gameplay
+
     void Update()
     {
         if (health > 0 && !paused)
@@ -64,11 +72,11 @@ public class Player : Entity
         }
 
         healthSlider.value = health / (float)maxHealth;
-        healthCounter.text = $"Health: {health} / {maxHealth}";
+        healthCounter.text = $"{Translator.inst.GetText("Health")}: {health} / {maxHealth}";
         bulletSlider.value = currentBullet / (float)maxBullet;
-        bulletCounter.text = $"Bullets: {currentBullet} / {maxBullet}";
+        bulletCounter.text = $"{Translator.inst.GetText("Bullets")}: {currentBullet} / {maxBullet}";
 
-        timerText.text = $"{PlayerPrefs.GetFloat("Difficulty") * 100:F1}% Difficulty\n{StopwatchTime(gameTimer)}";
+        timerText.text = $"{PlayerPrefs.GetFloat("Difficulty") * 100:F1}% {Translator.inst.GetText("Difficulty")}\n{StopwatchTime(gameTimer)}";
         string StopwatchTime(Stopwatch stopwatch)
         {
             TimeSpan time = stopwatch.Elapsed;
@@ -97,6 +105,32 @@ public class Player : Entity
         targetPosition.y = Mathf.Clamp(targetPosition.y, WaveManager.minY, WaveManager.maxY);
         transform.position = Vector3.Lerp(transform.position, targetPosition, 10f * Time.deltaTime);
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent(out Entity entity))
+        {
+            this.TakeDamage();
+        }
+        else if (collision.CompareTag("Wall"))
+        {
+            this.TakeDamage();
+        }
+        else if (collision.CompareTag("Resupply") && currentBullet < maxBullet)
+        {
+            WaveManager.instance.ReturnResupply(collision.GetComponent<Resupply>());
+            currentBullet = Mathf.Min(currentBullet + 2, maxBullet);
+        }
+        else if (collision.CompareTag("HealthPack") && health < maxHealth)
+        {
+            Destroy(collision.gameObject);
+            health++;
+        }
+    }
+
+    #endregion
+
+#region Ending
 
     protected override void DamageEffect()
     {
@@ -133,7 +167,7 @@ public class Player : Entity
         immune = true;
         tookDamage++;
         SetAlpha(this.spriteRenderer, 0.5f);
-        WaveManager.instance.EndGame($"You Lost.", PlayerStats());
+        WaveManager.instance.EndGame(Translator.inst.GetText("Lost"), PlayerStats());
     }
 
     public (int, int) PlayerStats()
@@ -142,25 +176,6 @@ public class Player : Entity
         return (firedBullets - landedBullets, tookDamage);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.TryGetComponent(out Entity entity))
-        {
-            this.TakeDamage();
-        }
-        else if (collision.CompareTag("Wall"))
-        {
-            this.TakeDamage();
-        }
-        else if (collision.CompareTag("Resupply") && currentBullet < maxBullet)
-        {
-            WaveManager.instance.ReturnResupply(collision.GetComponent<Resupply>());
-            currentBullet = Mathf.Min(currentBullet + 2, maxBullet);
-        }
-        else if (collision.CompareTag("HealthPack") && health < maxHealth)
-        {
-            Destroy(collision.gameObject);
-            health++;
-        }
-    }
+    #endregion
+
 }

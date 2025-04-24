@@ -6,6 +6,12 @@ public class Bullet : MonoBehaviour
     public Entity owner { get; private set; }
     string ownerTag;
     protected float bulletSpeed;
+    public SpriteRenderer spriteRenderer { get; private set; }
+
+    protected virtual void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
 
     protected virtual void TryAndReturn(bool landed)
     {
