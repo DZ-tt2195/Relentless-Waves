@@ -11,6 +11,8 @@ public class TitleScreen : MonoBehaviour
 {
     [SerializeField] Slider difficultySlider;
     [SerializeField] TMP_Text sliderLabel;
+    [SerializeField] Slider juggleSlider;
+
     [SerializeField] TMP_Text bestRun;
     [SerializeField] TMP_Dropdown languageDropdown;
 
@@ -18,10 +20,12 @@ public class TitleScreen : MonoBehaviour
     {
         if (!PlayerPrefs.HasKey("Difficulty"))
             PlayerPrefs.SetFloat("Difficulty", 1f);
-
         difficultySlider.onValueChanged.AddListener(UpdateText);
         difficultySlider.value = PlayerPrefs.GetFloat("Difficulty");
         UpdateText(PlayerPrefs.GetFloat("Difficulty"));
+
+        if (!PlayerPrefs.HasKey("Juggle")) PlayerPrefs.SetInt("Juggle", 0);
+        juggleSlider.value = (float)PlayerPrefs.GetInt("Juggle");
 
         languageDropdown.onValueChanged.AddListener(ChangeDropdown);
         string pattern = @"^\d+\.\s*(.+)$";
@@ -64,5 +68,6 @@ public class TitleScreen : MonoBehaviour
     private void OnDisable()
     {
         PlayerPrefs.SetFloat("Difficulty", difficultySlider.value);
+        PlayerPrefs.SetInt("Juggle", (int)juggleSlider.value);
     }
 }

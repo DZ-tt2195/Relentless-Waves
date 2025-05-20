@@ -7,15 +7,16 @@ using TMPro;
 
 public class WaveManager : MonoBehaviour
 {
-    public static WaveManager instance;
 
+#region Setup
+
+    public static WaveManager instance;
     List<BaseEnemy> allEnemies = new();
-    Wave[] listOfWaves;
-    BaseEnemy[] enemiesToSpawn;
 
     [Foldout("Prefabs", true)]
     [SerializeField] Resupply resupplyPrefab;
     [SerializeField] HealthPack healthPack;
+    [SerializeField] JuggleBall jugglePrefab;
     Queue<Resupply> resupplyQueue = new();
 
     [Foldout("UI", true)]
@@ -44,12 +45,13 @@ public class WaveManager : MonoBehaviour
         minY = mainCamera.transform.position.y - cameraHeight / 2f;
         maxY = 3.5f;
 
-        listOfWaves = Resources.LoadAll<Wave>("Waves");
-        enemiesToSpawn = Resources.LoadAll<BaseEnemy>("Enemies");
-
         InvokeRepeating(nameof(SpawnResupply), 1f, 2.25f);
         NewWave();
     }
+
+    #endregion
+
+#region Gameplay
 
     void SpawnResupply()
     {
@@ -67,17 +69,23 @@ public class WaveManager : MonoBehaviour
     void NewWave()
     {
         currentWave++;
-        if (currentWave < listOfWaves.Count())
+        Level currentLevel = Translator.inst.CurrentLevel();
+        if (currentWave < currentLevel.listOfWaves.Count())
         {
+            if (PlayerPrefs.GetInt("Juggle") == 1)
+            {
+                JuggleBall newBall = Instantiate(jugglePrefab);
+                newBall.transform.position = new(Random.Range(minX + 0.5f, maxX - 0.5f), maxY);
+            }
             if (currentWave >= 1)
             {
                 HealthPack pack = Instantiate(healthPack);
                 pack.transform.position = new(Random.Range(minX + 0.5f, maxX - 0.5f), maxY);
             }
-            foreach (Vector2 vector in listOfWaves[currentWave].enemySpawns)
-                CreateEnemy(vector, enemiesToSpawn[Random.Range(0, enemiesToSpawn.Length)]);
-            waveSlider.value = (currentWave + 1) / (float)listOfWaves.Length;
-            waveCounter.text = $"{Translator.inst.GetText("Wave")}: {currentWave + 1} / {listOfWaves.Length}";
+            foreach (Collection collection in currentLevel.listOfWaves[currentWave].enemies)
+                CreateEnemy(collection.position, collection.toCreate);
+            waveSlider.value = (currentWave + 1) / (float)currentLevel.listOfWaves.Count;
+            waveCounter.text = $"{Translator.inst.GetText("Wave")}: {currentWave + 1} / {currentLevel.listOfWaves.Count}";
         }
         else
         {
@@ -109,7 +117,7 @@ public class WaveManager : MonoBehaviour
 
     public void CreateEnemy(Vector2 start, BaseEnemy prefab)
     {
-        BaseEnemy enemy = Instantiate(prefab);
+        BaseEnemy enemy = Instantiate(prefab != null ? prefab : Translator.inst.RandomEnemy());
         enemy.EnemySetup();
         enemy.transform.position = start;
         allEnemies.Add(enemy);
@@ -148,4 +156,7 @@ public class WaveManager : MonoBehaviour
                 $"{Translator.inst.GetText("Health Lost")}: {stats.tookDamage}";
         }
     }
+
+    #endregion
+
 }

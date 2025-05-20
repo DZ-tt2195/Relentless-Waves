@@ -119,13 +119,18 @@ public class Player : Entity
         else if (collision.CompareTag("Resupply") && currentBullet < maxBullet)
         {
             WaveManager.instance.ReturnResupply(collision.GetComponent<Resupply>());
-            currentBullet = Mathf.Min(currentBullet + 2, maxBullet);
+            AddBullet(2);
         }
         else if (collision.CompareTag("HealthPack") && health < maxHealth)
         {
             Destroy(collision.gameObject);
             health++;
         }
+    }
+
+    public void AddBullet(int addition)
+    {
+        currentBullet = Mathf.Min(currentBullet + addition, maxBullet);
     }
 
     #endregion

@@ -7,12 +7,19 @@ public class Translator : MonoBehaviour
     List<Dictionary<string, string>> keyTranslate = new();
     TextAsset[] languageFiles;
 
+    Level[] listOfLevels;
+    BaseEnemy[] enemiesToSpawn;
+
     private void Awake()
     {
         if (inst == null)
         {
             inst = this;
             DontDestroyOnLoad(this.gameObject);
+
+            listOfLevels = Resources.LoadAll<Level>("Levels");
+            enemiesToSpawn = Resources.LoadAll<BaseEnemy>("Enemies");
+
             languageFiles = Resources.LoadAll<TextAsset>("Languages");
             foreach (TextAsset language in languageFiles)
             {
@@ -47,5 +54,15 @@ public class Translator : MonoBehaviour
         {
             return string.Format(keyTranslate[0][key], args);
         }
+    }
+
+    public BaseEnemy RandomEnemy()
+    {
+        return enemiesToSpawn[Random.Range(0, enemiesToSpawn.Length)];
+    }
+
+    public Level CurrentLevel()
+    {
+        return listOfLevels[PlayerPrefs.GetInt("Current Level")];
     }
 }

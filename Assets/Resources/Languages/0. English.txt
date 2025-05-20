@@ -1,5 +1,5 @@
 Description=Bullet hell game where enemies keep shooting until you finish the entire wave\nThomas Tang (DZ)
-Last Update=Last Updated: Apr 23, 2025
+Last Update=Last Updated: May 20, 2025
 Translate Credit=
 Language=Language
 Play=Play
@@ -20,3 +20,5 @@ Lost=You Lost.
 Enemies=Enemies
 Bullets=Bullets
 Health=Health
+Juggle Balls=Juggle Balls
+Bullet Change=Bullet Change
