@@ -3,9 +3,6 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
-using System.Linq;
-using System.IO;
-using System.Text.RegularExpressions;
 
 public class TitleScreen : MonoBehaviour
 {
@@ -18,8 +15,7 @@ public class TitleScreen : MonoBehaviour
 
     void Start()
     {
-        if (!PlayerPrefs.HasKey("Difficulty"))
-            PlayerPrefs.SetFloat("Difficulty", 1f);
+        if (!PlayerPrefs.HasKey("Difficulty")) PlayerPrefs.SetFloat("Difficulty", 1f);
         difficultySlider.onValueChanged.AddListener(UpdateText);
         difficultySlider.value = PlayerPrefs.GetFloat("Difficulty");
         UpdateText(PlayerPrefs.GetFloat("Difficulty"));
@@ -27,15 +23,19 @@ public class TitleScreen : MonoBehaviour
         if (!PlayerPrefs.HasKey("Juggle")) PlayerPrefs.SetInt("Juggle", 0);
         juggleSlider.value = (float)PlayerPrefs.GetInt("Juggle");
 
+        if (!PlayerPrefs.HasKey("Language")) PlayerPrefs.SetString("Language", "English");
         languageDropdown.onValueChanged.AddListener(ChangeDropdown);
-        string pattern = @"^\d+\.\s*(.+)$";
-        foreach (TextAsset language in Resources.LoadAll<TextAsset>("Languages"))
+        TextAsset[] listOfAssets = Resources.LoadAll<TextAsset>("Languages");
+        for (int i = 0; i < listOfAssets.Length; i++)
         {
-            Match match = Regex.Match(language.name, pattern);
-            if (match.Success)
-                languageDropdown.AddOptions(new List<string>() { match.Groups[1].Value });
+            (bool success, string converted) = Translator.inst.ConvertTxtName(listOfAssets[i]);
+            if (success)
+            {
+                languageDropdown.AddOptions(new List<string>() { converted });
+                if (converted.Equals(PlayerPrefs.GetString("Language")))
+                    languageDropdown.value = i;
+            }
         }
-        languageDropdown.value = PlayerPrefs.GetInt("Language");
         languageDropdown.gameObject.SetActive(languageDropdown.options.Count >= 2);
 
         if (PlayerPrefs.HasKey("Best Difficulty"))
@@ -58,9 +58,10 @@ public class TitleScreen : MonoBehaviour
 
     void ChangeDropdown(int n)
     {
-        if (PlayerPrefs.GetInt("Language") != languageDropdown.value)
+        string selectedText = languageDropdown.options[languageDropdown.value].text;
+        if (!PlayerPrefs.GetString("Language").Equals(selectedText))
         {
-            PlayerPrefs.SetInt("Language", languageDropdown.value);
+            PlayerPrefs.SetString("Language", selectedText);
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }

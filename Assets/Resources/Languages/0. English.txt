@@ -21,4 +21,5 @@ Enemies=Enemies
 Bullets=Bullets
 Health=Health
 Juggle Balls=Juggle Balls
-Bullet Change=Bullet Change
+Resupply=+2 Bullets
+Health Pack =+1 Health

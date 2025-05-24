@@ -1,8 +1,5 @@
-using MyBox;
 using UnityEngine;
-using UnityEngine.UI;
 using System.Collections.Generic;
-using System.Collections;
 
 [CreateAssetMenu(fileName = "NewLevel", menuName = "ScriptableObjects/Level")]
 public class Level : ScriptableObject
@@ -11,9 +8,9 @@ public class Level : ScriptableObject
 }
 
 [System.Serializable]
-public class Wave<T>
+public class Wave<Collection>
 {
-    public List<T> enemies = new();
+    public List<Collection> enemies = new();
 }
 
 [System.Serializable]
