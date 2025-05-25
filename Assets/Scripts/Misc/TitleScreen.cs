@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using System.Linq;
 
 public class TitleScreen : MonoBehaviour
 {
@@ -25,16 +26,13 @@ public class TitleScreen : MonoBehaviour
 
         if (!PlayerPrefs.HasKey("Language")) PlayerPrefs.SetString("Language", "English");
         languageDropdown.onValueChanged.AddListener(ChangeDropdown);
-        TextAsset[] listOfAssets = Resources.LoadAll<TextAsset>("Languages");
-        for (int i = 0; i < listOfAssets.Length; i++)
+        List<string> languages = Translator.inst.GetTranslations().Keys.ToList();
+        for (int i = 0; i < languages.Count; i++)
         {
-            (bool success, string converted) = Translator.inst.ConvertTxtName(listOfAssets[i]);
-            if (success)
-            {
-                languageDropdown.AddOptions(new List<string>() { converted });
-                if (converted.Equals(PlayerPrefs.GetString("Language")))
-                    languageDropdown.value = i;
-            }
+            string nextLanguage = languages[i];
+            languageDropdown.AddOptions(new List<string>() { nextLanguage });
+            if (nextLanguage.Equals(PlayerPrefs.GetString("Language")))
+                languageDropdown.value = i;
         }
         languageDropdown.gameObject.SetActive(languageDropdown.options.Count >= 2);
 

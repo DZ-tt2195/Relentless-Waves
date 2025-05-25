@@ -1,0 +1,111 @@
+{
+    [
+      "key",
+      "English"
+    ],
+    [
+      "Description",
+      "Bullet hell game where enemies keep shooting until you finish the entire wave."
+    ],
+    [
+      "Author",
+      "by Thomas Tang (DZ)"
+    ],
+    [
+      "Last Update",
+      "Last Updated: May 24, 2025"
+    ],
+    [
+      "Translate Credit",
+      "\"\""
+    ],
+    [
+      "Language",
+      "Language"
+    ],
+    [
+      "Play",
+      "Play"
+    ],
+    [
+      "Easier",
+      "Easier"
+    ],
+    [
+      "Harder",
+      "Harder"
+    ],
+    [
+      "Replay",
+      "Replay"
+    ],
+    [
+      "Quit",
+      "Quit"
+    ],
+    [
+      "Paused",
+      "Paused"
+    ],
+    [
+      "Restart",
+      "Restart"
+    ],
+    [
+      "No Run",
+      "No runs available."
+    ],
+    [
+      "Best Score",
+      "Best Score"
+    ],
+    [
+      "Difficulty",
+      "Difficulty"
+    ],
+    [
+      "Bullets Missed",
+      "Bullets Missed"
+    ],
+    [
+      "Health Lost",
+      "Health Lost"
+    ],
+    [
+      "Wave",
+      "Wave"
+    ],
+    [
+      "Victory",
+      "You Won!"
+    ],
+    [
+      "Lost",
+      "You Lost."
+    ],
+    [
+      "Enemies",
+      "Enemies"
+    ],
+    [
+      "Bullets",
+      "Bullets"
+    ],
+    [
+      "Health",
+      "Health "
+    ],
+    [
+      "Resupply",
+      "\"+2 Bullets\""
+    ],
+    [
+      "Health Pack",
+      "\"+1 Health\""
+    ],
+    [
+      "Juggle Balls",
+      "Juggle Balls"
+    ]
+  ]
+}
