@@ -4,10 +4,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.Networking;
-using MyBox;
 using System.IO;
-using System;
-using System.Reflection;
 using UnityEngine.SceneManagement;
 
 public class Translator : MonoBehaviour
@@ -27,21 +24,54 @@ public class Translator : MonoBehaviour
 
     private void Awake()
     {
+        //Debug.Log(string.Format($"hi {0}", "lol"));
+        //Debug.Log(string.Format($"hi {{0}}", "lol"));
+
         if (inst == null)
         {
             inst = this;
             DontDestroyOnLoad(this.gameObject);
 
-            //Debug.Log(string.Format($"hi {0}", "lol"));
-            //Debug.Log(string.Format($"hi {{0}}", "lol"));
-
             listOfLevels = Resources.LoadAll<Level>("Levels");
             enemiesToSpawn = Resources.LoadAll<BaseEnemy>("Enemies");
+
+            TxtLanguages();
             StartCoroutine(DownloadLanguages());
         }
         else
         {
             Destroy(this.gameObject);
+        }
+    }
+
+    void TxtLanguages()
+    {
+        TextAsset[] languageFiles = Resources.LoadAll<TextAsset>("Txt Languages");
+        foreach (TextAsset language in languageFiles)
+        {
+            (bool success, string converted) = ConvertTxtName(language);
+            if (success)
+            {
+                Dictionary<string, string> newDictionary = new();
+                keyTranslate.Add(converted, newDictionary);
+                string[] lines = language.text.Split('\n');
+
+                foreach (string line in lines)
+                {
+                    string[] parts = line.Split('=');
+                    newDictionary[parts[0].Trim()] = parts[1].Trim();
+                }
+            }
+        }
+
+        (bool, string) ConvertTxtName(TextAsset asset)
+        {
+            string pattern = @"^\d+\.\s*(.+)$";
+            Match match = Regex.Match(asset.name, pattern);
+            if (match.Success)
+                return (true, match.Groups[1].Value);
+            else
+                return (false, "");
         }
     }
 
@@ -77,8 +107,8 @@ public class Translator : MonoBehaviour
 
     IEnumerator DownloadLanguages()
     {
-        yield return Download("Languages");
-        GetLanguages(ReadFile("Languages"));
+        yield return Download("Csv Languages");
+        GetLanguages(ReadFile("Csv Languages"));
 
         string[][] ReadFile(string range)
         {
@@ -100,13 +130,14 @@ public class Translator : MonoBehaviour
 
     void GetLanguages(string[][] data)
     {
-        for (int i = 1; i < data[1].Length; i++) //get languages
+        for (int i = 1; i < data[1].Length; i++)
         {
             data[1][i] = data[1][i].Replace("\"", "").Trim();
             Dictionary<string, string> newDictionary = new();
             keyTranslate.Add(data[1][i], newDictionary);
         }
 
+        List<string> listOfKeys = new();
         for (int i = 2; i < data.Length; i++)
         {
             for (int j = 0; j < data[i].Length; j++)
@@ -118,9 +149,24 @@ public class Translator : MonoBehaviour
                     string key = data[i][0];
                     keyTranslate[language][key] = data[i][j];
                 }
+                else
+                {
+                    listOfKeys.Add(data[i][j]);
+                }
             }
         }
+        CreateBaseTxtFile(listOfKeys);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    void CreateBaseTxtFile(List<string> listOfKeys)
+    {
+        string filePath = Path.Combine(Application.persistentDataPath, "BaseTxtFile.txt");
+        using (StreamWriter writer = new StreamWriter(filePath))
+        {
+            foreach (string input in listOfKeys)
+                writer.WriteLine($"{input}=");
+        }
     }
 
     #endregion
