@@ -172,7 +172,7 @@ public class Player : Entity
         immune = true;
         tookDamage++;
         SetAlpha(this.spriteRenderer, 0.5f);
-        WaveManager.instance.EndGame(Translator.inst.GetText("Lost"), PlayerStats());
+        WaveManager.instance.EndGame(Translator.inst.GetText("Lost"), PlayerStats(), -1);
     }
 
     public (int, int) PlayerStats()

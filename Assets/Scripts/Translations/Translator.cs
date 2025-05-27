@@ -31,6 +31,7 @@ public class Translator : MonoBehaviour
         {
             inst = this;
             DontDestroyOnLoad(this.gameObject);
+            Debug.Log("start downloading");
 
             listOfLevels = Resources.LoadAll<Level>("Levels");
             enemiesToSpawn = Resources.LoadAll<BaseEnemy>("Enemies");
@@ -58,8 +59,11 @@ public class Translator : MonoBehaviour
 
                 foreach (string line in lines)
                 {
-                    string[] parts = line.Split('=');
-                    newDictionary[parts[0].Trim()] = parts[1].Trim();
+                    if (line != "")
+                    {
+                        string[] parts = line.Split('=');
+                        newDictionary[parts[0].Trim()] = parts[1].Trim();
+                    }
                 }
             }
         }
@@ -100,7 +104,7 @@ public class Translator : MonoBehaviour
                 List<string> modifiedLines = allLines.ToList();
                 modifiedLines.RemoveRange(1, 3);
                 File.WriteAllLines($"{filePath}", modifiedLines.ToArray());
-                Debug.Log($"downloaded {range}");
+                //Debug.Log($"downloaded {range}");
             }
         }
     }
@@ -121,9 +125,7 @@ public class Translator : MonoBehaviour
             string[][] list = new string[numLines.Length][];
 
             for (int i = 0; i < numLines.Length; i++)
-            {
                 list[i] = numLines[i].Split("\",");
-            }
             return list;
         }
     }
@@ -156,17 +158,24 @@ public class Translator : MonoBehaviour
             }
         }
         CreateBaseTxtFile(listOfKeys);
+        Debug.Log("download complete");
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     void CreateBaseTxtFile(List<string> listOfKeys)
     {
+        string baseText = "";
+        foreach (string key in listOfKeys)
+            baseText += $"{key}=\n";
+        string filePath = $"Assets/Resources/BaseTxtFile.txt";
+        File.WriteAllText($"{filePath}", baseText);
+        /*
         string filePath = Path.Combine(Application.persistentDataPath, "BaseTxtFile.txt");
         using (StreamWriter writer = new StreamWriter(filePath))
         {
             foreach (string input in listOfKeys)
                 writer.WriteLine($"{input}=");
-        }
+        }*/
     }
 
     #endregion
@@ -181,13 +190,25 @@ public class Translator : MonoBehaviour
         }
         catch
         {
-            return string.Format(keyTranslate["English"][key], args);
+            try
+            {
+                return string.Format(keyTranslate["English"][key], args);
+            }
+            catch
+            {
+                return key;
+            }
         }
     }
 
     public BaseEnemy RandomEnemy()
     {
         return enemiesToSpawn[UnityEngine.Random.Range(0, enemiesToSpawn.Length)];
+    }
+
+    public Level[] AllLevels()
+    {
+        return listOfLevels;
     }
 
     public Level CurrentLevel()

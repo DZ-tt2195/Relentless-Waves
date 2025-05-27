@@ -70,6 +70,7 @@ public class WaveManager : MonoBehaviour
     {
         currentWave++;
         Level currentLevel = Translator.inst.CurrentLevel();
+
         if (currentWave < currentLevel.listOfWaves.Count())
         {
             if (PlayerPrefs.GetInt("Juggle") == 1)
@@ -94,24 +95,14 @@ public class WaveManager : MonoBehaviour
                 Destroy(bullet.gameObject);
 
             (int missedBullets, int tookDamage) = Player.instance.PlayerStats();
-            EndGame(Translator.inst.GetText("Victory"), new(missedBullets, tookDamage));
 
-            float currentDifficulty = PlayerPrefs.GetFloat("Difficulty");
-            float bestDifficulty = PlayerPrefs.HasKey("Best Difficulty") ? PlayerPrefs.GetFloat("Best Difficulty") : 0f;
-            int currentScore = missedBullets + tookDamage;
-            int bestScore = PlayerPrefs.GetInt("Best Bullet") + PlayerPrefs.GetInt("Best Damage");
+            int score = (int)(PlayerPrefs.GetFloat("Difficulty") * 100) - missedBullets - tookDamage;
+            if (PlayerPrefs.GetInt("Juggle") == 1)
+                score += 10;
 
-            if (currentDifficulty > bestDifficulty)
-            {
-                PlayerPrefs.SetFloat("Best Difficulty", currentDifficulty);
-                PlayerPrefs.SetInt("Best Bullet", missedBullets);
-                PlayerPrefs.SetInt("Best Damage", tookDamage);
-            }
-            else if (currentDifficulty == bestDifficulty && currentScore < bestScore)
-            {
-                PlayerPrefs.SetInt("Best Bullet", missedBullets);
-                PlayerPrefs.SetInt("Best Damage", tookDamage);
-            }
+            EndGame(Translator.inst.GetText("Victory"), new(missedBullets, tookDamage), score);
+            if (score > PlayerPrefs.GetInt($"{currentLevel} - Best Score"))
+                PlayerPrefs.SetInt($"{currentLevel} - Best Score", score);
         }
     }
 
@@ -147,13 +138,16 @@ public class WaveManager : MonoBehaviour
         }
     }
 
-    public void EndGame(string text, (int missedBullets, int tookDamage) stats)
+    public void EndGame(string text, (int missedBullets, int tookDamage) stats, int score)
     {
         if (!endingText.transform.parent.gameObject.activeSelf)
         {
             endingText.transform.parent.gameObject.SetActive(true);
-            endingText.text = $"{text}\n\n{Translator.inst.GetText("Bullets Missed")}: {stats.missedBullets}\n" +
-                $"{Translator.inst.GetText("Health Lost")}: {stats.tookDamage}";
+            endingText.text = $"{text}\n\n" +
+                $"{Translator.inst.GetText("Bullets Missed")}: {stats.missedBullets}\n" +
+                $"{Translator.inst.GetText("Health Lost")}: {stats.tookDamage}\n";
+            if (score > 0)
+                endingText.text += $"\n{Translator.inst.GetText("Score")}: {score}";
         }
     }
 

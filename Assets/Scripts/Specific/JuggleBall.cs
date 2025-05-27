@@ -16,6 +16,7 @@ public class JuggleBall : MonoBehaviour
         {
             Player.instance.TakeDamage();
             this.transform.position = new(this.transform.position.x, WaveManager.maxY);
+            currentSpeed = -1 * Mathf.Abs(currentSpeed);
         }
         else if (this.transform.position.y > WaveManager.maxY)
         {
