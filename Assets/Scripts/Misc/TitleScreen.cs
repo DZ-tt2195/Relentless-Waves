@@ -8,7 +8,9 @@ using System.Linq;
 public class TitleScreen : MonoBehaviour
 {
     [SerializeField] Slider difficultySlider;
-    [SerializeField] TMP_Text sliderLabel;
+    [SerializeField] TMP_Text difficultyLabel;
+    [SerializeField] Slider waveSlider;
+    [SerializeField] TMP_Text waveLabel;
     [SerializeField] Slider juggleSlider;
 
     [SerializeField] TMP_Text bestRun;
@@ -24,8 +26,20 @@ public class TitleScreen : MonoBehaviour
 
         void UpdateDifficultyText(float value)
         {
-            sliderLabel.text = $"{value * 100:F1}%";
-            PlayerPrefs.SetFloat("Difficulty", difficultySlider.value);
+            difficultyLabel.text = $"{value * 100:F1}%";
+            PlayerPrefs.SetFloat("Difficulty", value);
+        }
+
+        if (!PlayerPrefs.HasKey("Starting Wave")) PlayerPrefs.SetInt("Starting Wave", 1);
+        waveSlider.onValueChanged.AddListener(UpdateWaveText);
+        waveSlider.value = PlayerPrefs.GetInt("Starting Wave");
+        UpdateWaveText(PlayerPrefs.GetInt("Starting Wave"));
+
+        void UpdateWaveText(float value)
+        {
+            waveLabel.text = $"{(int)value}";
+            PlayerPrefs.SetInt("Starting Wave", (int)value);
+            Debug.Log(PlayerPrefs.GetInt("Starting Wave"));
         }
 
         if (!PlayerPrefs.HasKey("Juggle")) PlayerPrefs.SetInt("Juggle", 0);
@@ -80,6 +94,8 @@ public class TitleScreen : MonoBehaviour
         void ChangeLevelDropdown(int n)
         {
             PlayerPrefs.SetInt("Current Level", n);
+            waveSlider.maxValue = Translator.inst.AllLevels()[n].listOfWaves.Count;
+            UpdateWaveText(1);
             string levelName = Translator.inst.AllLevels()[n].name;
 
             if (PlayerPrefs.HasKey($"{levelName} - Best Score"))

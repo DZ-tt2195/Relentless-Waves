@@ -19,6 +19,7 @@ Health Lost=
 Wave=
 Victory=
 Lost=
+Skipped Ahead=
 Enemies=
 Bullets=
 Health=

@@ -23,7 +23,7 @@ public class WaveManager : MonoBehaviour
     public Camera mainCamera;
     [SerializeField] Slider waveSlider;
     [SerializeField] TMP_Text waveCounter;
-    int currentWave = -1;
+    int currentWave;
     [SerializeField] Slider enemySlider;
     [SerializeField] TMP_Text enemyCounter;
     [SerializeField] TMP_Text endingText;
@@ -46,6 +46,11 @@ public class WaveManager : MonoBehaviour
         maxY = 3.5f;
 
         InvokeRepeating(nameof(SpawnResupply), 1f, 2.25f);
+        currentWave = PlayerPrefs.GetInt("Starting Wave")-1;
+        Debug.Log(currentWave);
+        for (int i = 0; i<currentWave; i++)
+            CreateJuggleBall();
+
         NewWave();
     }
 
@@ -68,16 +73,11 @@ public class WaveManager : MonoBehaviour
 
     void NewWave()
     {
-        currentWave++;
         Level currentLevel = Translator.inst.CurrentLevel();
 
         if (currentWave < currentLevel.listOfWaves.Count())
         {
-            if (PlayerPrefs.GetInt("Juggle") == 1)
-            {
-                JuggleBall newBall = Instantiate(jugglePrefab);
-                newBall.transform.position = new(Random.Range(minX + 0.5f, maxX - 0.5f), maxY);
-            }
+            CreateJuggleBall();
             if (currentWave >= 1)
             {
                 HealthPack pack = Instantiate(healthPack);
@@ -100,13 +100,25 @@ public class WaveManager : MonoBehaviour
             if (PlayerPrefs.GetInt("Juggle") == 1)
                 score += 10;
 
-            EndGame(Translator.inst.GetText("Victory"), new(missedBullets, tookDamage), score);
-            if (score > PlayerPrefs.GetInt($"{currentLevel} - Best Score"))
+            string endText = Translator.inst.GetText("Victory");
+            if (PlayerPrefs.GetInt("Starting Wave") > 1)
+                endText += $"[{Translator.inst.GetText("Skipped Ahead")} {PlayerPrefs.GetInt("Starting Wave")}]";
+            else if (score > PlayerPrefs.GetInt($"{currentLevel} - Best Score"))
                 PlayerPrefs.SetInt($"{currentLevel} - Best Score", score);
+            EndGame(endText, new(missedBullets, tookDamage), score);
         }
     }
 
-    public void CreateEnemy(Vector2 start, BaseEnemy prefab)
+    void CreateJuggleBall()
+    {
+        if (PlayerPrefs.GetInt("Juggle") == 1)
+        {
+            JuggleBall newBall = Instantiate(jugglePrefab);
+            newBall.transform.position = new(Random.Range(minX + 0.5f, maxX - 0.5f), maxY);
+        }
+    }
+
+    void CreateEnemy(Vector2 start, BaseEnemy prefab)
     {
         BaseEnemy enemy = Instantiate(prefab != null ? prefab : Translator.inst.RandomEnemy());
         enemy.EnemySetup();
@@ -133,6 +145,7 @@ public class WaveManager : MonoBehaviour
             {
                 for (int i = allEnemies.Count - 1; i >= 0; i--)
                     Destroy(allEnemies[i].gameObject);
+                currentWave++;
                 NewWave();
             }
         }

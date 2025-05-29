@@ -88,6 +88,10 @@
       "You Lost."
     ],
     [
+      "Skipped Ahead",
+      "Skipped to Wave"
+    ],
+    [
       "Enemies",
       "Enemies"
     ],
