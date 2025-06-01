@@ -27,6 +27,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] Slider enemySlider;
     [SerializeField] TMP_Text enemyCounter;
     [SerializeField] TMP_Text endingText;
+    [SerializeField] TMP_Text tutorialText;
 
     public static float minX { get; private set; }
     public static float maxX { get; private set; }
@@ -87,12 +88,14 @@ public class WaveManager : MonoBehaviour
                 CreateEnemy(collection.position, collection.toCreate);
             waveSlider.value = (currentWave + 1) / (float)currentLevel.listOfWaves.Count;
             waveCounter.text = $"{Translator.inst.GetText("Wave")}: {currentWave + 1} / {currentLevel.listOfWaves.Count}";
+            tutorialText.text = Translator.inst.GetText(currentLevel.listOfWaves[currentWave].tutorialKey);
         }
         else
         {
-            Bullet[] bullets = FindObjectsByType<Bullet>(FindObjectsSortMode.None);
-            foreach (Bullet bullet in bullets)
-                Destroy(bullet.gameObject);
+            Bullet[] allBullets = FindObjectsByType<Bullet>(FindObjectsSortMode.None);
+                foreach (Bullet bullet in allBullets) Destroy(bullet.gameObject);
+            JuggleBall[] allBalls = FindObjectsByType<JuggleBall>(FindObjectsSortMode.None);
+                foreach (JuggleBall ball in allBalls) Destroy(ball.gameObject);
 
             (int missedBullets, int tookDamage) = Player.instance.PlayerStats();
 
@@ -102,9 +105,9 @@ public class WaveManager : MonoBehaviour
 
             string endText = Translator.inst.GetText("Victory");
             if (PlayerPrefs.GetInt("Starting Wave") > 1)
-                endText += $"[{Translator.inst.GetText("Skipped Ahead")} {PlayerPrefs.GetInt("Starting Wave")}]";
-            else if (score > PlayerPrefs.GetInt($"{currentLevel} - Best Score"))
-                PlayerPrefs.SetInt($"{currentLevel} - Best Score", score);
+                endText += $" [{Translator.inst.GetText("Skipped Ahead")} {PlayerPrefs.GetInt("Starting Wave")}]";
+            else if (score > PlayerPrefs.GetInt($"{currentLevel.name} - Best Score"))
+                PlayerPrefs.SetInt($"{currentLevel.name} - Best Score", score);
             EndGame(endText, new(missedBullets, tookDamage), score);
         }
     }

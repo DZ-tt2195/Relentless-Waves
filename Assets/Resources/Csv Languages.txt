@@ -13,7 +13,7 @@
     ],
     [
       "Last Update",
-      "Last Updated: May 26, 2025"
+      "Last Updated: June 01, 2025"
     ],
     [
       "Translator Credit",
@@ -26,6 +26,10 @@
     [
       "Choose Level",
       "Choose Level"
+    ],
+    [
+      "Start on Wave",
+      "Start on Wave"
     ],
     [
       "Play",
@@ -120,8 +124,32 @@
       "Score"
     ],
     [
+      "1. Tutorial 1",
+      "Tutorial 1"
+    ],
+    [
+      "2. Tutorial 2",
+      "Tutorial 2"
+    ],
+    [
       "Random",
       "Random"
+    ],
+    [
+      "First Tutorial",
+      "Click to shoot at enemies. Pick up more bullets if you run out."
+    ],
+    [
+      "Second Tutorial",
+      "Enemies will continue to shoot at you even when defeated. Defeat all enemies to clear the wave."
+    ],
+    [
+      "Third Tutorial",
+      "Catch the stars thrown by the Staff to damage it and disable its barrier."
+    ],
+    [
+      "Fourth Tutorial",
+      "The Phoenix can revive itself. Defeat all other enemies first to clear the wave."
     ]
   ]
 }

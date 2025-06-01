@@ -26,7 +26,7 @@ public class TitleScreen : MonoBehaviour
 
         void UpdateDifficultyText(float value)
         {
-            difficultyLabel.text = $"{value * 100:F1}%";
+            difficultyLabel.text = $"{Translator.inst.GetText("Difficulty")}: {value * 100:F1}%";
             PlayerPrefs.SetFloat("Difficulty", value);
         }
 
@@ -37,7 +37,7 @@ public class TitleScreen : MonoBehaviour
 
         void UpdateWaveText(float value)
         {
-            waveLabel.text = $"{(int)value}";
+            waveLabel.text = $"{Translator.inst.GetText("Start on Wave")} {(int)value}";
             PlayerPrefs.SetInt("Starting Wave", (int)value);
             Debug.Log(PlayerPrefs.GetInt("Starting Wave"));
         }

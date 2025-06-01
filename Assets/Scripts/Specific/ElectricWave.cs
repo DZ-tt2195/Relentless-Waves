@@ -16,7 +16,7 @@ public class ElectricWave : Bullet
     {
         base.Awake();
         travelTime *= 2 - PlayerPrefs.GetFloat("Difficulty");
-        vanishTime *= 2 - PlayerPrefs.GetFloat("Difficulty");
+        vanishTime *= PlayerPrefs.GetFloat("Difficulty");
     }
 
     public override void AssignInfo(float speed, Vector3 direction, Entity owner)

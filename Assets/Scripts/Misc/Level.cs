@@ -11,6 +11,7 @@ public class Level : ScriptableObject
 public class Wave<Collection>
 {
     public List<Collection> enemies = new();
+    public string tutorialKey;
 }
 
 [System.Serializable]
