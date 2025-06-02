@@ -13,7 +13,7 @@
     ],
     [
       "Last Update",
-      "Last Updated: June 01, 2025"
+      "Last Updated: June 02, 2025"
     ],
     [
       "Translator Credit",
@@ -36,12 +36,8 @@
       "Play"
     ],
     [
-      "Easier",
-      "Easier"
-    ],
-    [
-      "Harder",
-      "Harder"
+      "Delete",
+      "Delete Scores"
     ],
     [
       "Replay",

@@ -16,6 +16,7 @@ public class TitleScreen : MonoBehaviour
     [SerializeField] TMP_Text bestRun;
     [SerializeField] TMP_Dropdown languageDropdown;
     [SerializeField] TMP_Dropdown levelDropdown;
+    [SerializeField] Button deleteScoreButton;
 
     void Start()
     {
@@ -39,7 +40,6 @@ public class TitleScreen : MonoBehaviour
         {
             waveLabel.text = $"{Translator.inst.GetText("Start on Wave")} {(int)value}";
             PlayerPrefs.SetInt("Starting Wave", (int)value);
-            Debug.Log(PlayerPrefs.GetInt("Starting Wave"));
         }
 
         if (!PlayerPrefs.HasKey("Juggle")) PlayerPrefs.SetInt("Juggle", 0);
@@ -78,8 +78,10 @@ public class TitleScreen : MonoBehaviour
         }
 
         if (!PlayerPrefs.HasKey("Current Level")) PlayerPrefs.SetInt("Current Level", 0);
-        levelDropdown.onValueChanged.AddListener(ChangeLevelDropdown);
         Level[] listOfLevels = Translator.inst.AllLevels();
+
+        deleteScoreButton.onClick.AddListener(ClearScores);
+        levelDropdown.onValueChanged.AddListener(ChangeLevelDropdown);
         for (int i = 0; i < listOfLevels.Length; i++)
         {
             Level nextLevel = listOfLevels[i];
@@ -91,6 +93,13 @@ public class TitleScreen : MonoBehaviour
             }
         }
 
+        void ClearScores()
+        {
+            foreach (Level level in listOfLevels)
+                PlayerPrefs.SetInt($"{level.name} - Best Score", 0);
+            ChangeLevelDropdown(PlayerPrefs.GetInt("Current Level"));
+        }
+
         void ChangeLevelDropdown(int n)
         {
             PlayerPrefs.SetInt("Current Level", n);
@@ -98,7 +107,7 @@ public class TitleScreen : MonoBehaviour
             UpdateWaveText(1);
             string levelName = Translator.inst.AllLevels()[n].name;
 
-            if (PlayerPrefs.HasKey($"{levelName} - Best Score"))
+            if (PlayerPrefs.GetInt($"{levelName} - Best Score") > 0)
                 bestRun.text = $"{Translator.inst.GetText("Best Score")}: {PlayerPrefs.GetInt($"{levelName} - Best Score")}";
             else
                 bestRun.text = Translator.inst.GetText("No Score");
