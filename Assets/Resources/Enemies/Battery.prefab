@@ -350,7 +350,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetXpand: 16
   travelTime: 3
-  vanishTime: 2
+  vanishTime: 1.25
 --- !u!212 &7177628417667645969
 SpriteRenderer:
   m_ObjectHideFlags: 0

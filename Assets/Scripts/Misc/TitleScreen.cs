@@ -104,7 +104,7 @@ public class TitleScreen : MonoBehaviour
         {
             PlayerPrefs.SetInt("Current Level", n);
             waveSlider.maxValue = Translator.inst.AllLevels()[n].listOfWaves.Count;
-            UpdateWaveText(1);
+            waveSlider.value = 1;
             string levelName = Translator.inst.AllLevels()[n].name;
 
             if (PlayerPrefs.GetInt($"{levelName} - Best Score") > 0)

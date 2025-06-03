@@ -29,6 +29,7 @@ Juggle Balls=
 Score=
 1. Tutorial 1=
 2. Tutorial 2=
+3. Enemy Rush=
 Random=
 First Tutorial=
 Second Tutorial=

@@ -48,7 +48,6 @@ public class WaveManager : MonoBehaviour
 
         InvokeRepeating(nameof(SpawnResupply), 1f, 2.25f);
         currentWave = PlayerPrefs.GetInt("Starting Wave")-1;
-        Debug.Log(currentWave);
         for (int i = 0; i<currentWave; i++)
             CreateJuggleBall();
 

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class JuggleBall : MonoBehaviour
 {
-    float currentSpeed = -1.5f;
+    float currentSpeed = -1.25f;
 
     private void Awake()
     {
