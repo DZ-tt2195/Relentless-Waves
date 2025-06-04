@@ -73,8 +73,17 @@ public class Player : Entity
 
         healthSlider.value = health / (float)maxHealth;
         healthCounter.text = $"{Translator.inst.GetText("Health")}: {health} / {maxHealth}";
-        bulletSlider.value = currentBullet / (float)maxBullet;
-        bulletCounter.text = $"{Translator.inst.GetText("Bullets")}: {currentBullet} / {maxBullet}";
+
+        if (PlayerPrefs.GetInt("Infinite") == 0)
+        {
+            bulletSlider.value = currentBullet / (float)maxBullet;
+            bulletCounter.text = $"{Translator.inst.GetText("Bullets")}: {currentBullet} / {maxBullet}";
+        }
+        else
+        {
+            bulletSlider.value = (float)maxBullet / (float)maxBullet;
+            bulletCounter.text = $"{Translator.inst.GetText("Bullets")}: \u221E";
+        }
 
         timerText.text = $"{PlayerPrefs.GetFloat("Difficulty") * 100:F1}% {Translator.inst.GetText("Difficulty")}\n{StopwatchTime(gameTimer)}";
         string StopwatchTime(Stopwatch stopwatch)
@@ -89,7 +98,7 @@ public class Player : Entity
     {
         if (Input.GetKeyDown(KeyCode.Mouse0) && currentBullet >= 1)
         {
-            currentBullet--;
+            if (PlayerPrefs.GetInt("Infinite") == 0) currentBullet--;
             firedBullets++;
             CreateBullet(prefab, this.transform.position, bulletSpeed, Vector3.up);
         }

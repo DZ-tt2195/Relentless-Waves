@@ -26,6 +26,7 @@ Health=
 Resupply=
 Health Pack=
 Juggle Balls=
+Infinite Bullets=
 Score=
 1. Tutorial 1=
 2. Tutorial 2=

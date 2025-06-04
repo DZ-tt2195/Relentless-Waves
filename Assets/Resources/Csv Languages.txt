@@ -113,7 +113,11 @@
     ],
     [
       "Juggle Balls",
-      "Juggle Balls"
+      "Juggle Balls (+15 Score)"
+    ],
+    [
+      "Infinite Bullets",
+      "Infinite Bullets (-15 Score)"
     ],
     [
       "Score",

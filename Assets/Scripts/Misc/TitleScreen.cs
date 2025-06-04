@@ -11,7 +11,9 @@ public class TitleScreen : MonoBehaviour
     [SerializeField] TMP_Text difficultyLabel;
     [SerializeField] Slider waveSlider;
     [SerializeField] TMP_Text waveLabel;
+
     [SerializeField] Slider juggleSlider;
+    [SerializeField] Slider infiniteSlider;
 
     [SerializeField] TMP_Text bestRun;
     [SerializeField] TMP_Dropdown languageDropdown;
@@ -50,6 +52,16 @@ public class TitleScreen : MonoBehaviour
         void ChangeJuggleSlider(float value)
         {
             PlayerPrefs.SetInt("Juggle", (int)(value));
+        }
+
+        if (!PlayerPrefs.HasKey("Infinite")) PlayerPrefs.SetInt("Infinite", 0);
+        infiniteSlider.onValueChanged.AddListener(ChangeInfiniteSlider);
+        infiniteSlider.value = PlayerPrefs.GetInt("Infinite");
+        ChangeInfiniteSlider(PlayerPrefs.GetInt("Infinite"));
+
+        void ChangeInfiniteSlider(float value)
+        {
+            PlayerPrefs.SetInt("Infinite", (int)(value));
         }
 
         if (!PlayerPrefs.HasKey("Language")) PlayerPrefs.SetString("Language", "English");

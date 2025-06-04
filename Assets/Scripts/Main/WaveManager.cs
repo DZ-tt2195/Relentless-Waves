@@ -100,7 +100,9 @@ public class WaveManager : MonoBehaviour
 
             int score = (int)(PlayerPrefs.GetFloat("Difficulty") * 100) - missedBullets - tookDamage;
             if (PlayerPrefs.GetInt("Juggle") == 1)
-                score += 10;
+                score += 15;
+            if (PlayerPrefs.GetInt("Infinite") == 1)
+                score -= 15;
 
             string endText = Translator.inst.GetText("Victory");
             if (PlayerPrefs.GetInt("Starting Wave") > 1)
