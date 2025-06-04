@@ -60,9 +60,12 @@ public class WaveManager : MonoBehaviour
 
     void SpawnResupply()
     {
-        Resupply resupply = (resupplyQueue.Count > 0) ? resupplyQueue.Dequeue() : Instantiate(resupplyPrefab);
-        resupply.transform.position = new(Random.Range(minX + 0.5f, maxX - 0.5f), maxY);
-        resupply.gameObject.SetActive(true);
+        if (PlayerPrefs.GetInt("Infinite") == 0)
+        {
+            Resupply resupply = (resupplyQueue.Count > 0) ? resupplyQueue.Dequeue() : Instantiate(resupplyPrefab);
+            resupply.transform.position = new(Random.Range(minX + 0.5f, maxX - 0.5f), maxY);
+            resupply.gameObject.SetActive(true);
+        }
     }
 
     public void ReturnResupply(Resupply resupply)
