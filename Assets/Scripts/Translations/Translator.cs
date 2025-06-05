@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using System.IO;
 using UnityEngine.SceneManagement;
+using MyBox;
 
 public class Translator : MonoBehaviour
 {
@@ -18,9 +19,11 @@ public class Translator : MonoBehaviour
     Level[] listOfLevels;
     BaseEnemy[] enemiesToSpawn;
 
+    [SerializeField] bool downloadOn = true;
     string sheetURL = "19CiC2QT3GX_mW_-fsajqhnjdXPyRAB7rgwfp4-efBxQ";
     string apiKey = "AIzaSyCl_GqHd1-WROqf7i2YddE3zH6vSv3sNTA";
     string baseUrl = "https://sheets.googleapis.com/v4/spreadsheets/";
+    [Scene][SerializeField] string toLoad;
 
     private void Awake()
     {
@@ -85,7 +88,7 @@ public class Translator : MonoBehaviour
 
     IEnumerator Download(string range)
     {
-        if (Application.isEditor)
+        if (Application.isEditor && downloadOn)
         {
             string url = $"{baseUrl}{sheetURL}/values/{range}?key={apiKey}";
             using UnityWebRequest www = UnityWebRequest.Get(url);
@@ -159,23 +162,26 @@ public class Translator : MonoBehaviour
         }
         CreateBaseTxtFile(listOfKeys);
         Debug.Log("download complete");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(toLoad);
     }
 
     void CreateBaseTxtFile(List<string> listOfKeys)
     {
-        string baseText = "";
-        foreach (string key in listOfKeys)
-            baseText += $"{key}=\n";
-        string filePath = $"Assets/Resources/BaseTxtFile.txt";
-        File.WriteAllText($"{filePath}", baseText);
-        /*
-        string filePath = Path.Combine(Application.persistentDataPath, "BaseTxtFile.txt");
-        using (StreamWriter writer = new StreamWriter(filePath))
+        if (Application.isEditor)
         {
-            foreach (string input in listOfKeys)
-                writer.WriteLine($"{input}=");
-        }*/
+            string baseText = "";
+            foreach (string key in listOfKeys)
+                baseText += $"{key}=\n";
+            string filePath = $"Assets/Resources/BaseTxtFile.txt";
+            File.WriteAllText($"{filePath}", baseText);
+            /*
+            string filePath = Path.Combine(Application.persistentDataPath, "BaseTxtFile.txt");
+            using (StreamWriter writer = new StreamWriter(filePath))
+            {
+                foreach (string input in listOfKeys)
+                    writer.WriteLine($"{input}=");
+            }*/
+        }
     }
 
     #endregion
