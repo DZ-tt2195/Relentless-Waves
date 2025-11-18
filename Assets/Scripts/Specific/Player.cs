@@ -19,6 +19,8 @@ public class Player : Entity
     int currentBullet;
     [SerializeField] int maxBullet;
     [SerializeField] float immuneTime;
+    [SerializeField] GameObject blackOutObject;
+    public float blackOutTime = 0f;
     int firedBullets;
     int tookDamage;
     Stopwatch gameTimer;
@@ -54,12 +56,6 @@ public class Player : Entity
 
     void Update()
     {
-        if (health > 0 && !paused)
-        {
-            FollowMouse();
-            ShootBullet();
-        }
-
         if (health > 0 && Input.GetKeyDown(KeyCode.Space))
         {
             paused = !paused;
@@ -71,26 +67,39 @@ public class Player : Entity
                 gameTimer.Start();
         }
 
-        healthSlider.value = health / (float)maxHealth;
-        healthCounter.text = $"{Translator.inst.GetText("Health")}: {health} / {maxHealth}";
+        if (!paused)
+        {
+            if (health > 0)
+            {
+                FollowMouse();
+                ShootBullet();
+            }
 
-        if (PlayerPrefs.GetInt("Infinite") == 0)
-        {
-            bulletSlider.value = currentBullet / (float)maxBullet;
-            bulletCounter.text = $"{Translator.inst.GetText("Bullets")}: {currentBullet} / {maxBullet}";
-        }
-        else
-        {
-            bulletSlider.value = (float)maxBullet / (float)maxBullet;
-            bulletCounter.text = $"{Translator.inst.GetText("Bullets")}: \u221E";
-        }
+            if (blackOutTime > 0f)
+                blackOutTime -= Time.deltaTime;
+            blackOutObject.SetActive(blackOutTime > 0f);
 
-        timerText.text = $"{PlayerPrefs.GetFloat("Difficulty") * 100:F1}% {Translator.inst.GetText("Difficulty")}\n{StopwatchTime(gameTimer)}";
-        string StopwatchTime(Stopwatch stopwatch)
-        {
-            TimeSpan time = stopwatch.Elapsed;
-            string part = time.Seconds < 10 ? $"0{time.Seconds}" : $"{time.Seconds}";
-            return $"{time.Minutes}:{part}.{time.Milliseconds}";
+            healthSlider.value = health / (float)maxHealth;
+            healthCounter.text = $"{Translator.inst.Translate("Health")}: {health} / {maxHealth}";
+
+            if (PlayerPrefs.GetInt("Infinite") == 0)
+            {
+                bulletSlider.value = currentBullet / (float)maxBullet;
+                bulletCounter.text = $"{Translator.inst.Translate("Bullets")}: {currentBullet} / {maxBullet}";
+            }
+            else
+            {
+                bulletSlider.value = (float)maxBullet / (float)maxBullet;
+                bulletCounter.text = $"{Translator.inst.Translate("Bullets")}: \u221E";
+            }
+
+            timerText.text = $"{PlayerPrefs.GetFloat("Difficulty") * 100:F1}% {Translator.inst.Translate("Difficulty")}\n{StopwatchTime(gameTimer)}";
+            string StopwatchTime(Stopwatch stopwatch)
+            {
+                TimeSpan time = stopwatch.Elapsed;
+                string part = time.Seconds < 10 ? $"0{time.Seconds}" : $"{time.Seconds}";
+                return $"{time.Minutes}:{part}.{time.Milliseconds}";
+            }
         }
     }
 
@@ -181,7 +190,7 @@ public class Player : Entity
         immune = true;
         tookDamage++;
         SetAlpha(this.spriteRenderer, 0.5f);
-        WaveManager.instance.EndGame(Translator.inst.GetText("Lost"), PlayerStats(), -1);
+        WaveManager.instance.EndGame(Translator.inst.Translate("Lost"), PlayerStats(), -1);
     }
 
     public (int, int) PlayerStats()

@@ -7,6 +7,6 @@ public class SetText : MonoBehaviour
 
     private void Start()
     {
-        GetComponent<TMP_Text>().text = Translator.inst.GetText(key);
+        GetComponent<TMP_Text>().text = Translator.inst.Translate(key);
     }
 }

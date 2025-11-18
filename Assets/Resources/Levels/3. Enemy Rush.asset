@@ -14,6 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   listOfWaves:
   - enemies:
+    - toCreate: {fileID: 7281539886758776230, guid: eb00d3b1344e24fbaadffdb9e8ca4242, type: 3}
+      position: {x: -3, y: 3}
+    - toCreate: {fileID: 7281539886758776230, guid: eb00d3b1344e24fbaadffdb9e8ca4242, type: 3}
+      position: {x: 0, y: 3}
+    - toCreate: {fileID: 7281539886758776230, guid: eb00d3b1344e24fbaadffdb9e8ca4242, type: 3}
+      position: {x: 3, y: 3}
+    tutorialKey: 
+  - enemies:
     - toCreate: {fileID: 7516396602756695447, guid: 56791cf3361bd40f6a1e8d3039aaeadd, type: 3}
       position: {x: -1, y: 1.25}
     - toCreate: {fileID: 7516396602756695447, guid: 56791cf3361bd40f6a1e8d3039aaeadd, type: 3}

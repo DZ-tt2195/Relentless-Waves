@@ -89,8 +89,8 @@ public class WaveManager : MonoBehaviour
             foreach (Collection collection in currentLevel.listOfWaves[currentWave].enemies)
                 CreateEnemy(collection.position, collection.toCreate);
             waveSlider.value = (currentWave + 1) / (float)currentLevel.listOfWaves.Count;
-            waveCounter.text = $"{Translator.inst.GetText("Wave")}: {currentWave + 1} / {currentLevel.listOfWaves.Count}";
-            tutorialText.text = Translator.inst.GetText(currentLevel.listOfWaves[currentWave].tutorialKey);
+            waveCounter.text = $"{Translator.inst.Translate("Wave")}: {currentWave + 1} / {currentLevel.listOfWaves.Count}";
+            tutorialText.text = Translator.inst.Translate(currentLevel.listOfWaves[currentWave].tutorialKey);
         }
         else
         {
@@ -107,9 +107,9 @@ public class WaveManager : MonoBehaviour
             if (PlayerPrefs.GetInt("Infinite") == 1)
                 score -= 15;
 
-            string endText = Translator.inst.GetText("Victory");
+            string endText = Translator.inst.Translate("Victory");
             if (PlayerPrefs.GetInt("Starting Wave") > 1)
-                endText += $" [{Translator.inst.GetText("Skipped Ahead")} {PlayerPrefs.GetInt("Starting Wave")}]";
+                endText += $" [{Translator.inst.Translate("Skipped Ahead")} {PlayerPrefs.GetInt("Starting Wave")}]";
             else if (score > PlayerPrefs.GetInt($"{currentLevel.name} - Best Score"))
                 PlayerPrefs.SetInt($"{currentLevel.name} - Best Score", score);
             EndGame(endText, new(missedBullets, tookDamage), score);
@@ -146,7 +146,7 @@ public class WaveManager : MonoBehaviour
             }
 
             enemySlider.value = (float)currentEnemies / allEnemies.Count;
-            enemyCounter.text = $"{Translator.inst.GetText("Enemies")}: {currentEnemies} / {allEnemies.Count}";
+            enemyCounter.text = $"{Translator.inst.Translate("Enemies")}: {currentEnemies} / {allEnemies.Count}";
 
             if (currentEnemies == 0)
             {
@@ -164,10 +164,10 @@ public class WaveManager : MonoBehaviour
         {
             endingText.transform.parent.gameObject.SetActive(true);
             endingText.text = $"{text}\n\n" +
-                $"{Translator.inst.GetText("Bullets Missed")}: {stats.missedBullets}\n" +
-                $"{Translator.inst.GetText("Health Lost")}: {stats.tookDamage}\n";
+                $"{Translator.inst.Translate("Bullets Missed")}: {stats.missedBullets}\n" +
+                $"{Translator.inst.Translate("Health Lost")}: {stats.tookDamage}\n";
             if (score > 0)
-                endingText.text += $"\n{Translator.inst.GetText("Score")}: {score}";
+                endingText.text += $"\n{Translator.inst.Translate("Score")}: {score}";
         }
     }
 

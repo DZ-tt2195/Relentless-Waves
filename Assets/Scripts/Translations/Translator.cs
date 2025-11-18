@@ -1,12 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEngine;
-using UnityEngine.Networking;
-using System.IO;
 using UnityEngine.SceneManagement;
 using MyBox;
+using System;
+using System.Reflection;
 
 public class Translator : MonoBehaviour
 {
@@ -15,37 +13,55 @@ public class Translator : MonoBehaviour
 
     public static Translator inst;
     Dictionary<string, Dictionary<string, string>> keyTranslate = new();
+    [Scene][SerializeField] string toLoad;
 
     Level[] listOfLevels;
     BaseEnemy[] enemiesToSpawn;
 
-    [SerializeField] bool downloadOn = true;
-    string sheetURL = "19CiC2QT3GX_mW_-fsajqhnjdXPyRAB7rgwfp4-efBxQ";
-    string apiKey = "AIzaSyCl_GqHd1-WROqf7i2YddE3zH6vSv3sNTA";
-    string baseUrl = "https://sheets.googleapis.com/v4/spreadsheets/";
-    [Scene][SerializeField] string toLoad;
-
-    private void Awake()
+    void Awake()
     {
-        //Debug.Log(string.Format($"hi {0}", "lol"));
-        //Debug.Log(string.Format($"hi {{0}}", "lol"));
-
         if (inst == null)
         {
             inst = this;
             DontDestroyOnLoad(this.gameObject);
-            Debug.Log("start downloading");
 
             listOfLevels = Resources.LoadAll<Level>("Levels");
             enemiesToSpawn = Resources.LoadAll<BaseEnemy>("Enemies");
-
-            TxtLanguages();
-            StartCoroutine(DownloadLanguages());
+            Application.targetFrameRate = 60;
         }
         else
         {
             Destroy(this.gameObject);
         }
+    }
+
+    private void Start()
+    {
+        if (!PlayerPrefs.HasKey("Language"))
+            PlayerPrefs.SetString("Language", "English");
+
+        TxtLanguages();
+        CsvLanguages(ReadFile("Csv Languages"));
+        SceneManager.LoadScene(toLoad);
+    }
+
+    #endregion
+
+#region Reading Files
+
+    public static string[][] ReadFile(string range)
+    {
+        TextAsset data = Resources.Load($"{range}") as TextAsset;
+
+        string editData = data.text;
+        editData = editData.Replace("],", "").Replace("{", "").Replace("}", "");
+
+        string[] numLines = editData.Split("[");
+        string[][] list = new string[numLines.Length][];
+
+        for (int i = 0; i < numLines.Length; i++)
+            list[i] = numLines[i].Split("\",");
+        return list;
     }
 
     void TxtLanguages()
@@ -73,6 +89,7 @@ public class Translator : MonoBehaviour
 
         (bool, string) ConvertTxtName(TextAsset asset)
         {
+            //pattern: "0. English"
             string pattern = @"^\d+\.\s*(.+)$";
             Match match = Regex.Match(asset.name, pattern);
             if (match.Success)
@@ -82,58 +99,7 @@ public class Translator : MonoBehaviour
         }
     }
 
-    #endregion
-
-#region Downloading
-
-    IEnumerator Download(string range)
-    {
-        if (Application.isEditor && downloadOn)
-        {
-            string url = $"{baseUrl}{sheetURL}/values/{range}?key={apiKey}";
-            using UnityWebRequest www = UnityWebRequest.Get(url);
-            yield return www.SendWebRequest();
-
-            if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
-            {
-                Debug.LogError($"Download failed: {www.error}");
-            }
-            else
-            {
-                string filePath = $"Assets/Resources/{range}.txt";
-                File.WriteAllText($"{filePath}", www.downloadHandler.text);
-
-                string[] allLines = File.ReadAllLines($"{filePath}");
-                List<string> modifiedLines = allLines.ToList();
-                modifiedLines.RemoveRange(1, 3);
-                File.WriteAllLines($"{filePath}", modifiedLines.ToArray());
-                //Debug.Log($"downloaded {range}");
-            }
-        }
-    }
-
-    IEnumerator DownloadLanguages()
-    {
-        yield return Download("Csv Languages");
-        GetLanguages(ReadFile("Csv Languages"));
-
-        string[][] ReadFile(string range)
-        {
-            TextAsset data = Resources.Load($"{range}") as TextAsset;
-
-            string editData = data.text;
-            editData = editData.Replace("],", "").Replace("{", "").Replace("}", "");
-
-            string[] numLines = editData.Split("[");
-            string[][] list = new string[numLines.Length][];
-
-            for (int i = 0; i < numLines.Length; i++)
-                list[i] = numLines[i].Split("\",");
-            return list;
-        }
-    }
-
-    void GetLanguages(string[][] data)
+    void CsvLanguages(string[][] data)
     {
         for (int i = 1; i < data[1].Length; i++)
         {
@@ -142,45 +108,18 @@ public class Translator : MonoBehaviour
             keyTranslate.Add(data[1][i], newDictionary);
         }
 
-        List<string> listOfKeys = new();
         for (int i = 2; i < data.Length; i++)
         {
             for (int j = 0; j < data[i].Length; j++)
             {
-                data[i][j] = data[i][j].Replace("\"", "").Replace("\\", "").Replace("]", "").Trim();
+                data[i][j] = data[i][j].Replace("\"", "").Replace("\\", "").Replace("]", "").Replace("|", "\n").Trim();
                 if (j > 0)
                 {
                     string language = data[1][j];
                     string key = data[i][0];
                     keyTranslate[language][key] = data[i][j];
                 }
-                else
-                {
-                    listOfKeys.Add(data[i][j]);
-                }
             }
-        }
-        CreateBaseTxtFile(listOfKeys);
-        Debug.Log("download complete");
-        SceneManager.LoadScene(toLoad);
-    }
-
-    void CreateBaseTxtFile(List<string> listOfKeys)
-    {
-        if (Application.isEditor)
-        {
-            string baseText = "";
-            foreach (string key in listOfKeys)
-                baseText += $"{key}=\n";
-            string filePath = $"Assets/Resources/BaseTxtFile.txt";
-            File.WriteAllText($"{filePath}", baseText);
-            /*
-            string filePath = Path.Combine(Application.persistentDataPath, "BaseTxtFile.txt");
-            using (StreamWriter writer = new StreamWriter(filePath))
-            {
-                foreach (string input in listOfKeys)
-                    writer.WriteLine($"{input}=");
-            }*/
         }
     }
 
@@ -188,22 +127,54 @@ public class Translator : MonoBehaviour
 
 #region Helpers
 
-    public string GetText(string key, params object[] args)
+    public bool TranslationExists(string key)
     {
+        return keyTranslate["English"].ContainsKey(key);
+    }
+
+    public string Translate(string key, List<(string, string)> toReplace = null)
+    {
+        if (key == "" || int.TryParse(key, out _))
+            return key;
+
+        string answer;
         try
         {
-            return string.Format(keyTranslate[PlayerPrefs.GetString("Language")][key], args);
+            answer = keyTranslate[PlayerPrefs.GetString("Language")][key];
         }
         catch
         {
             try
             {
-                return string.Format(keyTranslate["English"][key], args);
+                answer = keyTranslate[("English")][key];
+                //Debug.Log($"{key} failed to translate in {PlayerPrefs.GetString("Language")}");
             }
             catch
             {
+                //Debug.Log($"{key} failed to translate at all");
                 return key;
             }
+        }
+
+        if (toReplace != null)
+        {
+            foreach ((string one, string two) in toReplace)
+                answer = answer.Replace($"${one}$", two);
+        }
+        return answer;
+    }
+
+    public Dictionary<string, Dictionary<string, string>> GetTranslations()
+    {
+        return keyTranslate;
+    }
+
+    public void ChangeLanguage(string newLanguage)
+    {
+        if (!PlayerPrefs.GetString("Language").Equals(newLanguage))
+        {
+            PlayerPrefs.SetString("Language", newLanguage);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 
@@ -220,11 +191,6 @@ public class Translator : MonoBehaviour
     public Level CurrentLevel()
     {
         return listOfLevels[PlayerPrefs.GetInt("Current Level")];
-    }
-
-    public Dictionary<string, Dictionary<string, string>> GetTranslations()
-    {
-        return keyTranslate;
     }
 
     #endregion

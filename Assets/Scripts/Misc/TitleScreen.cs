@@ -29,7 +29,7 @@ public class TitleScreen : MonoBehaviour
 
         void UpdateDifficultyText(float value)
         {
-            difficultyLabel.text = $"{Translator.inst.GetText("Difficulty")}: {value * 100:F1}%";
+            difficultyLabel.text = $"{Translator.inst.Translate("Difficulty")}: {value * 100:F1}%";
             PlayerPrefs.SetFloat("Difficulty", value);
         }
 
@@ -40,7 +40,7 @@ public class TitleScreen : MonoBehaviour
 
         void UpdateWaveText(float value)
         {
-            waveLabel.text = $"{Translator.inst.GetText("Start on Wave")} {(int)value}";
+            waveLabel.text = $"{Translator.inst.Translate("Start on Wave")} {(int)value}";
             PlayerPrefs.SetInt("Starting Wave", (int)value);
         }
 
@@ -97,7 +97,7 @@ public class TitleScreen : MonoBehaviour
         for (int i = 0; i < listOfLevels.Length; i++)
         {
             Level nextLevel = listOfLevels[i];
-            levelDropdown.AddOptions(new List<string>() { Translator.inst.GetText(nextLevel.name) });
+            levelDropdown.AddOptions(new List<string>() { Translator.inst.Translate(nextLevel.name) });
             if (i == PlayerPrefs.GetInt("Current Level"))
             {
                 levelDropdown.value = i;
@@ -120,9 +120,9 @@ public class TitleScreen : MonoBehaviour
             string levelName = Translator.inst.AllLevels()[n].name;
 
             if (PlayerPrefs.GetInt($"{levelName} - Best Score") > 0)
-                bestRun.text = $"{Translator.inst.GetText("Best Score")}: {PlayerPrefs.GetInt($"{levelName} - Best Score")}";
+                bestRun.text = $"{Translator.inst.Translate("Best Score")}: {PlayerPrefs.GetInt($"{levelName} - Best Score")}";
             else
-                bestRun.text = Translator.inst.GetText("No Score");
+                bestRun.text = Translator.inst.Translate("No Score");
         }
     }
 }
