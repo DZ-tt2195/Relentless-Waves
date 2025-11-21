@@ -16,7 +16,6 @@ public class TitleScreen : MonoBehaviour
     [SerializeField] Slider infiniteSlider;
 
     [SerializeField] TMP_Text bestRun;
-    [SerializeField] TMP_Dropdown languageDropdown;
     [SerializeField] TMP_Dropdown levelDropdown;
     [SerializeField] Button deleteScoreButton;
 
@@ -64,31 +63,6 @@ public class TitleScreen : MonoBehaviour
             PlayerPrefs.SetInt("Infinite", (int)(value));
         }
 
-        if (!PlayerPrefs.HasKey("Language")) PlayerPrefs.SetString("Language", "English");
-        languageDropdown.onValueChanged.AddListener(ChangeLanguageDropdown);
-        List<string> languages = Translator.inst.GetTranslations().Keys.ToList();
-        for (int i = 0; i < languages.Count; i++)
-        {
-            string nextLanguage = languages[i];
-            languageDropdown.AddOptions(new List<string>() { nextLanguage });
-            if (nextLanguage.Equals(PlayerPrefs.GetString("Language")))
-            {
-                languageDropdown.value = i;
-                ChangeLanguageDropdown(i);
-            }
-        }
-        languageDropdown.gameObject.SetActive(languageDropdown.options.Count >= 2);
-
-        void ChangeLanguageDropdown(int n)
-        {
-            string selectedText = languageDropdown.options[languageDropdown.value].text;
-            if (!PlayerPrefs.GetString("Language").Equals(selectedText))
-            {
-                PlayerPrefs.SetString("Language", selectedText);
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            }
-        }
-
         if (!PlayerPrefs.HasKey("Current Level")) PlayerPrefs.SetInt("Current Level", 0);
         Level[] listOfLevels = Translator.inst.AllLevels();
 
@@ -115,12 +89,22 @@ public class TitleScreen : MonoBehaviour
         void ChangeLevelDropdown(int n)
         {
             PlayerPrefs.SetInt("Current Level", n);
-            waveSlider.maxValue = Translator.inst.AllLevels()[n].listOfWaves.Count;
-            waveSlider.value = 1;
-            string levelName = Translator.inst.AllLevels()[n].name;
+            Level newLevel = Translator.inst.AllLevels()[n];
 
-            if (PlayerPrefs.GetInt($"{levelName} - Best Score") > 0)
-                bestRun.text = $"{Translator.inst.Translate("Best Score")}: {PlayerPrefs.GetInt($"{levelName} - Best Score")}";
+            if (newLevel.endless)
+            {
+                waveSlider.value = 1;
+                waveSlider.gameObject.SetActive(false);
+            }
+            else
+            {
+                waveSlider.maxValue = newLevel.listOfWaves.Count;
+                waveSlider.value = 1;
+                waveSlider.gameObject.SetActive(true);
+            }
+
+            if (PlayerPrefs.GetInt($"{newLevel.levelName} - Best Score") > 0)
+                bestRun.text = $"{Translator.inst.Translate("Best Score")}: {PlayerPrefs.GetInt($"{newLevel.levelName} - Best Score")}";
             else
                 bestRun.text = Translator.inst.Translate("No Score");
         }

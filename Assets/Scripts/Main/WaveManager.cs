@@ -23,7 +23,7 @@ public class WaveManager : MonoBehaviour
     public Camera mainCamera;
     [SerializeField] Slider waveSlider;
     [SerializeField] TMP_Text waveCounter;
-    int currentWave;
+    public int currentWave { get; private set; }
     [SerializeField] Slider enemySlider;
     [SerializeField] TMP_Text enemyCounter;
     [SerializeField] TMP_Text endingText;
@@ -78,7 +78,7 @@ public class WaveManager : MonoBehaviour
     {
         Level currentLevel = Translator.inst.CurrentLevel();
 
-        if (currentWave < currentLevel.listOfWaves.Count())
+        if (currentWave < currentLevel.listOfWaves.Count() || currentLevel.endless)
         {
             CreateJuggleBall();
             if (currentWave >= 1)
@@ -86,18 +86,29 @@ public class WaveManager : MonoBehaviour
                 HealthPack pack = Instantiate(healthPack);
                 pack.transform.position = new(Random.Range(minX + 0.5f, maxX - 0.5f), maxY);
             }
-            foreach (Collection collection in currentLevel.listOfWaves[currentWave].enemies)
+
+            foreach (Collection collection in currentLevel.listOfWaves[Mathf.Min(currentLevel.listOfWaves.Count, currentWave)].enemies)
                 CreateEnemy(collection.position, collection.toCreate);
+
             waveSlider.value = (currentWave + 1) / (float)currentLevel.listOfWaves.Count;
-            waveCounter.text = $"{Translator.inst.Translate("Wave")}: {currentWave + 1} / {currentLevel.listOfWaves.Count}";
-            tutorialText.text = Translator.inst.Translate(currentLevel.listOfWaves[currentWave].tutorialKey);
+
+            if (!currentLevel.endless)
+            {
+                waveCounter.text = $"{Translator.inst.Translate("Wave")}: {currentWave + 1} / {currentLevel.listOfWaves.Count}";
+                tutorialText.text = Translator.inst.Translate(currentLevel.listOfWaves[currentWave].tutorialKey);
+            }
+            else
+            {
+                waveCounter.text = $"{Translator.inst.Translate("Wave")}: {currentWave + 1} / \u221E";
+                tutorialText.text = "";
+            }
         }
         else
         {
             Bullet[] allBullets = FindObjectsByType<Bullet>(FindObjectsSortMode.None);
-                foreach (Bullet bullet in allBullets) Destroy(bullet.gameObject);
+            foreach (Bullet bullet in allBullets) Destroy(bullet.gameObject);
             JuggleBall[] allBalls = FindObjectsByType<JuggleBall>(FindObjectsSortMode.None);
-                foreach (JuggleBall ball in allBalls) Destroy(ball.gameObject);
+            foreach (JuggleBall ball in allBalls) Destroy(ball.gameObject);
 
             (int missedBullets, int tookDamage) = Player.instance.PlayerStats();
 
@@ -111,7 +122,7 @@ public class WaveManager : MonoBehaviour
             if (PlayerPrefs.GetInt("Starting Wave") > 1)
                 endText += $" [{Translator.inst.Translate("Skipped Ahead")} {PlayerPrefs.GetInt("Starting Wave")}]";
             else if (score > PlayerPrefs.GetInt($"{currentLevel.name} - Best Score"))
-                PlayerPrefs.SetInt($"{currentLevel.name} - Best Score", score);
+                PlayerPrefs.SetInt($"{currentLevel.levelName} - Best Score", score);
             EndGame(endText, new(missedBullets, tookDamage), score);
         }
     }

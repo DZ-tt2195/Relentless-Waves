@@ -1,6 +1,6 @@
 Description=Bullet hell game where enemies keep shooting until you finish the entire wave.
 Designer=by Thomas Tang (DZ)
-Last Update=Last Updated: Nov 17, 2025
+Last Update=Last Updated: Nov 21, 2025
 Translator Credit=
 Language=Language
 Choose Level=Choose Level
@@ -31,7 +31,8 @@ Score=Score
 1. Tutorial 1=Tutorial 1
 2. Tutorial 2=Tutorial 2
 3. Enemy Rush=Enemy Rush
-Random=Random
+4. Random=Random
+5. Endless=Endless
 First Tutorial=Click to shoot at enemies. Pick up more bullets if you run out.
 Second Tutorial=Enemies will continue to shoot at you even when defeated. Defeat all enemies to clear the wave.
 Third Tutorial=Catch the stars thrown by the Staff to damage it and disable its barrier.

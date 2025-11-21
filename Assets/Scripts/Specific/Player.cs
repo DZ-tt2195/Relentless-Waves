@@ -190,7 +190,24 @@ public class Player : Entity
         immune = true;
         tookDamage++;
         SetAlpha(this.spriteRenderer, 0.5f);
-        WaveManager.instance.EndGame(Translator.inst.Translate("Lost"), PlayerStats(), -1);
+
+        Level currentLevel = Translator.inst.CurrentLevel();
+        if (currentLevel.endless)
+        {
+            int score = (int)(PlayerPrefs.GetFloat("Difficulty") * 100) + WaveManager.instance.currentWave*10;
+            if (PlayerPrefs.GetInt("Juggle") == 1)
+                score += 15;
+            if (PlayerPrefs.GetInt("Infinite") == 1)
+                score -= 15;
+
+            WaveManager.instance.EndGame(Translator.inst.Translate("Lost"), PlayerStats(), score);
+            if (score > PlayerPrefs.GetInt($"{currentLevel.levelName} - Best Score"))
+                PlayerPrefs.SetInt($"{currentLevel.levelName} - Best Score", score);
+        }
+        else
+        {
+            WaveManager.instance.EndGame(Translator.inst.Translate("Lost"), PlayerStats(), -1);
+        }
     }
 
     public (int, int) PlayerStats()

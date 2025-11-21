@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 13a19542f09574d3792a844c9ee0db97, type: 3}
-  m_Name: Random
+  m_Name: 4. Random
   m_EditorClassIdentifier: 
   listOfWaves:
   - enemies:
@@ -22,6 +22,7 @@ MonoBehaviour:
       position: {x: 1, y: 1.25}
     - toCreate: {fileID: 0}
       position: {x: 1, y: 3}
+    tutorialKey: 
   - enemies:
     - toCreate: {fileID: 0}
       position: {x: -3, y: 3}
@@ -33,6 +34,7 @@ MonoBehaviour:
       position: {x: 1.5, y: 3}
     - toCreate: {fileID: 0}
       position: {x: 3, y: 3}
+    tutorialKey: 
   - enemies:
     - toCreate: {fileID: 0}
       position: {x: 0, y: 3}
@@ -46,6 +48,7 @@ MonoBehaviour:
       position: {x: 2, y: 3}
     - toCreate: {fileID: 0}
       position: {x: 2, y: 1.25}
+    tutorialKey: 
   - enemies:
     - toCreate: {fileID: 0}
       position: {x: -3, y: 3}
@@ -63,6 +66,7 @@ MonoBehaviour:
       position: {x: 3, y: 3}
     - toCreate: {fileID: 0}
       position: {x: 3, y: 1.25}
+    tutorialKey: 
   - enemies:
     - toCreate: {fileID: 0}
       position: {x: -8, y: 3}
@@ -82,3 +86,6 @@ MonoBehaviour:
       position: {x: 6, y: 3}
     - toCreate: {fileID: 0}
       position: {x: 8, y: 3}
+    tutorialKey: 
+  levelName: Random
+  endless: 0

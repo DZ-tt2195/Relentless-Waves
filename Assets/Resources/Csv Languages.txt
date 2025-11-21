@@ -13,7 +13,7 @@
     ],
     [
       "Last Update",
-      "Last Updated: Nov 17, 2025"
+      "Last Updated: Nov 21, 2025"
     ],
     [
       "Translator Credit",
@@ -136,8 +136,12 @@
       "Enemy Rush"
     ],
     [
-      "Random",
+      "4. Random",
       "Random"
+    ],
+    [
+      "5. Endless",
+      "Endless"
     ],
     [
       "First Tutorial",

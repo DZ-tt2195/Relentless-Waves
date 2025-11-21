@@ -5,6 +5,8 @@ using System.Collections.Generic;
 public class Level : ScriptableObject
 {
     public List<Wave<Collection>> listOfWaves = new();
+    public string levelName;
+    public bool endless;
 }
 
 [System.Serializable]

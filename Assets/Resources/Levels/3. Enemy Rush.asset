@@ -121,3 +121,5 @@ MonoBehaviour:
     - toCreate: {fileID: 1135478034882460308, guid: 83c245ebb2cec4f0185e4a614d367591, type: 3}
       position: {x: 3, y: 3}
     tutorialKey: 
+  levelName: Enemy Rush
+  endless: 0

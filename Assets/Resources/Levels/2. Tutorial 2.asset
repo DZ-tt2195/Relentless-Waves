@@ -35,3 +35,5 @@ MonoBehaviour:
     - toCreate: {fileID: 2288650429703796706, guid: a7bcc1b0078884e4ea95ab9c0a50e12c, type: 3}
       position: {x: 0, y: 3}
     tutorialKey: Fourth Tutorial
+  levelName: Tutorial 2
+  endless: 0
