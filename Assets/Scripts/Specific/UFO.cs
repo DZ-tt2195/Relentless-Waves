@@ -10,7 +10,7 @@ public class UFO : BaseEnemy
         Vector2 randomPosition = Vector2.zero;
         while (true)
         {
-            randomPosition = new(Random.Range(WaveManager.minX + avoid, WaveManager.maxX - avoid), Random.Range(WaveManager.minY / 3f, WaveManager.maxY - avoid));
+            randomPosition = new(Random.Range(WaveManager.minX + avoid, WaveManager.maxX - avoid), Random.Range(-1, WaveManager.maxY - avoid));
             Collider2D[] colliders = Physics2D.OverlapCircleAll(randomPosition, avoid);
             bool hasEntityGameComponent = colliders.Any(collider => collider.GetComponent<Entity>() != null);
 
