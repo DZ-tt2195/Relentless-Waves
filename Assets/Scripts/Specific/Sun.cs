@@ -19,12 +19,12 @@ public class Sun : BaseEnemy
 
     protected override void ShootBullet()
     {
-        CreateBullet(prefab, this.transform.position, bulletSpeed, new(-1, -1));
-        CreateBullet(prefab, this.transform.position, bulletSpeed, new(-1, 0));
-        CreateBullet(prefab, this.transform.position, bulletSpeed, new(-1, 1));
+        CreateBullet(bulletPrefab, this.transform.position, bulletSpeed, new(-1, -1));
+        CreateBullet(bulletPrefab, this.transform.position, bulletSpeed, new(-1, 0));
+        CreateBullet(bulletPrefab, this.transform.position, bulletSpeed, new(-1, 1));
 
-        CreateBullet(prefab, this.transform.position, bulletSpeed, new(1, -1));
-        CreateBullet(prefab, this.transform.position, bulletSpeed, new(1, 0));
-        CreateBullet(prefab, this.transform.position, bulletSpeed, new(1, 1));
+        CreateBullet(bulletPrefab, this.transform.position, bulletSpeed, new(1, -1));
+        CreateBullet(bulletPrefab, this.transform.position, bulletSpeed, new(1, 0));
+        CreateBullet(bulletPrefab, this.transform.position, bulletSpeed, new(1, 1));
     }
 }

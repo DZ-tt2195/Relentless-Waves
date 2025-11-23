@@ -22,7 +22,7 @@ public class Staff : BaseEnemy
         target.Normalize();
 
         for (int i = 0; i < numBullets; i++)
-            CreateBullet(prefab, this.transform.position, bulletSpeed, new(target.x + RandomOffSet(), target.y + RandomOffSet()));
+            CreateBullet(bulletPrefab, this.transform.position, bulletSpeed, new(target.x + RandomOffSet(), target.y + RandomOffSet()));
 
         if (health > 0 && !starPrefab.gameObject.activeSelf)
         {

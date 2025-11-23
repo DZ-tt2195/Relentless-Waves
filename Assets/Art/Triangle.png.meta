@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 3ba87dbf70f2540c298d4a427d4b6a73
+guid: 7000d73035c6343bda9b7eef92895588
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2739807658926110822
-    second: Skull_0
-  - first:
-      213: -8375587311600527847
-    second: Skull_1
+      213: -3795437932344149621
+    second: Triangle_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -54,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 600
+  spritePixelsToUnits: 1000
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -76,32 +73,6 @@ TextureImporter:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 512
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: Win64
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: OSXUniversal
-    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -142,35 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Skull_0
+      name: Triangle_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 64
-        width: 357
-        height: 363
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a9780d8437f3af9d0800000000000000
-      internalID: -2739807658926110822
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Skull_1
-      rect:
-        serializedVersion: 2
-        x: 73
         y: 0
-        width: 211
-        height: 88
+        width: 407
+        height: 407
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 91618c247bfe3cb80800000000000000
-      internalID: -8375587311600527847
+      spriteID: b8975934f45e35bc0800000000000000
+      internalID: -3795437932344149621
       vertices: []
       indices: 
       edges: []
@@ -199,8 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Skull_0: -2739807658926110822
-      Skull_1: -8375587311600527847
+      Triangle_0: -3795437932344149621
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

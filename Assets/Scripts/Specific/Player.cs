@@ -109,7 +109,7 @@ public class Player : Entity
         {
             if (PlayerPrefs.GetInt("Infinite") == 0) currentBullet--;
             firedBullets++;
-            CreateBullet(prefab, this.transform.position, bulletSpeed, Vector3.up);
+            CreateBullet(bulletPrefab, this.transform.position, bulletSpeed, Vector3.up);
         }
     }
 
@@ -194,7 +194,7 @@ public class Player : Entity
         Level currentLevel = Translator.inst.CurrentLevel();
         if (currentLevel.endless)
         {
-            int score = (int)(PlayerPrefs.GetFloat("Difficulty") * 100) + WaveManager.instance.currentWave*10;
+            int score = (int)(PlayerPrefs.GetFloat("Difficulty") * 100) + (WaveManager.instance.currentWave-1)*10;
             if (PlayerPrefs.GetInt("Juggle") == 1)
                 score += 15;
             if (PlayerPrefs.GetInt("Infinite") == 1)

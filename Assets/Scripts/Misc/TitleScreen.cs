@@ -82,7 +82,7 @@ public class TitleScreen : MonoBehaviour
         void ClearScores()
         {
             foreach (Level level in listOfLevels)
-                PlayerPrefs.SetInt($"{level.name} - Best Score", 0);
+                PlayerPrefs.SetInt($"{level.levelName} - Best Score", 0);
             ChangeLevelDropdown(PlayerPrefs.GetInt("Current Level"));
         }
 

@@ -14,7 +14,7 @@ public class Entity : MonoBehaviour
     protected bool immune = false;
     [SerializeField] protected float bulletSpeed;
 
-    protected Bullet prefab { get; private set; }
+    protected Bullet bulletPrefab { get; private set; }
     protected Queue<Bullet> bulletQueue = new();
     protected int landedBullets { get; private set; }
 
@@ -23,8 +23,8 @@ public class Entity : MonoBehaviour
         spriteRenderer = transform.Find("Sprite").GetComponent<SpriteRenderer>();
         try
         {
-            prefab = this.transform.Find("Bullet").GetComponent<Bullet>();
-            prefab.gameObject.SetActive(false);
+            bulletPrefab = this.transform.Find("Bullet").GetComponent<Bullet>();
+            bulletPrefab.gameObject.SetActive(false);
         } catch { }
         maxHealth = health;
     }

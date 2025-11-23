@@ -52,6 +52,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -73,6 +75,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -139,6 +142,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -160,6 +165,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
@@ -183,10 +189,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4391531458095197952}
-  - component: {fileID: 919569623440653086}
   - component: {fileID: 9078216097732047457}
   - component: {fileID: 6370670206990027092}
   - component: {fileID: 6000556645161270346}
+  - component: {fileID: 571838821494175774}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -209,18 +215,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5602975972425853259}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &919569623440653086
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4839569043441903554}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 452b36838ab904a36baac59b542b6217, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!212 &9078216097732047457
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -241,6 +235,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -262,6 +258,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -278,7 +275,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!50 &6370670206990027092
 Rigidbody2D:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -289,8 +286,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -349,6 +346,18 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.2, y: 0.3}
   m_EdgeRadius: 0
+--- !u!114 &571838821494175774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4839569043441903554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 916b9b263332c4775a6b226bee3bb2bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Bullet
 --- !u!1 &7461354543800533658
 GameObject:
   m_ObjectHideFlags: 0
@@ -358,9 +367,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5602975972425853259}
-  - component: {fileID: 4982336583283359399}
   - component: {fileID: 7595905048437823666}
   - component: {fileID: 3084981597421438330}
+  - component: {fileID: 165902128648321467}
   m_Layer: 0
   m_Name: Knight
   m_TagString: Enemy
@@ -386,23 +395,6 @@ Transform:
   - {fileID: 4391531458095197952}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4982336583283359399
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7461354543800533658}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 325a5d3d1bc7d47e5a669eedd7fe3446, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 4
-  bulletSpeed: 2.5
-  moveSpeed: 0
-  attackRate: 1.25
-  lookAtPlayer: 0
 --- !u!61 &7595905048437823666
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -451,7 +443,7 @@ BoxCollider2D:
   m_EdgeRadius: 0
 --- !u!50 &3084981597421438330
 Rigidbody2D:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -462,8 +454,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -476,3 +468,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &165902128648321467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7461354543800533658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eacedff480b84e0aa52afd8203f69f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Knight
+  health: 4
+  bulletSpeed: 2.5
+  moveSpeed: 0
+  attackRate: 1.25
+  lookAtPlayer: 0

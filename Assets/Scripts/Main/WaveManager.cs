@@ -121,7 +121,7 @@ public class WaveManager : MonoBehaviour
             string endText = Translator.inst.Translate("Victory");
             if (PlayerPrefs.GetInt("Starting Wave") > 1)
                 endText += $" [{Translator.inst.Translate("Skipped Ahead")} {PlayerPrefs.GetInt("Starting Wave")}]";
-            else if (score > PlayerPrefs.GetInt($"{currentLevel.name} - Best Score"))
+            else if (score > PlayerPrefs.GetInt($"{currentLevel.levelName} - Best Score"))
                 PlayerPrefs.SetInt($"{currentLevel.levelName} - Best Score", score);
             EndGame(endText, new(missedBullets, tookDamage), score);
         }

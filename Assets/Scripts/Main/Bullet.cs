@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour
     string ownerTag;
     protected float bulletSpeed;
     public SpriteRenderer spriteRenderer { get; private set; }
+    protected bool disappearOnWall = true;
 
     protected virtual void Awake()
     {
@@ -34,8 +35,8 @@ public class Bullet : MonoBehaviour
     void Update()
     {
         Movement();
-        if (this.transform.position.x < WaveManager.minX - 0.5f || this.transform.position.x > WaveManager.maxX + 0.5f ||
-            this.transform.position.y < WaveManager.minY - 0.5f || this.transform.position.y > WaveManager.maxY + 0.5f)
+        if (disappearOnWall && (this.transform.position.x < WaveManager.minX - 0.5f || this.transform.position.x > WaveManager.maxX + 0.5f ||
+            this.transform.position.y < WaveManager.minY - 0.5f || this.transform.position.y > WaveManager.maxY + 0.5f))
             TryAndReturn(false);
     }
 
@@ -52,7 +53,7 @@ public class Bullet : MonoBehaviour
             target.TakeDamage();
             TryAndReturn(true);
         }
-        else if (collision.CompareTag("Wall") && !collision.transform.parent.CompareTag(ownerTag))
+        else if (disappearOnWall && collision.CompareTag("Wall") && !collision.transform.parent.CompareTag(ownerTag))
         {
             TryAndReturn(false);
         }

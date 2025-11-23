@@ -13,7 +13,7 @@
     ],
     [
       "Last Update",
-      "Last Updated: Nov 21, 2025"
+      "Last Updated: Nov 22, 2025"
     ],
     [
       "Translator Credit",

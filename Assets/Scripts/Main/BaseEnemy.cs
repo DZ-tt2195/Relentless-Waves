@@ -27,7 +27,7 @@ public class BaseEnemy : Entity
     {
         Vector2 target = AimAtPlayer();
         target.Normalize();
-        CreateBullet(prefab, this.transform.position, bulletSpeed, target);
+        CreateBullet(bulletPrefab, this.transform.position, bulletSpeed, target);
     }
 
     protected virtual void Update()
