@@ -1,9 +1,10 @@
 Description=Bullet hell game where enemies keep shooting until you finish the entire wave.
 Designer=by Thomas Tang (DZ)
-Last Update=Last Updated: Nov 22, 2025
+Last Update=Last Updated: Dec 08, 2025
 Translator Credit=
 Language=Language
 Choose Level=Choose Level
+Controls=Click to shoot, space to pause
 Start on Wave=Start on Wave
 Play=Play
 Delete=Delete Scores
@@ -37,3 +38,4 @@ First Tutorial=Click to shoot at enemies. Pick up more bullets if you run out.
 Second Tutorial=Enemies will continue to shoot at you even when defeated. Defeat all enemies to clear the wave.
 Third Tutorial=Catch the stars thrown by the Staff to damage it and disable its barrier.
 Fourth Tutorial=The Phoenix can revive itself. Defeat all other enemies first to clear the wave.
+FPS=FPS

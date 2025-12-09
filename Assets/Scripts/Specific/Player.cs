@@ -34,6 +34,11 @@ public class Player : Entity
     [SerializeField] Slider healthSlider;
     [SerializeField] TMP_Text healthCounter;
 
+    [Foldout("FPS", true)]
+    int lastframe = 0;
+    int lastupdate = 60;
+    float[] framearray = new float[60];
+
     protected override void Awake()
     {
         base.Awake();
@@ -93,12 +98,23 @@ public class Player : Entity
                 bulletCounter.text = $"{Translator.inst.Translate("Bullets")}: \u221E";
             }
 
-            timerText.text = $"{PlayerPrefs.GetFloat("Difficulty") * 100:F1}% {Translator.inst.Translate("Difficulty")}\n{StopwatchTime(gameTimer)}";
-            string StopwatchTime(Stopwatch stopwatch)
+            timerText.text = $"{PlayerPrefs.GetFloat("Difficulty") * 100:F1}% {Translator.inst.Translate("Difficulty")}\n{MyExtensions.StopwatchTime(gameTimer)}";
+            timerText.text += $" | {Translator.inst.Translate("FPS")}: {GetFPS()}";
+
+            string GetFPS()
             {
-                TimeSpan time = stopwatch.Elapsed;
-                string part = time.Seconds < 10 ? $"0{time.Seconds}" : $"{time.Seconds}";
-                return $"{time.Minutes}:{part}.{time.Milliseconds}";
+                framearray[lastframe] = Time.deltaTime;
+                lastframe = (lastframe + 1);
+                if (lastframe == 60)
+                {
+                    lastframe = 0;
+                    float total = 0;
+                    for (int i = 0; i < framearray.Length; i++)
+                        total += framearray[i];
+                    lastupdate = (int)(framearray.Length / total);
+                    return lastupdate.ToString();
+                }
+                return (lastupdate > Application.targetFrameRate) ? Application.targetFrameRate.ToString() : lastupdate.ToString();
             }
         }
     }
