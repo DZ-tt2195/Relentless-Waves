@@ -16,9 +16,9 @@ public class BaseEnemy : Entity
         crossedOut = transform.Find("X").gameObject;
         crossedOut.SetActive(false);
 
-        attackRate *= 2-PlayerPrefs.GetFloat("Difficulty");
-        bulletSpeed *= PlayerPrefs.GetFloat("Difficulty");
-        moveSpeed *= PlayerPrefs.GetFloat("Difficulty");
+        attackRate *= 2-PrefManager.GetDifficulty();
+        bulletSpeed *= PrefManager.GetDifficulty();
+        moveSpeed *= PrefManager.GetDifficulty();
 
         InvokeRepeating(nameof(ShootBullet), attackRate*0.5f, attackRate);
     }

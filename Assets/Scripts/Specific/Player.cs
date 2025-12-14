@@ -49,7 +49,7 @@ public class Player : Entity
 
         this.tag = "Player";
         currentBullet = maxBullet;
-        immuneTime *= 2 - PlayerPrefs.GetFloat("Difficulty");
+        immuneTime *= 2 - PrefManager.GetDifficulty();
 
         gameTimer = new Stopwatch();
         gameTimer.Start();
@@ -85,21 +85,21 @@ public class Player : Entity
             blackOutObject.SetActive(blackOutTime > 0f);
 
             healthSlider.value = health / (float)maxHealth;
-            healthCounter.text = $"{Translator.inst.Translate("Health")}: {health} / {maxHealth}";
+            healthCounter.text = AutoTranslate.Health(health.ToString(), maxHealth.ToString());
 
-            if (PlayerPrefs.GetInt("Infinite") == 0)
+            if (PrefManager.GetJuggle() == 0)
             {
                 bulletSlider.value = currentBullet / (float)maxBullet;
-                bulletCounter.text = $"{Translator.inst.Translate("Bullets")}: {currentBullet} / {maxBullet}";
+                bulletCounter.text = AutoTranslate.Bullets(currentBullet.ToString(), maxBullet.ToString());
             }
             else
             {
                 bulletSlider.value = (float)maxBullet / (float)maxBullet;
-                bulletCounter.text = $"{Translator.inst.Translate("Bullets")}: \u221E";
+                bulletCounter.text = AutoTranslate.Bullets("\u221E", "\u221E");
             }
 
-            timerText.text = $"{PlayerPrefs.GetFloat("Difficulty") * 100:F1}% {Translator.inst.Translate("Difficulty")}\n{MyExtensions.StopwatchTime(gameTimer)}";
-            timerText.text += $" | {Translator.inst.Translate("FPS")}: {GetFPS()}";
+            timerText.text = $"{AutoTranslate.Difficulty($"{PrefManager.GetDifficulty()*100:F1}")}\n{MyExtensions.StopwatchTime(gameTimer)}";
+            timerText.text += $" | {AutoTranslate.FPS(GetFPS())}";
 
             string GetFPS()
             {
@@ -123,7 +123,8 @@ public class Player : Entity
     {
         if (Input.GetKeyDown(KeyCode.Mouse0) && currentBullet >= 1)
         {
-            if (PlayerPrefs.GetInt("Infinite") == 0) currentBullet--;
+            if (PrefManager.GetInfinity() == 0) 
+                currentBullet--;
             firedBullets++;
             CreateBullet(bulletPrefab, this.transform.position, bulletSpeed, Vector3.up);
         }
@@ -210,19 +211,19 @@ public class Player : Entity
         Level currentLevel = Translator.inst.CurrentLevel();
         if (currentLevel.endless)
         {
-            int score = (int)(PlayerPrefs.GetFloat("Difficulty") * 100) + (WaveManager.instance.currentWave-1)*10;
-            if (PlayerPrefs.GetInt("Juggle") == 1)
+            int score = (int)(PrefManager.GetDifficulty() * 100) + (WaveManager.instance.currentWave-1)*10;
+            if (PrefManager.GetJuggle() == 1)
                 score += 15;
-            if (PlayerPrefs.GetInt("Infinite") == 1)
+            if (PrefManager.GetInfinity() == 1)
                 score -= 15;
 
-            WaveManager.instance.EndGame(Translator.inst.Translate("Lost"), PlayerStats(), score);
-            if (score > PlayerPrefs.GetInt($"{currentLevel.levelName} - Best Score"))
-                PlayerPrefs.SetInt($"{currentLevel.levelName} - Best Score", score);
+            WaveManager.instance.EndGame(AutoTranslate.DoEnum(ToTranslate.Lost), PlayerStats(), score);
+            if (score > PrefManager.GetScore(currentLevel.levelName.ToString()))
+                PrefManager.SetScore(currentLevel.levelName.ToString(), score);
         }
         else
         {
-            WaveManager.instance.EndGame(Translator.inst.Translate("Lost"), PlayerStats(), -1);
+            WaveManager.instance.EndGame(AutoTranslate.DoEnum(ToTranslate.Lost), PlayerStats(), -1);
         }
     }
 

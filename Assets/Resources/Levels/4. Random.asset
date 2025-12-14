@@ -22,7 +22,7 @@ MonoBehaviour:
       position: {x: 1, y: 1.25}
     - toCreate: {fileID: 0}
       position: {x: 1, y: 3}
-    tutorialKey: 
+    tutorialKey: 30
   - enemies:
     - toCreate: {fileID: 0}
       position: {x: -3, y: 3}
@@ -34,7 +34,7 @@ MonoBehaviour:
       position: {x: 1.5, y: 3}
     - toCreate: {fileID: 0}
       position: {x: 3, y: 3}
-    tutorialKey: 
+    tutorialKey: 30
   - enemies:
     - toCreate: {fileID: 0}
       position: {x: 0, y: 3}
@@ -48,7 +48,7 @@ MonoBehaviour:
       position: {x: 2, y: 3}
     - toCreate: {fileID: 0}
       position: {x: 2, y: 1.25}
-    tutorialKey: 
+    tutorialKey: 30
   - enemies:
     - toCreate: {fileID: 0}
       position: {x: -3, y: 3}
@@ -66,7 +66,7 @@ MonoBehaviour:
       position: {x: 3, y: 3}
     - toCreate: {fileID: 0}
       position: {x: 3, y: 1.25}
-    tutorialKey: 
+    tutorialKey: 30
   - enemies:
     - toCreate: {fileID: 0}
       position: {x: -8, y: 3}
@@ -86,6 +86,7 @@ MonoBehaviour:
       position: {x: 6, y: 3}
     - toCreate: {fileID: 0}
       position: {x: 8, y: 3}
-    tutorialKey: 
-  levelName: Random
+    tutorialKey: 30
+  levelName: 23
   endless: 0
+  levelNumber: 4

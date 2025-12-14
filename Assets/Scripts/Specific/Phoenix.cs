@@ -10,7 +10,7 @@ public class Phoenix : BaseEnemy
     protected override void Awake()
     {
         base.Awake();
-        respawnTime *= 2 - PlayerPrefs.GetFloat("Difficulty");
+        respawnTime *= 2 - PrefManager.GetDifficulty();
         textBox.gameObject.SetActive(false);
     }
 

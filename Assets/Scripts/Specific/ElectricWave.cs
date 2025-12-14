@@ -15,8 +15,8 @@ public class ElectricWave : Bullet
     protected override void Awake()
     {
         base.Awake();
-        travelTime *= 2 - PlayerPrefs.GetFloat("Difficulty");
-        vanishTime *= PlayerPrefs.GetFloat("Difficulty");
+        travelTime *= 2 - PrefManager.GetDifficulty();
+        vanishTime *= PrefManager.GetDifficulty();
     }
 
     public override void AssignInfo(float speed, Vector3 direction, Entity owner)

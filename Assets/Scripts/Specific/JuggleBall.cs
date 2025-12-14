@@ -6,7 +6,7 @@ public class JuggleBall : MonoBehaviour
 
     private void Awake()
     {
-        currentSpeed *= PlayerPrefs.GetFloat("Difficulty");
+        currentSpeed *= PrefManager.GetDifficulty();
     }
 
     private void Update()

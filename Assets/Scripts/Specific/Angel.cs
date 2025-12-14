@@ -11,8 +11,8 @@ public class Angel : BaseEnemy
     {
         base.Awake();
         wall = transform.Find("Wall").gameObject;
-        wallOn *= PlayerPrefs.GetFloat("Difficulty");
-        wallOff *= 2 - PlayerPrefs.GetFloat("Difficulty");
+        wallOn *= PrefManager.GetDifficulty();
+        wallOff *= 2 - PrefManager.GetDifficulty();
 
         wall.SetActive(true);
         timer = wallOn;

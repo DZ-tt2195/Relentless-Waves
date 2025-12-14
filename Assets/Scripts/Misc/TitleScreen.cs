@@ -21,74 +21,67 @@ public class TitleScreen : MonoBehaviour
 
     void Start()
     {
-        if (!PlayerPrefs.HasKey("Difficulty")) PlayerPrefs.SetFloat("Difficulty", 1f);
+        if (!PlayerPrefs.HasKey(PrefManager.Difficulty)) PrefManager.SetDifficulty(1f);
         difficultySlider.onValueChanged.AddListener(UpdateDifficultyText);
-        difficultySlider.value = PlayerPrefs.GetFloat("Difficulty");
-        UpdateDifficultyText(PlayerPrefs.GetFloat("Difficulty"));
+        difficultySlider.value = PrefManager.GetDifficulty();
+        UpdateDifficultyText(PrefManager.GetDifficulty());
 
         void UpdateDifficultyText(float value)
         {
-            difficultyLabel.text = $"{Translator.inst.Translate("Difficulty")}: {value * 100:F1}%";
-            PlayerPrefs.SetFloat("Difficulty", value);
+            difficultyLabel.text = AutoTranslate.Difficulty($"{value*100:F1}");
+            PrefManager.SetDifficulty(value);
         }
 
-        if (!PlayerPrefs.HasKey("Starting Wave")) PlayerPrefs.SetInt("Starting Wave", 1);
+        if (!PlayerPrefs.HasKey(PrefManager.StartWave)) PrefManager.SetStartWave(1);
         waveSlider.onValueChanged.AddListener(UpdateWaveText);
-        waveSlider.value = PlayerPrefs.GetInt("Starting Wave");
-        UpdateWaveText(PlayerPrefs.GetInt("Starting Wave"));
+        waveSlider.value = PrefManager.GetStartWave();
+        UpdateWaveText(PrefManager.GetStartWave());
 
         void UpdateWaveText(float value)
         {
-            waveLabel.text = $"{Translator.inst.Translate("Start on Wave")} {(int)value}";
-            PlayerPrefs.SetInt("Starting Wave", (int)value);
+            waveLabel.text = AutoTranslate.Start_on_Wave(((int)(value)).ToString());
+            PrefManager.SetStartWave((int)value);
         }
 
-        if (!PlayerPrefs.HasKey("Juggle")) PlayerPrefs.SetInt("Juggle", 0);
+        if (!PlayerPrefs.HasKey(PrefManager.Juggle)) PrefManager.SetJuggle(0);
         juggleSlider.onValueChanged.AddListener(ChangeJuggleSlider);
-        juggleSlider.value = PlayerPrefs.GetInt("Juggle");
-        ChangeJuggleSlider(PlayerPrefs.GetInt("Juggle"));
+        juggleSlider.value = PrefManager.GetJuggle();
+        ChangeJuggleSlider(PrefManager.GetJuggle());
 
-        void ChangeJuggleSlider(float value)
-        {
-            PlayerPrefs.SetInt("Juggle", (int)(value));
-        }
+        void ChangeJuggleSlider(float value) { PrefManager.SetJuggle((int)value); }
 
-        if (!PlayerPrefs.HasKey("Infinite")) PlayerPrefs.SetInt("Infinite", 0);
+        if (!PlayerPrefs.HasKey(PrefManager.Infinity)) PrefManager.SetInfinity(0);
         infiniteSlider.onValueChanged.AddListener(ChangeInfiniteSlider);
-        infiniteSlider.value = PlayerPrefs.GetInt("Infinite");
-        ChangeInfiniteSlider(PlayerPrefs.GetInt("Infinite"));
+        infiniteSlider.value = PrefManager.GetInfinity();
+        ChangeInfiniteSlider(PrefManager.GetInfinity());
 
-        void ChangeInfiniteSlider(float value)
-        {
-            PlayerPrefs.SetInt("Infinite", (int)(value));
-        }
+        void ChangeInfiniteSlider(float value) {PrefManager.SetInfinity((int)value);}
 
-        if (!PlayerPrefs.HasKey("Current Level")) PlayerPrefs.SetInt("Current Level", 0);
-        Level[] listOfLevels = Translator.inst.AllLevels();
-
-        deleteScoreButton.onClick.AddListener(ClearScores);
+        if (!PlayerPrefs.HasKey(PrefManager.CurrentLevel)) PrefManager.SetCurrentLevel(0);
         levelDropdown.onValueChanged.AddListener(ChangeLevelDropdown);
+        Level[] listOfLevels = Translator.inst.AllLevels();
         for (int i = 0; i < listOfLevels.Length; i++)
         {
             Level nextLevel = listOfLevels[i];
-            levelDropdown.AddOptions(new List<string>() { Translator.inst.Translate(nextLevel.name) });
-            if (i == PlayerPrefs.GetInt("Current Level"))
+            levelDropdown.AddOptions(new List<string>() { AutoTranslate.DoEnum(nextLevel.levelName) });
+            if (i == PrefManager.GetCurrentLevel())
             {
                 levelDropdown.value = i;
                 ChangeLevelDropdown(i);
             }
         }
 
+        deleteScoreButton.onClick.AddListener(ClearScores);
         void ClearScores()
         {
             foreach (Level level in listOfLevels)
-                PlayerPrefs.SetInt($"{level.levelName} - Best Score", 0);
-            ChangeLevelDropdown(PlayerPrefs.GetInt("Current Level"));
+                PrefManager.SetScore(level.levelName.ToString(), 0);
+            ChangeLevelDropdown(PrefManager.GetCurrentLevel());
         }
 
         void ChangeLevelDropdown(int n)
         {
-            PlayerPrefs.SetInt("Current Level", n);
+            PrefManager.SetCurrentLevel(n);
             Level newLevel = Translator.inst.AllLevels()[n];
 
             if (newLevel.endless)
@@ -103,10 +96,10 @@ public class TitleScreen : MonoBehaviour
                 waveSlider.gameObject.SetActive(true);
             }
 
-            if (PlayerPrefs.GetInt($"{newLevel.levelName} - Best Score") > 0)
-                bestRun.text = $"{Translator.inst.Translate("Best Score")}: {PlayerPrefs.GetInt($"{newLevel.levelName} - Best Score")}";
+            if (PrefManager.GetScore(newLevel.levelName.ToString()) > 0)
+                bestRun.text = AutoTranslate.Best_Score($"{PrefManager.GetScore(newLevel.levelName.ToString())}");
             else
-                bestRun.text = Translator.inst.Translate("No Score");
+                bestRun.text = AutoTranslate.DoEnum(ToTranslate.No_Score);
         }
     }
 }

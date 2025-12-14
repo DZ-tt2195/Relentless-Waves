@@ -13,7 +13,7 @@
     ],
     [
       "Last Update",
-      "Last Updated: Dec 08, 2025"
+      "Last Updated: Dec 13, 2025"
     ],
     [
       "Translator Credit",
@@ -33,7 +33,7 @@
     ],
     [
       "Start on Wave",
-      "Start on Wave"
+      "Start on Wave $Num$"
     ],
     [
       "Play",
@@ -65,23 +65,23 @@
     ],
     [
       "Best Score",
-      "Best Score"
+      "Best Score: $Num$"
     ],
     [
       "Difficulty",
-      "Difficulty"
+      "Difficulty: $Num$%"
     ],
     [
       "Bullets Missed",
-      "Bullets Missed"
+      "Bullets Missed: $Num$"
     ],
     [
       "Health Lost",
-      "Health Lost"
+      "Health Lost: $Num$"
     ],
     [
       "Wave",
-      "Wave"
+      "Wave: $Num$ / $Max$"
     ],
     [
       "Victory",
@@ -93,19 +93,19 @@
     ],
     [
       "Skipped Ahead",
-      "Skipped to Wave"
+      "(Skipped to Wave $Num$)"
     ],
     [
       "Enemies",
-      "Enemies"
+      "Enemies: $Num$ / $Max$"
     ],
     [
       "Bullets",
-      "Bullets"
+      "Bullets: $Num$ / $Max$"
     ],
     [
       "Health",
-      "Health "
+      "Health: $Num$ / $Max$"
     ],
     [
       "Resupply",
@@ -125,26 +125,26 @@
     ],
     [
       "Score",
-      "Score"
+      "Score: $Num$"
     ],
     [
-      "1. Tutorial 1",
+      "Tutorial 1",
       "Tutorial 1"
     ],
     [
-      "2. Tutorial 2",
+      "Tutorial 2",
       "Tutorial 2"
     ],
     [
-      "3. Enemy Rush",
+      "Enemy Rush",
       "Enemy Rush"
     ],
     [
-      "4. Random",
+      "Random",
       "Random"
     ],
     [
-      "5. Endless",
+      "Endless",
       "Endless"
     ],
     [
@@ -165,7 +165,15 @@
     ],
     [
       "FPS",
-      "FPS"
+      "FPS: $Num$"
+    ],
+    [
+      "Update History",
+      "Update History"
+    ],
+    [
+      "Blank",
+      "\"\""
     ]
   ]
 }

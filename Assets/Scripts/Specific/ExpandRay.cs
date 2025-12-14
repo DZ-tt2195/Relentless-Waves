@@ -9,7 +9,7 @@ public class ExpandRay : Bullet
     protected override void Awake()
     {
         base.Awake();
-        travelTime *= 2 - PlayerPrefs.GetFloat("Difficulty");
+        travelTime *= 2 - PrefManager.GetDifficulty();
     }
 
     public override void AssignInfo(float speed, Vector3 direction, Entity owner)

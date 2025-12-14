@@ -1075,7 +1075,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 159b66c071ced43f499eb58b9b7c8b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  key: Quit
+  key: 10
 --- !u!1 &470240359
 GameObject:
   m_ObjectHideFlags: 0
@@ -1428,7 +1428,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 159b66c071ced43f499eb58b9b7c8b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  key: Restart
+  key: 12
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -2681,7 +2681,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 159b66c071ced43f499eb58b9b7c8b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  key: Paused
+  key: 11
 --- !u!1 &1118295514
 GameObject:
   m_ObjectHideFlags: 0
@@ -3643,7 +3643,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 159b66c071ced43f499eb58b9b7c8b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  key: Quit
+  key: 10
 --- !u!114 &1469589233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4031,7 +4031,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 159b66c071ced43f499eb58b9b7c8b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  key: Replay
+  key: 9
 --- !u!1 &1637886915
 GameObject:
   m_ObjectHideFlags: 0

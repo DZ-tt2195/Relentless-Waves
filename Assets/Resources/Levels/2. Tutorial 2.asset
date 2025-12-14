@@ -16,13 +16,13 @@ MonoBehaviour:
   - enemies:
     - toCreate: {fileID: 1135478034882460308, guid: 83c245ebb2cec4f0185e4a614d367591, type: 3}
       position: {x: 0, y: 1.25}
-    - toCreate: {fileID: 4982336583283359399, guid: 790230b2e898849c3b4dc347a23077fd, type: 3}
+    - toCreate: {fileID: 0}
       position: {x: 0, y: 3}
     - toCreate: {fileID: 7519828667132375851, guid: 7fa0ddbd3ba9546b29ada3d8d9d20dd3, type: 3}
       position: {x: -2, y: 3}
     - toCreate: {fileID: 5873671863857375307, guid: df31574ee5d53423d907a34821411fbf, type: 3}
       position: {x: 2, y: 3}
-    tutorialKey: Third Tutorial
+    tutorialKey: 27
   - enemies:
     - toCreate: {fileID: 7516396602756695447, guid: 56791cf3361bd40f6a1e8d3039aaeadd, type: 3}
       position: {x: -2, y: 3}
@@ -34,6 +34,7 @@ MonoBehaviour:
       position: {x: 0, y: 3}
     - toCreate: {fileID: 2288650429703796706, guid: a7bcc1b0078884e4ea95ab9c0a50e12c, type: 3}
       position: {x: 0, y: 3}
-    tutorialKey: Fourth Tutorial
-  levelName: Tutorial 2
+    tutorialKey: 28
+  levelName: 21
   endless: 0
+  levelNumber: 2

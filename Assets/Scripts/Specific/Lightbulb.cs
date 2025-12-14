@@ -8,7 +8,7 @@ public class Lightbulb : BaseEnemy
     protected override void Awake()
     {
         base.Awake();
-        blackOutTime *= PlayerPrefs.GetFloat("Difficulty");
+        blackOutTime *= PrefManager.GetDifficulty();
     }
 
     protected override void DamageEffect()

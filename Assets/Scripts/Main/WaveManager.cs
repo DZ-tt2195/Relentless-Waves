@@ -47,7 +47,7 @@ public class WaveManager : MonoBehaviour
         maxY = 3.5f;
 
         InvokeRepeating(nameof(SpawnResupply), 1f, 2.25f);
-        currentWave = PlayerPrefs.GetInt("Starting Wave")-1;
+        currentWave = PrefManager.GetStartWave()-1;
         for (int i = 0; i<currentWave; i++)
             CreateJuggleBall();
 
@@ -60,7 +60,7 @@ public class WaveManager : MonoBehaviour
 
     void SpawnResupply()
     {
-        if (PlayerPrefs.GetInt("Infinite") == 0)
+        if (PrefManager.GetInfinity() == 0)
         {
             Resupply resupply = (resupplyQueue.Count > 0) ? resupplyQueue.Dequeue() : Instantiate(resupplyPrefab);
             resupply.transform.position = new(Random.Range(minX + 0.5f, maxX - 0.5f), maxY);
@@ -94,12 +94,12 @@ public class WaveManager : MonoBehaviour
 
             if (!currentLevel.endless)
             {
-                waveCounter.text = $"{Translator.inst.Translate("Wave")}: {currentWave + 1} / {currentLevel.listOfWaves.Count}";
-                tutorialText.text = Translator.inst.Translate(currentLevel.listOfWaves[currentWave].tutorialKey);
+                waveCounter.text = AutoTranslate.Wave((currentWave+1).ToString(), currentLevel.listOfWaves.Count.ToString());
+                tutorialText.text = AutoTranslate.DoEnum(currentLevel.listOfWaves[currentWave].tutorialKey);;
             }
             else
             {
-                waveCounter.text = $"{Translator.inst.Translate("Wave")}: {currentWave + 1} / \u221E";
+                waveCounter.text = AutoTranslate.Wave((currentWave+1).ToString(), "\u221E");
                 tutorialText.text = "";
             }
         }
@@ -112,24 +112,24 @@ public class WaveManager : MonoBehaviour
 
             (int missedBullets, int tookDamage) = Player.instance.PlayerStats();
 
-            int score = (int)(PlayerPrefs.GetFloat("Difficulty") * 100) - missedBullets - tookDamage;
-            if (PlayerPrefs.GetInt("Juggle") == 1)
+            int score = (int)(PrefManager.GetDifficulty() * 100) - missedBullets - tookDamage;
+            if (PrefManager.GetJuggle() == 1)
                 score += 15;
-            if (PlayerPrefs.GetInt("Infinite") == 1)
+            if (PrefManager.GetInfinity() == 1)
                 score -= 15;
 
-            string endText = Translator.inst.Translate("Victory");
-            if (PlayerPrefs.GetInt("Starting Wave") > 1)
-                endText += $" [{Translator.inst.Translate("Skipped Ahead")} {PlayerPrefs.GetInt("Starting Wave")}]";
-            else if (score > PlayerPrefs.GetInt($"{currentLevel.levelName} - Best Score"))
-                PlayerPrefs.SetInt($"{currentLevel.levelName} - Best Score", score);
+            string endText = AutoTranslate.DoEnum(ToTranslate.Victory);
+            if (PrefManager.GetStartWave() > 1)
+                endText += AutoTranslate.Skipped_Ahead(PrefManager.GetStartWave().ToString());
+            else if (score > PrefManager.GetScore(currentLevel.levelName.ToString()))
+                PrefManager.SetScore(currentLevel.levelName.ToString(), score);
             EndGame(endText, new(missedBullets, tookDamage), score);
         }
     }
 
     void CreateJuggleBall()
     {
-        if (PlayerPrefs.GetInt("Juggle") == 1)
+        if (PrefManager.GetJuggle() == 1)
         {
             JuggleBall newBall = Instantiate(jugglePrefab);
             newBall.transform.position = new(Random.Range(minX + 0.5f, maxX - 0.5f), maxY);
@@ -157,7 +157,7 @@ public class WaveManager : MonoBehaviour
             }
 
             enemySlider.value = (float)currentEnemies / allEnemies.Count;
-            enemyCounter.text = $"{Translator.inst.Translate("Enemies")}: {currentEnemies} / {allEnemies.Count}";
+            enemyCounter.text = AutoTranslate.Enemies(currentEnemies.ToString(), allEnemies.Count().ToString());
 
             if (currentEnemies == 0)
             {
@@ -175,10 +175,10 @@ public class WaveManager : MonoBehaviour
         {
             endingText.transform.parent.gameObject.SetActive(true);
             endingText.text = $"{text}\n\n" +
-                $"{Translator.inst.Translate("Bullets Missed")}: {stats.missedBullets}\n" +
-                $"{Translator.inst.Translate("Health Lost")}: {stats.tookDamage}\n";
+                $"{AutoTranslate.Bullets_Missed(stats.missedBullets.ToString())}" +
+                $"\n{AutoTranslate.Health_Lost(stats.tookDamage.ToString())}\n";
             if (score > 0)
-                endingText.text += $"\n{Translator.inst.Translate("Score")}: {score}";
+                endingText.text += $"\n{AutoTranslate.Score(score.ToString())}";
         }
     }
 
