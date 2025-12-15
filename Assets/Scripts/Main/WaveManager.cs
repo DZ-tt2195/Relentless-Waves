@@ -48,10 +48,13 @@ public class WaveManager : MonoBehaviour
 
         InvokeRepeating(nameof(SpawnResupply), 1f, 2.25f);
         currentWave = PrefManager.GetStartWave()-1;
-        for (int i = 0; i<currentWave; i++)
-            CreateJuggleBall();
-
         NewWave();
+
+        if (PrefManager.GetJuggle() == 1)
+        {
+            JuggleBall newBall = Instantiate(jugglePrefab);
+            newBall.transform.position = new(Random.Range(minX + 0.5f, maxX - 0.5f), maxY);
+        }
     }
 
     #endregion
@@ -77,17 +80,17 @@ public class WaveManager : MonoBehaviour
     void NewWave()
     {
         Level currentLevel = Translator.inst.CurrentLevel();
+        StartCoroutine(Player.instance.Immunity(false));
 
         if (currentWave < currentLevel.listOfWaves.Count() || currentLevel.endless)
         {
-            CreateJuggleBall();
             if (currentWave >= 1)
             {
                 HealthPack pack = Instantiate(healthPack);
                 pack.transform.position = new(Random.Range(minX + 0.5f, maxX - 0.5f), maxY);
             }
 
-            foreach (Collection collection in currentLevel.listOfWaves[Mathf.Min(currentLevel.listOfWaves.Count, currentWave)].enemies)
+            foreach (Collection collection in currentLevel.listOfWaves[Mathf.Min(currentLevel.listOfWaves.Count-1, currentWave)].enemies)
                 CreateEnemy(collection.position, collection.toCreate);
 
             waveSlider.value = (currentWave + 1) / (float)currentLevel.listOfWaves.Count;
@@ -124,15 +127,6 @@ public class WaveManager : MonoBehaviour
             else if (score > PrefManager.GetScore(currentLevel.levelName.ToString()))
                 PrefManager.SetScore(currentLevel.levelName.ToString(), score);
             EndGame(endText, new(missedBullets, tookDamage), score);
-        }
-    }
-
-    void CreateJuggleBall()
-    {
-        if (PrefManager.GetJuggle() == 1)
-        {
-            JuggleBall newBall = Instantiate(jugglePrefab);
-            newBall.transform.position = new(Random.Range(minX + 0.5f, maxX - 0.5f), maxY);
         }
     }
 

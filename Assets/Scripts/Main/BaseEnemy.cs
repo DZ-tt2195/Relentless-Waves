@@ -20,7 +20,8 @@ public class BaseEnemy : Entity
         bulletSpeed *= PrefManager.GetDifficulty();
         moveSpeed *= PrefManager.GetDifficulty();
 
-        InvokeRepeating(nameof(ShootBullet), attackRate*0.5f, attackRate);
+        if (bulletPrefab != null)
+            InvokeRepeating(nameof(ShootBullet), attackRate*0.5f, attackRate);
     }
 
     protected virtual void ShootBullet()
@@ -33,11 +34,16 @@ public class BaseEnemy : Entity
     protected virtual void Update()
     {
         this.transform.Translate(moveSpeed * Time.deltaTime * moveDirection);
+        RotateToPlayer();
+    }
+
+    protected virtual void RotateToPlayer()
+    {
         if (lookAtPlayer)
         {
             Vector2 aimDirection = AimAtPlayer();
             spriteRenderer.transform.localEulerAngles = new(0, 0, Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg + 90);
-        }
+        }        
     }
 
     protected Vector2 AimAtPlayer()

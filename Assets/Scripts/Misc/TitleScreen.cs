@@ -84,7 +84,7 @@ public class TitleScreen : MonoBehaviour
             PrefManager.SetCurrentLevel(n);
             Level newLevel = Translator.inst.AllLevels()[n];
 
-            if (newLevel.endless)
+            if (newLevel.endless || newLevel.listOfWaves.Count == 1)
             {
                 waveSlider.value = 1;
                 waveSlider.gameObject.SetActive(false);

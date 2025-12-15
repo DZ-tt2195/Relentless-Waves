@@ -14,14 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   listOfWaves:
   - enemies:
-    - toCreate: {fileID: 7281539886758776230, guid: eb00d3b1344e24fbaadffdb9e8ca4242, type: 3}
-      position: {x: -3, y: 3}
-    - toCreate: {fileID: 7281539886758776230, guid: eb00d3b1344e24fbaadffdb9e8ca4242, type: 3}
-      position: {x: 0, y: 3}
-    - toCreate: {fileID: 7281539886758776230, guid: eb00d3b1344e24fbaadffdb9e8ca4242, type: 3}
-      position: {x: 3, y: 3}
-    tutorialKey: 30
-  - enemies:
     - toCreate: {fileID: 7516396602756695447, guid: 56791cf3361bd40f6a1e8d3039aaeadd, type: 3}
       position: {x: -1, y: 1.25}
     - toCreate: {fileID: 7516396602756695447, guid: 56791cf3361bd40f6a1e8d3039aaeadd, type: 3}
@@ -32,14 +24,6 @@ MonoBehaviour:
       position: {x: 1, y: 3}
     tutorialKey: 30
   - enemies:
-    - toCreate: {fileID: 165902128648321467, guid: 790230b2e898849c3b4dc347a23077fd, type: 3}
-      position: {x: -3, y: 3}
-    - toCreate: {fileID: 165902128648321467, guid: 790230b2e898849c3b4dc347a23077fd, type: 3}
-      position: {x: 0, y: 3}
-    - toCreate: {fileID: 165902128648321467, guid: 790230b2e898849c3b4dc347a23077fd, type: 3}
-      position: {x: 3, y: 3}
-    tutorialKey: 30
-  - enemies:
     - toCreate: {fileID: 7350995930825681136, guid: e88ebd426c103448986d9e32a0b40a44, type: 3}
       position: {x: -3, y: 3}
     - toCreate: {fileID: 7350995930825681136, guid: e88ebd426c103448986d9e32a0b40a44, type: 3}
@@ -47,6 +31,24 @@ MonoBehaviour:
     - toCreate: {fileID: 7350995930825681136, guid: e88ebd426c103448986d9e32a0b40a44, type: 3}
       position: {x: 1, y: 3}
     - toCreate: {fileID: 7350995930825681136, guid: e88ebd426c103448986d9e32a0b40a44, type: 3}
+      position: {x: 3, y: 3}
+    tutorialKey: 30
+  - enemies:
+    - toCreate: {fileID: 7519828667132375851, guid: 7fa0ddbd3ba9546b29ada3d8d9d20dd3, type: 3}
+      position: {x: -4, y: 3}
+    - toCreate: {fileID: 7519828667132375851, guid: 7fa0ddbd3ba9546b29ada3d8d9d20dd3, type: 3}
+      position: {x: 4, y: 3}
+    - toCreate: {fileID: 7519828667132375851, guid: 7fa0ddbd3ba9546b29ada3d8d9d20dd3, type: 3}
+      position: {x: -2, y: 1.25}
+    - toCreate: {fileID: 7519828667132375851, guid: 7fa0ddbd3ba9546b29ada3d8d9d20dd3, type: 3}
+      position: {x: 2, y: 1.25}
+    tutorialKey: 30
+  - enemies:
+    - toCreate: {fileID: 7281539886758776230, guid: eb00d3b1344e24fbaadffdb9e8ca4242, type: 3}
+      position: {x: -3, y: 3}
+    - toCreate: {fileID: 7281539886758776230, guid: eb00d3b1344e24fbaadffdb9e8ca4242, type: 3}
+      position: {x: 0, y: 3}
+    - toCreate: {fileID: 7281539886758776230, guid: eb00d3b1344e24fbaadffdb9e8ca4242, type: 3}
       position: {x: 3, y: 3}
     tutorialKey: 30
   - enemies:
@@ -62,6 +64,14 @@ MonoBehaviour:
       position: {x: 4, y: 3}
     tutorialKey: 30
   - enemies:
+    - toCreate: {fileID: 165902128648321467, guid: 790230b2e898849c3b4dc347a23077fd, type: 3}
+      position: {x: -3, y: 3}
+    - toCreate: {fileID: 165902128648321467, guid: 790230b2e898849c3b4dc347a23077fd, type: 3}
+      position: {x: 0, y: 3}
+    - toCreate: {fileID: 165902128648321467, guid: 790230b2e898849c3b4dc347a23077fd, type: 3}
+      position: {x: 3, y: 3}
+    tutorialKey: 30
+  - enemies:
     - toCreate: {fileID: 1601267638787446188, guid: 378439694e5c9463c8219a2147fae4c2, type: 3}
       position: {x: -3, y: 3}
     - toCreate: {fileID: 1601267638787446188, guid: 378439694e5c9463c8219a2147fae4c2, type: 3}
@@ -70,16 +80,6 @@ MonoBehaviour:
       position: {x: 1, y: 3}
     - toCreate: {fileID: 1601267638787446188, guid: 378439694e5c9463c8219a2147fae4c2, type: 3}
       position: {x: 3, y: 3}
-    tutorialKey: 30
-  - enemies:
-    - toCreate: {fileID: 7519828667132375851, guid: 7fa0ddbd3ba9546b29ada3d8d9d20dd3, type: 3}
-      position: {x: -4, y: 3}
-    - toCreate: {fileID: 7519828667132375851, guid: 7fa0ddbd3ba9546b29ada3d8d9d20dd3, type: 3}
-      position: {x: 4, y: 3}
-    - toCreate: {fileID: 7519828667132375851, guid: 7fa0ddbd3ba9546b29ada3d8d9d20dd3, type: 3}
-      position: {x: -2, y: 1.25}
-    - toCreate: {fileID: 7519828667132375851, guid: 7fa0ddbd3ba9546b29ada3d8d9d20dd3, type: 3}
-      position: {x: 2, y: 1.25}
     tutorialKey: 30
   - enemies:
     - toCreate: {fileID: 2288650429703796706, guid: a7bcc1b0078884e4ea95ab9c0a50e12c, type: 3}
@@ -133,4 +133,3 @@ MonoBehaviour:
     tutorialKey: 30
   levelName: 22
   endless: 0
-  levelNumber: 3

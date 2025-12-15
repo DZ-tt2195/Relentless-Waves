@@ -26,6 +26,6 @@ public class UpdateDropdown : MonoBehaviour
         {
             updateText.text = listOfUpdates[dropdown.value].update;
         }
-        this.gameObject.SetActive(dropdown.options.Count >= 2);
+        this.gameObject.SetActive(dropdown.options.Count >= 1);
     }
 }

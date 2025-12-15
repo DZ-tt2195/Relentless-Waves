@@ -147,7 +147,7 @@ public class Player : Entity
         {
             this.TakeDamage();
         }
-        else if (collision.CompareTag("Wall"))
+        else if (collision.CompareTag("Wall") || collision.CompareTag("HurtOnTouch"))
         {
             this.TakeDamage();
         }
@@ -175,31 +175,36 @@ public class Player : Entity
     protected override void DamageEffect()
     {
         tookDamage++;
-        StartCoroutine(Immunity());
-        IEnumerator Immunity()
-        {
-            immune = true;
-            float elapsedTime = 0f;
-            bool flicker = true;
+        StartCoroutine(Immunity(true));
+    }
 
-            Vector3 darkness = new(0.1f, 0.1f, 0.1f);
-            Vector3 gray = new(0.25f, 0.25f, 0.25f);
+    public IEnumerator Immunity(bool animation)
+    {
+        immune = true;
+        float elapsedTime = 0f;
+        bool flicker = true;
+
+        Vector3 darkness = new(0.1f, 0.1f, 0.1f);
+        Vector3 gray = new(0.25f, 0.25f, 0.25f);
+        if (animation)
             WaveManager.instance.mainCamera.backgroundColor = new(darkness.x, darkness.y, darkness.z);
 
-            while (elapsedTime < immuneTime)
+        while (elapsedTime < immuneTime)
+        {
+            elapsedTime += Time.deltaTime;
+            if (animation)
             {
                 flicker = !flicker;
-                elapsedTime += Time.deltaTime;
                 SetAlpha(this.spriteRenderer, flicker ? (elapsedTime / immuneTime) : 1f);
                 Vector3 target = Vector3.Lerp(darkness, gray, elapsedTime / immuneTime);
                 WaveManager.instance.mainCamera.backgroundColor = new(target.x, target.y, target.z);
-                yield return null;
             }
-
-            WaveManager.instance.mainCamera.backgroundColor = new(gray.x, gray.y, gray.z);
-            SetAlpha(this.spriteRenderer, 1);
-            immune = false;
+            yield return null;
         }
+
+        WaveManager.instance.mainCamera.backgroundColor = new(gray.x, gray.y, gray.z);
+        SetAlpha(this.spriteRenderer, 1);
+        immune = false;        
     }
 
     protected override void DeathEffect()

@@ -1,6 +1,6 @@
 Description=Bullet hell game where enemies keep shooting until you finish the entire wave.
 Designer=by Thomas Tang (DZ)
-Last_Update=Last Updated: Dec 13, 2025
+Last_Update=Last Updated: Dec 15, 2025
 Translator_Credit=
 Language=Language
 Choose_Level=Choose Level
