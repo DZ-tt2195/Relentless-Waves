@@ -15,14 +15,13 @@ MonoBehaviour:
   listOfWaves:
   - enemies:
     - toCreate: {fileID: 7516396602756695447, guid: 56791cf3361bd40f6a1e8d3039aaeadd, type: 3}
-      position: {x: 0, y: 3}
+      position: {x: 0, y: 3.5}
     tutorialKey: 25
   - enemies:
     - toCreate: {fileID: 4982336583283359399, guid: 3b6f983a413704a4fbc223a664868c48, type: 3}
-      position: {x: -3, y: 3}
+      position: {x: -3, y: 3.5}
     - toCreate: {fileID: 6268477336979328763, guid: 1c59398b3b3ba4183a8f3a79ed1349b9, type: 3}
-      position: {x: 3, y: 3}
+      position: {x: 3, y: 3.5}
     tutorialKey: 26
   levelName: 20
   endless: 0
-  levelNumber: 1

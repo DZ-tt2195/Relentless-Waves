@@ -11,7 +11,7 @@ public class Entity : MonoBehaviour
     protected int maxHealth { get; private set; }
     protected SpriteRenderer spriteRenderer;
 
-    protected bool immune = false;
+    public bool immune {get; protected set; }
     [SerializeField] protected float bulletSpeed;
 
     protected Bullet bulletPrefab { get; private set; }

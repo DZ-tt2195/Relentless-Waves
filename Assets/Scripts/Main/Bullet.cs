@@ -48,7 +48,7 @@ public class Bullet : MonoBehaviour
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out Entity target) && target.health > 0 && !target.CompareTag(ownerTag))
+        if (collision.TryGetComponent(out Entity target) && !target.immune && !target.CompareTag(ownerTag))
         {
             target.TakeDamage();
             TryAndReturn(true);

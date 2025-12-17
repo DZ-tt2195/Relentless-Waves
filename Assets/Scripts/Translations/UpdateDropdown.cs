@@ -8,23 +8,23 @@ public class UpdateDropdown : MonoBehaviour
 {
     TMP_Dropdown dropdown;
     [SerializeField] TMP_Text updateText;
-    UpdateNotes[] listOfUpdates;
 
     private void Start()
     {
         dropdown = GetComponent<TMP_Dropdown>();
-        listOfUpdates = Resources.LoadAll<UpdateNotes>("Update Notes");
         dropdown.onValueChanged.AddListener(ChangeDropdown);
-        for (int i = 0; i < listOfUpdates.Length; i++)
+
+        int nextUpdate = 0;
+        while (Translator.inst.TranslationExists($"Update_{nextUpdate}") && Translator.inst.TranslationExists($"Update_{nextUpdate}_Text"))
         {
-            UpdateNotes nextLog = listOfUpdates[i];
-            dropdown.AddOptions(new List<string>() { nextLog.display });
-            //Debug.Log(nextLog.display);
+            dropdown.AddOptions(new List<string>() { Translator.inst.Translate($"Update_{nextUpdate}") });
+            nextUpdate++;
         }
-        dropdown.value = listOfUpdates.Length - 1;
+        dropdown.value = dropdown.options.Count-1;
+
         void ChangeDropdown(int n)
         {
-            updateText.text = listOfUpdates[dropdown.value].update;
+            updateText.text = Translator.inst.Translate($"Update_{dropdown.value}_Text");
         }
         this.gameObject.SetActive(dropdown.options.Count >= 1);
     }

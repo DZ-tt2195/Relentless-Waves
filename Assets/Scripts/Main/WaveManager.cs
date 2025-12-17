@@ -44,7 +44,8 @@ public class WaveManager : MonoBehaviour
         minX = mainCamera.transform.position.x - cameraWidth / 2f;
         maxX = mainCamera.transform.position.x + cameraWidth / 2f;
         minY = mainCamera.transform.position.y - cameraHeight / 2f;
-        maxY = 3.5f;
+        maxY = 4f;
+        Debug.Log($"X: {minX} to {maxX}; Y: {minY} to {maxY}");
 
         InvokeRepeating(nameof(SpawnResupply), 1f, 2.25f);
         currentWave = PrefManager.GetStartWave()-1;
@@ -84,11 +85,8 @@ public class WaveManager : MonoBehaviour
 
         if (currentWave < currentLevel.listOfWaves.Count() || currentLevel.endless)
         {
-            if (currentWave >= 1)
-            {
-                HealthPack pack = Instantiate(healthPack);
-                pack.transform.position = new(Random.Range(minX + 0.5f, maxX - 0.5f), maxY);
-            }
+            HealthPack pack = Instantiate(healthPack);
+            pack.transform.position = new(Random.Range(minX + 0.5f, maxX - 0.5f), maxY);
 
             foreach (Collection collection in currentLevel.listOfWaves[Mathf.Min(currentLevel.listOfWaves.Count-1, currentWave)].enemies)
                 CreateEnemy(collection.position, collection.toCreate);
@@ -123,7 +121,7 @@ public class WaveManager : MonoBehaviour
 
             string endText = AutoTranslate.DoEnum(ToTranslate.Victory);
             if (PrefManager.GetStartWave() > 1)
-                endText += AutoTranslate.Skipped_Ahead(PrefManager.GetStartWave().ToString());
+                endText += $" {AutoTranslate.Skipped_Ahead(PrefManager.GetStartWave().ToString())}";
             else if (score > PrefManager.GetScore(currentLevel.levelName.ToString()))
                 PrefManager.SetScore(currentLevel.levelName.ToString(), score);
             EndGame(endText, new(missedBullets, tookDamage), score);

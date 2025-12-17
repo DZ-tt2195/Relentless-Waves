@@ -15,6 +15,7 @@ public class Mortar : BaseEnemy
         waitTime *= 2 - PrefManager.GetDifficulty();
         foreach (SpriteRenderer next in listOfRadiuses)
             next.gameObject.SetActive(false);
+        InvokeRepeating(nameof(ShootBullet), attackRate*0.5f, attackRate);
     }
 
     protected override void ShootBullet()

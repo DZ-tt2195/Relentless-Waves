@@ -19,7 +19,7 @@ public class TitleScreen : MonoBehaviour
     [SerializeField] TMP_Dropdown levelDropdown;
     [SerializeField] Button deleteScoreButton;
 
-    void Start()
+    void Awake()
     {
         if (!PlayerPrefs.HasKey(PrefManager.Difficulty)) PrefManager.SetDifficulty(1f);
         difficultySlider.onValueChanged.AddListener(UpdateDifficultyText);
@@ -28,7 +28,7 @@ public class TitleScreen : MonoBehaviour
 
         void UpdateDifficultyText(float value)
         {
-            difficultyLabel.text = AutoTranslate.Difficulty($"{value*100:F1}");
+            difficultyLabel.text = AutoTranslate.Difficulty($"{value*100:F0}");
             PrefManager.SetDifficulty(value);
         }
 
@@ -63,6 +63,9 @@ public class TitleScreen : MonoBehaviour
         for (int i = 0; i < listOfLevels.Length; i++)
         {
             Level nextLevel = listOfLevels[i];
+            if (nextLevel.levelName == ToTranslate.Blank && !Application.isEditor)
+                continue;
+            
             levelDropdown.AddOptions(new List<string>() { AutoTranslate.DoEnum(nextLevel.levelName) });
             if (i == PrefManager.GetCurrentLevel())
             {
@@ -102,4 +105,5 @@ public class TitleScreen : MonoBehaviour
                 bestRun.text = AutoTranslate.DoEnum(ToTranslate.No_Score);
         }
     }
+
 }

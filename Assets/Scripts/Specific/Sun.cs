@@ -5,7 +5,7 @@ public class Sun : BaseEnemy
     protected override void Awake()
     {
         base.Awake();
-        moveDirection = Vector3.down;
+        moveDirection = Random.Range(0, 2) == 0 ? Vector3.down : Vector3.up;
     }
 
     protected override void Update()
@@ -19,12 +19,12 @@ public class Sun : BaseEnemy
 
     protected override void ShootBullet()
     {
-        CreateBullet(bulletPrefab, this.transform.position, bulletSpeed, new(-1, -1));
-        CreateBullet(bulletPrefab, this.transform.position, bulletSpeed, new(-1, 0));
-        CreateBullet(bulletPrefab, this.transform.position, bulletSpeed, new(-1, 1));
-
-        CreateBullet(bulletPrefab, this.transform.position, bulletSpeed, new(1, -1));
-        CreateBullet(bulletPrefab, this.transform.position, bulletSpeed, new(1, 0));
-        CreateBullet(bulletPrefab, this.transform.position, bulletSpeed, new(1, 1));
+        for (int i = -1; i<=1; i+=2)
+        {
+            for (int j = -1; j<=1; j++)
+            {
+                CreateBullet(bulletPrefab, this.transform.position, bulletSpeed, new(i, j));
+            }
+        }
     }
 }

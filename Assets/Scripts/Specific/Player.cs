@@ -98,7 +98,7 @@ public class Player : Entity
                 bulletCounter.text = AutoTranslate.Bullets("\u221E", "\u221E");
             }
 
-            timerText.text = $"{AutoTranslate.Difficulty($"{PrefManager.GetDifficulty()*100:F1}")}\n{MyExtensions.StopwatchTime(gameTimer)}";
+            timerText.text = $"{AutoTranslate.Difficulty($"{PrefManager.GetDifficulty()*100:F0}")}\n{MyExtensions.StopwatchTime(gameTimer)}";
             timerText.text += $" | {AutoTranslate.FPS(GetFPS())}";
 
             string GetFPS()

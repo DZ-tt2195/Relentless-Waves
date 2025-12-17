@@ -1,6 +1,6 @@
 Description=Bullet hell game where enemies keep shooting until you finish the entire wave.
 Designer=by Thomas Tang (DZ)
-Last_Update=Last Updated: Dec 15, 2025
+Last_Update=Last Updated: Dec 17, 2025
 Translator_Credit=
 Language=Language
 Choose_Level=Choose Level
@@ -36,8 +36,22 @@ Random=Random
 Endless=Endless
 First_Tutorial=Click to shoot at enemies. Pick up more bullets if you run out.
 Second_Tutorial=Enemies will continue to shoot at you even when defeated. Defeat all enemies to clear the wave.
-Third_Tutorial=Catch the stars thrown by the Staff to damage it and disable its barrier.
-Fourth_Tutorial=The Phoenix can revive itself. Defeat all other enemies first to clear the wave.
+Third_Tutorial=Catch the stars to deal damage to the Staff, and to disable its shield.
+Fourth_Tutorial=The Phoenix can revive itself. You'll have to defeat all other enemies first to clear the wave.
 FPS=FPS: $Num$
 Update_History=Update History
 Blank=
+Update_0=Dec 15
+Update_0_Text=Fixed Endless level 
+Nerfed Snowflake 
+Player is briefly immune to damage when a new wave spawns 
+Nerfed juggle challenge (only 1 ball to juggle) 
+Reordered some waves in Enemy Rush
+Update_1=Dec 17
+Update_1_Text=New enemies: Boxer, Crane, Planet. All added to Enemy Rush 
+Buffed Bow, Ghost, and Mortar 
+Removed some enemies from Tutorial 2 
+Sun can start by moving either down or up 
+Health pack spawns on wave 1 
+Changed some sprites 
+Slightly raised positions of all enemies

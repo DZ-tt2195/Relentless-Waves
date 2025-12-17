@@ -13,7 +13,7 @@
     ],
     [
       "Last Update",
-      "Last Updated: Dec 15, 2025"
+      "Last Updated: Dec 17, 2025"
     ],
     [
       "Translator Credit",
@@ -157,11 +157,11 @@
     ],
     [
       "Third Tutorial",
-      "Catch the stars thrown by the Staff to damage it and disable its barrier."
+      "Catch the stars to deal damage to the Staff, and to disable its shield."
     ],
     [
       "Fourth Tutorial",
-      "The Phoenix can revive itself. Defeat all other enemies first to clear the wave."
+      "The Phoenix can revive itself. You'll have to defeat all other enemies first to clear the wave."
     ],
     [
       "FPS",
@@ -174,6 +174,22 @@
     [
       "Blank",
       "\"\""
+    ],
+    [
+      "Update 0",
+      "Dec 15"
+    ],
+    [
+      "Update 0 Text",
+      "Fixed Endless level |Nerfed Snowflake |Player is briefly immune to damage when a new wave spawns |Nerfed juggle challenge (only 1 ball to juggle) |Reordered some waves in Enemy Rush"
+    ],
+    [
+      "Update 1",
+      "Dec 17"
+    ],
+    [
+      "Update 1 Text",
+      "New enemies: Boxer, Crane, Planet. All added to Enemy Rush |Buffed Bow, Ghost, and Mortar |Removed some enemies from Tutorial 2 |Sun can start by moving either down or up |Health pack spawns on wave 1 |Changed some sprites |Slightly raised positions of all enemies"
     ]
   ]
 }
