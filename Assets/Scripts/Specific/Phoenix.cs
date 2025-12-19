@@ -35,7 +35,7 @@ public class Phoenix : BaseEnemy
 
             textBox.gameObject.SetActive(false);
             crossedOut.SetActive(false);
-            SetAlpha(this.spriteRenderer, 1f);
+            MyExtensions.SetAlpha(this.spriteRenderer, 1f);
         }
     }
 }

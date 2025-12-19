@@ -195,7 +195,7 @@ public class Player : Entity
             if (animation)
             {
                 flicker = !flicker;
-                SetAlpha(this.spriteRenderer, flicker ? (elapsedTime / immuneTime) : 1f);
+                MyExtensions.SetAlpha(this.spriteRenderer, flicker ? (elapsedTime / immuneTime) : 1f);
                 Vector3 target = Vector3.Lerp(darkness, gray, elapsedTime / immuneTime);
                 WaveManager.instance.mainCamera.backgroundColor = new(target.x, target.y, target.z);
             }
@@ -203,7 +203,7 @@ public class Player : Entity
         }
 
         WaveManager.instance.mainCamera.backgroundColor = new(gray.x, gray.y, gray.z);
-        SetAlpha(this.spriteRenderer, 1);
+        MyExtensions.SetAlpha(this.spriteRenderer, 1);
         immune = false;        
     }
 
@@ -211,17 +211,12 @@ public class Player : Entity
     {
         immune = true;
         tookDamage++;
-        SetAlpha(this.spriteRenderer, 0.5f);
+        MyExtensions.SetAlpha(this.spriteRenderer, 0.5f);
 
         Level currentLevel = Translator.inst.CurrentLevel();
         if (currentLevel.endless)
         {
-            int score = (int)(PrefManager.GetDifficulty() * 100) + (WaveManager.instance.currentWave-1)*10;
-            if (PrefManager.GetJuggle() == 1)
-                score += 15;
-            if (PrefManager.GetInfinity() == 1)
-                score -= 15;
-
+            int score = (int)(PrefManager.GetDifficulty() * 100) + (WaveManager.instance.currentWave-1)*10 + PrefManager.CheatChallengeScore();
             WaveManager.instance.EndGame(AutoTranslate.DoEnum(ToTranslate.Lost), PlayerStats(), score);
             if (score > PrefManager.GetScore(currentLevel.levelName.ToString()))
                 PrefManager.SetScore(currentLevel.levelName.ToString(), score);

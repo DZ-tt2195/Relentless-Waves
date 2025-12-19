@@ -29,13 +29,6 @@ public class Entity : MonoBehaviour
         maxHealth = health;
     }
 
-    protected void SetAlpha(SpriteRenderer target, float alpha)
-    {
-        Color newColor = target.color;
-        newColor.a = alpha;
-        target.color = newColor;
-    }
-
     public void TakeDamage()
     {
         if (immune)

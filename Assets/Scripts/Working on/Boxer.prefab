@@ -305,6 +305,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Boxer
   health: 3
   bulletSpeed: 0
-  moveSpeed: 12.5
-  attackRate: 4
+  moveSpeed: 20
+  attackRate: 2
   lookAtPlayer: 1

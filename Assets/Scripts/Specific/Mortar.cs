@@ -39,11 +39,11 @@ public class Mortar : BaseEnemy
             while (elapsedTime < waitTime)
             {
                 elapsedTime += Time.deltaTime;
-                SetAlpha(next, elapsedTime / waitTime);
+                MyExtensions.SetAlpha(next, elapsedTime / waitTime);
                 yield return null;
             }
 
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(next.transform.position, 0.9f);
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(next.transform.position, 0.8f);
             foreach (Collider2D nextCollider in colliders)
             {
                 if (nextCollider.gameObject == Player.instance.gameObject)

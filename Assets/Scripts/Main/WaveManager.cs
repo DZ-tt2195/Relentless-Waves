@@ -113,12 +113,7 @@ public class WaveManager : MonoBehaviour
 
             (int missedBullets, int tookDamage) = Player.instance.PlayerStats();
 
-            int score = (int)(PrefManager.GetDifficulty() * 100) - missedBullets - tookDamage;
-            if (PrefManager.GetJuggle() == 1)
-                score += 15;
-            if (PrefManager.GetInfinity() == 1)
-                score -= 15;
-
+            int score = (int)(PrefManager.GetDifficulty() * 100) - missedBullets - tookDamage + PrefManager.CheatChallengeScore();
             string endText = AutoTranslate.DoEnum(ToTranslate.Victory);
             if (PrefManager.GetStartWave() > 1)
                 endText += $" {AutoTranslate.Skipped_Ahead(PrefManager.GetStartWave().ToString())}";

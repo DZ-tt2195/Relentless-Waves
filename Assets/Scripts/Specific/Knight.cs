@@ -4,6 +4,7 @@ public class Knight : BaseEnemy
 {
     protected override void ShootBullet()
     {
+        base.ShootBullet();
         CreateBullet(bulletPrefab, this.transform.position, bulletSpeed, Vector3.down);
     }
 }

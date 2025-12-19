@@ -14,16 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   listOfWaves:
   - enemies:
-    - toCreate: {fileID: 1239290056495338674, guid: 550802429dc3b48318b19a1c34549209, type: 3}
-      position: {x: 2, y: 3.5}
-    - toCreate: {fileID: 5011879533634328709, guid: 6e751607689f44dc6ba142a4bef5a121, type: 3}
-      position: {x: -2, y: 3.5}
-    - toCreate: {fileID: 4982336583283359399, guid: 3b6f983a413704a4fbc223a664868c48, type: 3}
+    - toCreate: {fileID: 165902128648321467, guid: 790230b2e898849c3b4dc347a23077fd, type: 3}
+      position: {x: 0, y: 2}
+    - toCreate: {fileID: 165902128648321467, guid: 790230b2e898849c3b4dc347a23077fd, type: 3}
       position: {x: 0, y: 3.5}
-    - toCreate: {fileID: 2914956959400858315, guid: 53433d4d17c344987a7fc802fe45ef12, type: 3}
-      position: {x: 4, y: 3.5}
-    - toCreate: {fileID: 5011879533634328709, guid: 6e751607689f44dc6ba142a4bef5a121, type: 3}
-      position: {x: -2, y: 2}
     tutorialKey: 30
   levelName: 30
   endless: 0

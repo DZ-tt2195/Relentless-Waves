@@ -779,7 +779,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Planet
   health: 4
   bulletSpeed: 0
-  moveSpeed: 1.25
+  moveSpeed: 1
   attackRate: 0
   lookAtPlayer: 0
   toSpin:
@@ -801,7 +801,7 @@ MonoBehaviour:
   - obj: {fileID: 7610205217623488726}
     rot: 300
     radius: 0
-  spinSpeed: 1
+  spinSpeed: 0.75
 --- !u!1 &7610205217623488726
 GameObject:
   m_ObjectHideFlags: 0

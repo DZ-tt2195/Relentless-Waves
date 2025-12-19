@@ -55,7 +55,7 @@ public class BaseEnemy : Entity
     {
         immune = true;
         crossedOut.SetActive(true);
-        SetAlpha(this.spriteRenderer, 0.5f);
+        MyExtensions.SetAlpha(this.spriteRenderer, 0.5f);
     }
 
     public void OnDestroy()

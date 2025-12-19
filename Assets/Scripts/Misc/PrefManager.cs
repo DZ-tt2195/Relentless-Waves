@@ -18,6 +18,16 @@ public static class PrefManager
     public static int GetJuggle() => PlayerPrefs.GetInt(Juggle);
     public static void SetJuggle(int value) => PlayerPrefs.SetInt(Juggle, value);
 
+    public static int CheatChallengeScore()
+    {
+        int effect = 0;
+        if (GetJuggle() == 1)
+            effect += 20;
+        if (GetInfinity() == 1)
+            effect -= 20;
+        return effect;
+    }
+
     public const string StartWave = nameof(StartWave);
     public static int GetStartWave() => PlayerPrefs.GetInt(StartWave);
     public static void SetStartWave(int value) => PlayerPrefs.SetInt(StartWave, value);

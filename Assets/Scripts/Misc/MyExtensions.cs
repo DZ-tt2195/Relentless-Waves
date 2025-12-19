@@ -31,6 +31,13 @@ public static class MyExtensions
         }
     }
 
+    public static void SetAlpha(SpriteRenderer target, float alpha)
+    {
+        Color newColor = target.color;
+        newColor.a = alpha;
+        target.color = newColor;
+    }
+
     public static List<T> Shuffle<T>(this List<T> originalList)
     {
         List<T> newList = new();

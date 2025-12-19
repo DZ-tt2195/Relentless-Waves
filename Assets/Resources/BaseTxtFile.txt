@@ -1,6 +1,6 @@
 Description=Bullet hell game where enemies keep shooting until you finish the entire wave.
 Designer=by Thomas Tang (DZ)
-Last_Update=Last Updated: Dec 17, 2025
+Last_Update=Last Updated: Dec 18, 2025
 Translator_Credit=
 Language=Language
 Choose_Level=Choose Level
@@ -26,8 +26,8 @@ Bullets=Bullets: $Num$ / $Max$
 Health=Health: $Num$ / $Max$
 Resupply=+2 Bullets
 Health_Pack=+1 Health
-Juggle_Balls=Juggle Balls (+15 Score)
-Infinite_Bullets=Infinite Bullets (-15 Score)
+Juggle_Balls=Juggle Balls (+20 Score)
+Infinite_Bullets=Infinite Bullets (-20 Score)
 Score=Score: $Num$
 Tutorial_1=Tutorial 1
 Tutorial_2=Tutorial 2
@@ -41,13 +41,13 @@ Fourth_Tutorial=The Phoenix can revive itself. You'll have to defeat all other e
 FPS=FPS: $Num$
 Update_History=Update History
 Blank=
-Update_0=Dec 15
+Update_0=Dec 15, 2025
 Update_0_Text=Fixed Endless level 
 Nerfed Snowflake 
 Player is briefly immune to damage when a new wave spawns 
 Nerfed juggle challenge (only 1 ball to juggle) 
 Reordered some waves in Enemy Rush
-Update_1=Dec 17
+Update_1=Dec 17, 2025
 Update_1_Text=New enemies: Boxer, Crane, Planet. All added to Enemy Rush 
 Buffed Bow, Ghost, and Mortar 
 Removed some enemies from Tutorial 2 
@@ -55,3 +55,10 @@ Sun can start by moving either down or up
 Health pack spawns on wave 1 
 Changed some sprites 
 Slightly raised positions of all enemies
+Update_2=Dec 18, 2025
+Update_2_Text=Dropped Boxer (will add a 15th enemy later)
+Buffed Mortar again
+Nerfed Knight, but it shoots directly at you in addition to shooting downwards
+Nerfed Planet
+Tweaks to Enemy Rush
+Cheats and Challenges add/subtract 20
