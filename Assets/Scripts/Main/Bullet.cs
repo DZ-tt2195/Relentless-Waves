@@ -4,7 +4,6 @@ public class Bullet : MonoBehaviour
 {
     protected Vector3 direction;
     public Entity owner { get; private set; }
-    string ownerTag;
     protected float bulletSpeed;
     public SpriteRenderer spriteRenderer { get; private set; }
     protected bool disappearOnWall = true;
@@ -28,7 +27,7 @@ public class Bullet : MonoBehaviour
         this.bulletSpeed = speed;
         this.direction = direction;
         this.owner = owner;
-        ownerTag = owner.tag;
+        Movement();
         this.gameObject.SetActive(true);
     }
 
@@ -48,12 +47,12 @@ public class Bullet : MonoBehaviour
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out Entity target) && !target.immune && !target.CompareTag(ownerTag))
+        if (collision.TryGetComponent(out Entity target) && !target.immune && !target.CompareTag(this.tag))
         {
             target.TakeDamage();
             TryAndReturn(true);
         }
-        else if (disappearOnWall && collision.CompareTag("Wall") && !collision.transform.parent.CompareTag(ownerTag))
+        else if (disappearOnWall && collision.CompareTag("Wall") && !collision.transform.parent.CompareTag(this.tag))
         {
             TryAndReturn(false);
         }

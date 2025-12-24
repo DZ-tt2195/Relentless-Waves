@@ -29,4 +29,4 @@ public static string FPS (string Num)  { return(Translator.inst.Translate("FPS",
 public static string DoEnum(ToTranslate thing) {return(Translator.inst.Translate(thing.ToString()));}
 }
 public enum ToTranslate {
-Description,Designer,Last_Update,Translator_Credit,Language,Choose_Level,Controls,Play,Delete,Replay,Quit,Paused,Restart,No_Score,Victory,Lost,Resupply,Health_Pack,Juggle_Balls,Infinite_Bullets,Tutorial_1,Tutorial_2,Enemy_Rush,Random,Endless,First_Tutorial,Second_Tutorial,Third_Tutorial,Fourth_Tutorial,Update_History,Blank,Update_0,Update_0_Text,Update_1,Update_1_Text,Update_2,Update_2_Text}
+Description,Designer,Last_Update,Translator_Credit,Language,Choose_Level,Controls,Play,Delete,Replay,Quit,Paused,Restart,No_Score,Victory,Lost,Resupply,Health_Pack,Juggle_Balls,Infinite_Bullets,Tutorial_1,Tutorial_2,Enemy_Rush,Random,Endless,First_Tutorial,Second_Tutorial,Third_Tutorial,Fourth_Tutorial,Update_History,Blank,Update_0,Update_0_Text,Update_1,Update_1_Text,Update_2,Update_2_Text,Update_3,Update_3_Text}

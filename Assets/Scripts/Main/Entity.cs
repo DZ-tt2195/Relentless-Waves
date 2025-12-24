@@ -49,11 +49,12 @@ public class Entity : MonoBehaviour
     {
     }
 
-    protected void CreateBullet(Bullet prefab, Vector3 start, float bulletSpeed, Vector3 direction)
+    protected Bullet CreateBullet(Bullet prefab, Vector3 start, float bulletSpeed, Vector3 direction)
     {
         Bullet newBullet = (bulletQueue.Count > 0) ? bulletQueue.Dequeue() : Instantiate(prefab);
         newBullet.transform.position = start;
         newBullet.AssignInfo(bulletSpeed, direction, this);
+        return newBullet;
     }
 
     public void ReturnBullet(Bullet bullet, bool landed)

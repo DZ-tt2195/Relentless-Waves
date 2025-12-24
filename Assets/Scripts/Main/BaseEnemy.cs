@@ -9,7 +9,6 @@ public class BaseEnemy : Entity
     [SerializeField] protected float attackRate;
     [SerializeField] bool lookAtPlayer = true;
     protected Vector3 moveDirection;
-
     public void EnemySetup()
     {
         this.tag = "Enemy";

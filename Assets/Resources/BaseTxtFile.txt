@@ -1,6 +1,6 @@
 Description=Bullet hell game where enemies keep shooting until you finish the entire wave.
 Designer=by Thomas Tang (DZ)
-Last_Update=Last Updated: Dec 18, 2025
+Last_Update=Last Updated: Dec 23, 2025
 Translator_Credit=
 Language=Language
 Choose_Level=Choose Level
@@ -62,3 +62,6 @@ Nerfed Knight, but it shoots directly at you in addition to shooting downwards
 Nerfed Planet
 Tweaks to Enemy Rush
 Cheats and Challenges add/subtract 20
+Update_3=Dec 23, 2025
+Update_3_Text=New enemy: Factory
+Taking damage subtracts 2 from your end score

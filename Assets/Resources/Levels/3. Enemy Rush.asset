@@ -112,6 +112,16 @@ MonoBehaviour:
       position: {x: 4, y: 3.5}
     tutorialKey: 30
   - enemies:
+    - toCreate: {fileID: 2190508740838595235, guid: 895fe1230ffde4353956d879ab373a44, type: 3}
+      position: {x: -2, y: 3.5}
+    - toCreate: {fileID: 2190508740838595235, guid: 895fe1230ffde4353956d879ab373a44, type: 3}
+      position: {x: -2, y: 2}
+    - toCreate: {fileID: 2190508740838595235, guid: 895fe1230ffde4353956d879ab373a44, type: 3}
+      position: {x: 2, y: 3.5}
+    - toCreate: {fileID: 2190508740838595235, guid: 895fe1230ffde4353956d879ab373a44, type: 3}
+      position: {x: 2, y: 2}
+    tutorialKey: 30
+  - enemies:
     - toCreate: {fileID: 5873671863857375307, guid: df31574ee5d53423d907a34821411fbf, type: 3}
       position: {x: -2, y: 3.25}
     - toCreate: {fileID: 5873671863857375307, guid: df31574ee5d53423d907a34821411fbf, type: 3}

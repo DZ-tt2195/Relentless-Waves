@@ -13,7 +13,7 @@
     ],
     [
       "Last Update",
-      "Last Updated: Dec 18, 2025"
+      "Last Updated: Dec 23, 2025"
     ],
     [
       "Translator Credit",
@@ -198,6 +198,14 @@
     [
       "Update 2 Text",
       "Dropped Boxer (will add a 15th enemy later)|Buffed Mortar again|Nerfed Knight, but it shoots directly at you in addition to shooting downwards|Nerfed Planet|Tweaks to Enemy Rush|Cheats and Challenges add/subtract 20"
+    ],
+    [
+      "Update 3",
+      "Dec 23, 2025"
+    ],
+    [
+      "Update 3 Text",
+      "New enemy: Factory|Taking damage subtracts 2 from your end score"
     ]
   ]
 }
