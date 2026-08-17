@@ -22,4 +22,20 @@ public class GameFiles : MonoBehaviour
         return listOfLevels[PrefManager.GetCurrentLevel()];
     }
     public List<Rule> AllRules() => listOfRules;    
+    public HashSet<Rule> SavedRules()
+    {
+        HashSet<Rule> toReturn = new();
+        for (int i = 0; i<NewCustomizer.numTwists; i++)
+        {
+            int savedNumber = PrefManager.GetRule(i);
+            if (savedNumber != -1)
+                toReturn.Add(listOfRules[savedNumber]);
+        }
+        while (toReturn.Count < NewCustomizer.numTwists)
+        {
+            int randomNumber = Random.Range(0, listOfRules.Count);
+            toReturn.Add(listOfRules[randomNumber]);                
+        }
+        return toReturn;
+    }
 }

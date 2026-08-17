@@ -9,6 +9,8 @@ using MyBox;
 public class TitleScreen : MonoBehaviour
 {
     [Foldout("UI", true)]
+    [SerializeField] Button extrasButton;
+    [SerializeField] Transform allExtras;
     [SerializeField] TMP_Text bestRun;
     [SerializeField] TMP_Dropdown levelDropdown;
     [SerializeField] Button deleteScoreButton;
@@ -35,8 +37,26 @@ public class TitleScreen : MonoBehaviour
         deleteScores.text = AutoTranslate.Delete();
         soundCredits.text = AutoTranslate.Sound_Credits();
 
+        extrasButton.onClick.AddListener(EnableExtras);
+        extrasButton.transform.GetComponentInChildren<TMP_Text>().text = AutoTranslate.Extras();
+        void EnableExtras()
+        {
+            extrasButton.gameObject.SetActive(false);
+            allExtras.gameObject.SetActive(true);
+        }
+
+        soundCreditsScreen.SetActive(false);
+        soundCreditsButton.onClick.AddListener(CreditsToggle);
+        void CreditsToggle()
+        {
+            AudioManager.instance.Menu();
+            if (soundCreditsScreen.activeSelf)
+                soundCreditsScreen.SetActive(false);
+            else
+                soundCreditsScreen.SetActive(true);
+        }    
+
         LevelInfo();
-        SoundInfo();
     }
     void LevelInfo()
     {
@@ -75,18 +95,5 @@ public class TitleScreen : MonoBehaviour
             else
                 bestRun.text = AutoTranslate.No_Score();
         }        
-    }
-    void SoundInfo()
-    {
-        soundCreditsScreen.SetActive(false);
-        soundCreditsButton.onClick.AddListener(CreditsToggle);
-        void CreditsToggle()
-        {
-            AudioManager.instance.Menu();
-            if (soundCreditsScreen.activeSelf)
-                soundCreditsScreen.SetActive(false);
-            else
-                soundCreditsScreen.SetActive(true);
-        }    
     }
 }

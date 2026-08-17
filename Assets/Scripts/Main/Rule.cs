@@ -18,6 +18,7 @@ public class Rule : MonoBehaviour
     public void AssignSlider(RulesSlider rulesslider)
     {
         this.slider = rulesslider.slider;
+        this.slider.value = 0f;
         this.slider.gameObject.SetActive(true);
         rulesslider.textBox.text = Translator.inst.Translate(this.name);
     }

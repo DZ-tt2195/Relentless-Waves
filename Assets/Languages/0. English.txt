@@ -1,6 +1,6 @@
 Description	Bullet hell game where enemies keep shooting until you finish the entire wave.
 Designer	by Thomas Tang (DZ)
-Last_Update	Last Updated: June 26, 2026
+Last_Update	Last Updated: Aug 17, 2026
 Update_History	Update History
 Upload_Translation	Upload Translation
 Download_English	Download English
@@ -10,6 +10,7 @@ Translator_Credit	Original Language
 Language	Language
 Choose_Level	Choose Level
 Controls	WASD/Arrows to move, Left click to shoot, Space to pause
+Extras	Extras
 Play	Play
 Delete	Delete Scores
 Restart	Restart
@@ -32,7 +33,9 @@ Tutorial_2	Tutorial 2
 Enemy_Rush	Enemy Rush
 Random	Random
 Endless	Endless
-Choose_Rule	Choose Rules
+Open_Customizer	Open Customizer
+Choose_Rule	Choose up to $Num$ rules
+Confirm	Confirm
 First_Tutorial	WASD/Arrows to move. Left click to shoot at enemies. Pick up more energy to shoot if necessary.
 Second_Tutorial	Enemies will continue to shoot at you even when defeated. Defeat all enemies to clear the wave.
 Third_Tutorial	Catch the stars to deal damage to the Staff, and to disable its shield.
@@ -74,3 +77,5 @@ Update_6	May 07, 2026
 Update_6_Text	Energy and Health are the same thing \nYou start with more Health, but shooting makes you lose 1 health \nWaves in Enemy Rush are now shuffled \nYou can see each enemy's health, and attack slightly less often \nChanged some sprites and added sounds
 Update_7	June 26, 2026
 Update_7_Text	Player now controlled with WASD/Arrows \nAll enemies now slowly move towards you, like how Planet does \nRedesigned and rebalanced many enemies and levels \nSeperated health and energy again; you start with a lot more health \nPlayer is now a clock, and its rotating clock hands are where it shoots \nThere are 2 Rules per game that trigger at different intervals \nMore sound effects added \nChanged game name from Relentless Waves to Time Attack
+Update_8	Aug 17, 2026
+Update_8_Text	Hidden optional stuff on the title screen behind the extras button \nYou customize rules on title screen instead \nThe game will remember which rules you chose

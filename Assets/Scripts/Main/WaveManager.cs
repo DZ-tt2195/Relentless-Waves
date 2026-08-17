@@ -6,9 +6,14 @@ using System.Linq;
 using TMPro;
 using System.Diagnostics;
 public enum GameState {Setup, Playing, Paused, Over}
+[System.Serializable]
+public class RulesSlider
+{
+    public Slider slider;
+    public TMP_Text textBox;
+}
 public class WaveManager : MonoBehaviour
 {
-
 #region Setup
 
     public static WaveManager instance;
@@ -31,6 +36,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] Slider energySlider;
     [SerializeField] TMP_Text energyCounter;
     [SerializeField] TMP_Text tutorialText;
+    [SerializeField] List<RulesSlider> rulesSliders = new();
 
     [Foldout("Pause screen", true)]
     [SerializeField] GameObject pauseScreen;
@@ -38,7 +44,10 @@ public class WaveManager : MonoBehaviour
     [SerializeField] Button restartButton;
     [SerializeField] Button quitButton;
     [SerializeField] TMP_Text endText;
-    
+    [SerializeField] Slider difficultySlider;
+    [SerializeField] TMP_Text difficultyLabel;
+    [SerializeField] List<RulesDisplay> displaysOnScreen;
+
     [Foldout("Audio", true)]
     [SerializeField] AudioClip winSound;
     [SerializeField] AudioClip loseSound;
@@ -64,15 +73,36 @@ public class WaveManager : MonoBehaviour
         maxX = mainCamera.transform.position.x + cameraWidth / 2f;
         minY = mainCamera.transform.position.y - cameraHeight / 2f;
         maxY = 4f;
-        //UnityEngine.Debug.Log($"{minX} - {maxX}; {minY} - {maxY}");
 
         restartButton.transform.GetComponentInChildren<TMP_Text>().text = AutoTranslate.Restart();
         quitButton.transform.GetComponentInChildren<TMP_Text>().text = AutoTranslate.Quit();
         playButton.transform.GetComponentInChildren<TMP_Text>().text = AutoTranslate.Play();
         endText.text = AutoTranslate.Blank();
 
+        if (!PlayerPrefs.HasKey(PrefManager.Difficulty)) PrefManager.SetDifficulty(1f);
+        difficultySlider.onValueChanged.AddListener(UpdateDifficultyText);
+        difficultySlider.value = PrefManager.GetDifficulty();
+        UpdateDifficultyText(PrefManager.GetDifficulty());
+
+        void UpdateDifficultyText(float value)
+        {
+            difficultyLabel.text = AutoTranslate.Difficulty($"{value*100:F0}");
+            PrefManager.SetDifficulty(value);
+        }
+
         state = GameState.Setup;
         gameTimer = new Stopwatch();
+
+        if (GameFiles.inst.CurrentLevel().includeRules)
+        {
+            List<Rule> selectedRules = GameFiles.inst.SavedRules().ToList();
+            for (int i = 0; i<selectedRules.Count; i++)
+            {
+                Rule newRule = Instantiate(selectedRules[i]);
+                newRule.AssignSlider(rulesSliders[i]);
+                displaysOnScreen[i].AssignRule(newRule);
+            }
+        }
     }
     public void BeginGame()
     {
@@ -91,6 +121,8 @@ public class WaveManager : MonoBehaviour
         enemySlider.gameObject.SetActive(true);
         timerText.gameObject.SetActive(true);
         energySlider.gameObject.SetActive(true);
+
+        difficultySlider.gameObject.SetActive(false);
 
         state = GameState.Playing;
         EnergyManager.inst.BeginGame();

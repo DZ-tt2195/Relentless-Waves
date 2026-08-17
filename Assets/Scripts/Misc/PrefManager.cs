@@ -12,5 +12,8 @@ public static class PrefManager
     public const string CurrentLevel = nameof(CurrentLevel);
     public static int GetCurrentLevel() => PlayerPrefs.GetInt(CurrentLevel);
     public static void SetCurrentLevel(int value) => PlayerPrefs.SetInt(CurrentLevel, value);
-}
 
+    public static int GetRule(int number) => PlayerPrefs.HasKey($"Rule {number}") ? PlayerPrefs.GetInt($"Rule {number}") : -1;
+    public static void SetRule(int number, int value) => PlayerPrefs.SetInt($"Rule {number}", value);
+
+}
